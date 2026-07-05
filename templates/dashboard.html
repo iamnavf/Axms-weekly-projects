@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% set total_enrolled = enrollments|length %}
+{% set completed_count = namespace(value=0) %}
+{% for row in enrollments %}
+    {% if row[3] == 100 %}
+        {% set completed_count.value = completed_count.value + 1 %}
+    {% endif %}
+{% endfor %}
+
+{% if total_enrolled > 0 %}
+    {% set overall_percentage = ((completed_count.value / total_enrolled) * 100)|round|int %}
+{% else %}
+    {% set overall_percentage = 0 %}
+{% endif %}
+
+<div class="mb-5 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 p-4 bg-white rounded-3 border shadow-sm">
+    <div>
+        <h2 class="fw-bold text-dark m-0 tracking-tight">Learning Dashboard</h2>
+        <p class="text-muted m-0 small">Track your ongoing tracks, curriculum milestones, and workspace progress metrics.</p>
+    </div>
+    <div class="bg-light border rounded-3 p-2 px-4 text-center col-12 col-md-auto">
+        <span class="text-muted small fw-medium d-block text-uppercase mb-1 tracking-wider" style="font-size: 0.65rem;">Overall Completion</span>
+        <span class="fs-4 fw-bold text-dark">{{ overall_percentage }}%</span>
+    </div>
+</div>
+
+<div class="mb-5">
+    <div class="d-flex align-items-center gap-2 mb-4">
+        <h4 class="fw-bold text-dark m-0 tracking-tight">Active Tracks</h4>
+        <span class="badge rounded-pill bg-secondary bg-opacity-10 text-secondary fw-bold badge-pill-counter">{{ total_enrolled - completed_count.value }}</span>
+    </div>
+
+    <div class="row g-4">
+        {% set active_found = namespace(value=false) %}
+        {% for row in enrollments %}
+            {% if row[3] < 100 %}
+                {% set active_found.value = true %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card p-4 d-flex flex-column justify-content-between h-100">
+                        <div>
+                            <span class="badge bg-light text-secondary border mb-3 text-uppercase fw-bold badge-track-label">{{ row[2] }}</span>
+                            <h5 class="fw-bold text-dark mb-3 line-height-sm tracking-tight">{{ row[1] }}</h5>
+                        </div>
+                        
+                        <div class="my-3">
+                            <div class="d-flex justify-content-between align-items-center mb-1.5 small">
+                                <span class="text-muted">Current Progress</span>
+                                <strong class="text-dark fw-semibold">{{ row[3] }}%</strong>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {{ row[3] }}%; background-color: var(--primary-purple) !important;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3 pt-3 border-top">
+                            <form action="{{ url_for('dashboard') }}" method="POST" class="m-0">
+                                <input type="hidden" name="enrollment_id" value="{{ row[0] }}">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text border-end-0 small">%</span>
+                                    <input type="number" name="progress" min="0" max="100" value="{{ row[3] }}" class="form-control text-center border-start-0 shadow-none fw-semibold progress-input-field" required>
+                                    <button type="submit" class="btn btn-primary fw-medium px-3">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        
+        {% if not active_found.value %}
+            <div class="col-12">
+                <div class="border rounded-3 p-4 text-center bg-white text-muted shadow-sm">
+                    No active enrollments found. Head to the <a href="{{ url_for('courses') }}" class="fw-semibold text-decoration-none" style="color: var(--primary-purple);">Course Catalog</a> to find a track!
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div>
+    <div class="d-flex align-items-center gap-2 mb-4">
+        <h4 class="fw-bold text-dark m-0 tracking-tight">Completed Milestones</h4>
+        <span class="badge rounded-pill bg-success bg-opacity-10 text-success fw-bold badge-pill-counter">{{ completed_count.value }}</span>
+    </div>
+
+    <div class="row g-4">
+        {% set completed_found = namespace(value=false) %}
+        {% for row in enrollments %}
+            {% if row[3] == 100 %}
+                {% set completed_found.value = true %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card p-4 d-flex flex-column justify-content-between h-100 card-completed-state">
+                        <div>
+                            <span class="badge bg-success text-success bg-opacity-10 border border-success border-opacity-20 mb-3 text-uppercase fw-bold badge-track-label">Graduated</span>
+                            <h5 class="fw-semibold text-muted mb-3 line-height-sm tracking-tight">{{ row[1] }}</h5>
+                        </div>
+                        
+                        <div class="my-3">
+                            <div class="d-flex justify-content-between align-items-center mb-1.5 small">
+                                <span class="text-muted">Status</span>
+                                <strong class="text-success fw-semibold">100%</strong>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 100%; background-color: var(--success-green) !important;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3 pt-3 border-top text-center">
+                            <span class="text-success fw-bold small d-inline-flex align-items-center gap-1">
+                                Complete 
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        
+        {% if not completed_found.value %}
+            <div class="col-12">
+                <div class="border rounded-3 p-4 text-center bg-white text-muted shadow-sm">
+                    No completed milestones yet. Keep moving forward!
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

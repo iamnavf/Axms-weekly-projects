@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="p-5 mb-5 rounded-3 shadow-sm border position-relative overflow-hidden hero-tech-panel">
+    <div class="row align-items-center py-4">
+        <div class="col-12 col-lg-7 text-start ps-md-4 position-relative z-index-1">
+            <span class="badge bg-dark border text-success fw-bold text-uppercase badge-track-label mb-3">Tech Core</span>
+            <h1 class="display-4 fw-bold text-white tracking-tight mb-3">Welcome to Learn</h1>
+            <p class="fs-5 text-muted mb-4" style="max-width: 600px; line-height: 1.6;">
+                Empower your career trajectory by mastering production-ready tech stacks on your own schedule. Build real-world expertise backed by advanced analytics.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="{{ url_for('courses') }}" class="btn btn-primary fw-bold px-4 py-2.5">
+                    Browse Courses
+                </a>
+                <a href="{{ url_for('register') }}" class="btn btn-outline-secondary fw-semibold px-4 py-2.5">
+                    Create Free Account
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-5 d-none d-lg-block text-center position-relative">
+            <div class="hero-accent-glow"></div>
+        </div>
+    </div>
+</div>
+
+<div class="mb-4">
+    <h3 class="fw-bold text-white">Featured Courses</h3>
+    <p class="text-muted">Dive into our most popular learning tracks hand-selected for new students today.</p>
+</div>
+
+<div class="row g-4">
+    {% for course in featured %}
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card course-card h-100 shadow-sm border-0">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                    <h4 class="card-title fw-bold text-white">{{ course[1] }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <span class="badge bg-secondary me-1">{{ course[2] }}</span>
+                        <span class="small">{{ course[3] }}</span>
+                    </h6>
+                    <p class="card-text text-muted mt-3 small" style="line-height: 1.5;">
+                        {{ course[4] }}
+                    </p>
+                </div>
+
+                <div class="border-top pt-3 mt-3">
+                    <a href="{{ url_for('course_details', course_id=course[0]) }}" class="btn btn-outline-primary btn-sm w-100 fw-semibold">
+                        Course Details
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

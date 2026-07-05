@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="mb-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+    <div>
+        <h2 class="fw-bold m-0">All Course Catalog</h2>
+        <p class="text-muted m-0">Browse through our current selections and track your next target skill milestone.</p>
+    </div>
+    
+    <form action="{{ url_for('courses') }}" method="GET" style="max-width: 400px; width: 100%;">
+        <div class="input-group shadow-sm">
+            <input type="text" name="search" class="form-control" placeholder="Search course title or keyword..." value="{{ search_query }}">
+            <button class="btn btn-primary fw-bold" type="submit">Search</button>
+            {% if search_query %}
+                <a href="{{ url_for('courses') }}" class="btn btn-outline-secondary d-flex align-items-center">Clear</a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+<div class="row g-4">
+    {% for course in courses %}
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card course-card h-100 shadow-sm border-0">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                    <h4 class="card-title fw-bold text-dark">{{ course[1] }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <span class="badge bg-secondary me-1">{{ course[2] }}</span>
+                        <span class="small">{{ course[3] }}</span>
+                    </h6>
+                    <p class="card-text text-secondary mt-3" style="font-size: 0.95em; line-height: 1.5;">
+                        {{ course[4] }}
+                    </p>
+                </div>
+
+                <div class="border-top pt-3 mt-3">
+                    <a href="{{ url_for('course_details', course_id=course[0]) }}" class="btn btn-outline-primary btn-sm w-100 mb-2 fw-semibold">
+                    Course Details
+                    </a>
+
+                    {% if session.get('user_id') %}
+                        {% if course[0] not in allready_enrolled %}
+                        <form action="{{ url_for('enroll', course_id=course[0]) }}" method="POST" class="m-0">
+                            <button type="submit" class="btn btn-success btn-sm w-100 fw-bold">
+                                Enroll Course
+                            </button>
+                        </form>
+                        {% endif %}
+
+                        {% if course[0] in allready_enrolled %}
+                        <form action="{{ url_for('dashboard')}}" method="GET" class="m-0">
+                            <button type="submit" class="btn btn-success btn-sm w-100 fw-bold">
+                                Track your Course
+                            </button>
+                        </form>
+                        {% endif %}
+                        
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+        <div class="alert alert-info text-center py-4">
+            No courses found matching "<strong>{{ search_query }}</strong>".clear filters to view all courses.
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,203 @@
+/* ================= PREMIUM SaaS TECH DESIGN SYSTEM ================= */
+:root {
+    --bg-main: #F8FAFC;         /* Soft Canvas White */
+    --card-bg: #FFFFFF;         /* Pure White for Cards */
+    --text-main: #0F172A;       /* Deep Slate for Primary Typography */
+    --text-muted: #64748B;      /* Cool Muted Gray for Subtext */
+    --primary-purple: #6366F1;  /* Royal Violet / Indigo Accent */
+    --primary-hover: #4F46E5;   /* Deep Purple Hover State */
+    --border-light: #E2E8F0;    /* Clean Minimal Border Line */
+    --success-green: #10B981;   /* Fresh Emerald for Completed States */
+    --success-bg: #F0FDF4;      /* Soft Mint Tint for Completed Backgrounds */
+}
+
+/* Base Canvas Setup */
+body {
+    background-color: var(--bg-main) !important;
+    color: var(--text-main) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+    letter-spacing: -0.01em;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 🧭 Clean Minimalist Header Navbar */
+.navbar {
+    background-color: var(--card-bg) !important;
+    border-bottom: 1px solid var(--border-light) !important;
+    padding: 0.9rem 0px !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02) !important;
+}
+
+.navbar-brand {
+    letter-spacing: -0.03em;
+    color: var(--text-main) !important;
+    font-size: 1.35rem;
+}
+
+.navbar .nav-link {
+    color: var(--text-muted) !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.15s ease;
+}
+
+.navbar .nav-link:hover, 
+.navbar .nav-link.active {
+    color: var(--primary-purple) !important;
+}
+
+/* 💎 Premium Depth Structural Cards */
+.card, .course-card {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-light) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.card:hover, .course-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.08) !important;
+    border-color: #CBD5E1 !important;
+}
+
+/* Explicitly force visibility on all text elements inside light panels */
+h1, h2, h3, h4, h5, h6, label, p, .card-title {
+    color: var(--text-main) !important;
+}
+
+/* 🏷️ FIXED: Global Course Category Badges Overrides */
+.badge.bg-secondary {
+    background-color: #F1F5F9 !important; /* Soft distinct gray backdrop */
+    color: #475569 !important;            /* Readable slate gray text color */
+    border: 1px solid #E2E8F0 !important;
+    font-weight: 600 !important;
+}
+
+.badge-track-label {
+    font-size: 0.65rem;
+    padding: 5px 10px;
+    letter-spacing: 0.03em;
+    border-radius: 6px;
+    background-color: #F1F5F9 !important;
+    color: #475569 !important;
+}
+
+/* ⚡ Royal Violet Core Action Buttons */
+.btn-primary {
+    background-color: var(--primary-purple) !important;
+    border-color: var(--primary-purple) !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    padding: 0.4rem 1rem;
+    transition: all 0.15s ease !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover) !important;
+    border-color: var(--primary-hover) !important;
+}
+
+.btn-outline-secondary {
+    border-radius: 8px !important;
+    font-weight: 500;
+    color: var(--text-muted) !important;
+    border-color: var(--border-light) !important;
+    background-color: var(--card-bg);
+}
+
+.btn-outline-secondary:hover {
+    background-color: #F8FAFC !important;
+    color: var(--text-main) !important;
+}
+
+/* 📊 Minimal Progress Indicator Tracks */
+.progress {
+    background-color: #F1F5F9 !important;
+    border-radius: 9999px !important;
+    height: 7px !important;
+    overflow: hidden;
+}
+
+.progress-bar {
+    border-radius: 9999px !important;
+    transition: width 0.5s ease !important;
+}
+
+/* 📝 FIXED: Form Input Element Component Custom Typing Overrides */
+.form-control {
+    background-color: var(--card-bg) !important;
+    color: #0F172A !important;              /* Solid dark typing text color */
+    border: 1px solid var(--border-light) !important;
+    border-radius: 8px !important;
+}
+
+.form-control::placeholder {
+    color: #94A3B8 !important;              /* Clean placeholder color text */
+}
+
+.form-control:focus {
+    color: #0F172A !important;
+    border-color: var(--primary-purple) !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+/* ================= DARK HERO & SPLIT SIDE MARKETING PANELS ================= */
+.hero-tech-panel {
+    background: #0F172A !important;
+}
+
+.hero-tech-panel h1, 
+.hero-tech-panel p, 
+.hero-tech-panel .text-muted {
+    color: #FFFFFF !important;
+}
+
+.auth-marketing-side {
+    background: #0F172A !important;
+}
+
+.auth-marketing-side h3, 
+.auth-marketing-side p,
+.auth-marketing-side strong,
+.auth-marketing-side .text-muted {
+    color: #FFFFFF !important;
+}
+
+/* 🎛️ Unified System Helper Classes */
+.tracking-tight {
+    letter-spacing: -0.02em;
+}
+
+.badge-pill-counter {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+}
+
+.progress-input-field {
+    max-width: 75px;
+}
+
+.card-completed-state {
+    background-color: var(--success-bg) !important;
+    border-color: #DCFCE7 !important;
+}
+
+footer {
+    background-color: var(--card-bg) !important;
+    border-top: 1px solid var(--border-light) !important;
+}
+
+/* ================= FORCE VISIBILITY ON BADGES ================= */
+.badge.bg-secondary, 
+.card-subtitle .badge, 
+.card-subtitle span {
+    background-color: #E2E8F0 !important; /* Light slate gray background */
+    color: #1E293B !important;            /* Solid deep charcoal text */
+    opacity: 1 !important;
+    display: inline-block !important;
+    visibility: visible !important;
+}

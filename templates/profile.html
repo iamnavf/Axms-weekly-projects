@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-12 col-md-8 col-lg-6">
+        <div class="card shadow border-0 bg-white p-4">
+            <div class="card-body">
+                <h2 class="card-title fw-bold text-white mb-2 tracking-tight">Account Settings</h2>
+                <p class="text-muted small mb-4">Modify your personal credential records below.</p>
+                
+                <form action="{{ url_for('profile') }}" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-secondary">Full Name</label>
+                       
+                        <input type="text" name="name" class="form-control" placeholder="Enter Name" value="{{ session.get('user_name', '') }}" required minlength="2" pattern="^[A-Za-z\s]+$" title="Name must contain letters and spaces only.">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-secondary">Email Address</label>
+ 
+                        <input type="email" name="email" class="form-control" placeholder="Enter Mail ID" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold text-secondary">New or Existing Password</label>
+
+                        <input type="password" name="password" class="form-control" placeholder="Enter a password (min. 6 characters)" required minlength="6">
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary fw-bold px-4">
+                            Save Changes
+                        </button>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary fw-semibold">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
