@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}register{% endblock %}
+
+{% block content %}
+<div class="container my-5 py-3">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden">
+                <div class="row g-0">
+                    <div class="col-md-6 p-4 p-sm-5 d-flex flex-column justify-content-center">
+                        <div class="mb-3">
+                            <h2 class="fw-bold text-dark tracking-tight hero-title-main">Create Account</h2>
+                            <p class="text-muted small mb-0">Fill out the options to register your profile.</p>
+                        </div>
+
+                        <form method="POST" action="/register">
+                            <div class="mb-3">
+                                <label class="form-label small fw-semibold text-secondary">Full Name</label>
+                                <input type="text" name="name" class="form-control rounded-3 small" placeholder="enter the name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label small fw-semibold text-secondary">Email</label>
+                                <input type="email" name="email" class="form-control rounded-3 small" placeholder="enter email" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label small fw-semibold text-secondary">Profile Account</label>
+                                <select name="role" class="form-select rounded-3 text-muted small" required>
+                                    <option value="Candidate" selected>Candidate Account</option>
+                                    <option value="Employer">Employer Corporate Admin</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="form-label small fw-semibold text-secondary">Password</label>
+                                <input type="password" name="password" class="form-control rounded-3 small" placeholder="enter password" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-dark w-100 rounded-pill py-2 fw-medium shadow-sm mb-2">Create Profile</button>
+                        </form>
+
+                        <div class="text-center mt-3 small">
+                            <span class="text-muted">Already have Account?</span> 
+                            <a href="/login" class="text-decoration-none fw-bold text-dark ms-1">Log In</a>
+                        </div>
+                    </div>
+
+                  
+                    <div class="col-md-6 bg-dark text-white p-5 d-none d-md-flex flex-column justify-content-center text-center position-relative">
+                        <h4 class="fw-bold mb-2">Scale Horizons</h4>
+                        <p class="small text-white-50 px-3 mb-0">Gain instantaneous operational metrics routing logs, job application locks, and candidate management arrays.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}edit job{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-2">
+    <div class="col-lg-8">
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb small">
+                <li class="breadcrumb-item"><a href="/dashboard" class="text-decoration-none text-secondary">Dashboard</a></li>
+                <li class="breadcrumb-item active text-dark fw-medium" aria-current="page">Modify Opening</li>
+            </ol>
+        </nav>
+
+        <div class="card border-0 shadow-sm p-4 rounded-4 bg-white">
+            <div class="mb-4">
+                <h3 class="fw-bold text-dark tracking-tight hero-title-main">Modify Job Opening</h3>
+                <p class="text-muted small mb-0">Update technical competencies, salary ranges.</p>
+            </div>
+
+            <form method="POST" action="/job/edit/{{ job[0] }}">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold text-secondary">Company Name</label>
+                        <input type="text" name="company_name" class="form-control rounded-3" value="{{ job[2] }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold text-secondary">Job Role</label>
+                        <input type="text" name="job_title" class="form-control rounded-3" value="{{ job[3] }}" required>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label small fw-semibold text-secondary">Location</label>
+                        <input type="text" name="location" class="form-control rounded-3" value="{{ job[4] }}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label small fw-semibold text-secondary">Experience Tier</label>
+                        <select name="experience" class="form-select rounded-3 text-muted" required>
+                            <option value="Entry-Level" {% if job[4] == 'Entry-Level' %}selected{% endif %}>Fresher (0-2 Years)</option>
+                            <option value="Mid-Level" {% if job[4] == 'Mid-Level' %}selected{% endif %}>Experienced (2-5 Years)</option>
+                            <option value="Senior" {% if job[4] == 'Senior' %}selected{% endif %}>Senior (5+ Years)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label small fw-semibold text-secondary">Annual Salary</label>
+                        <input type="number" name="salary" class="form-control rounded-3" value="{{ job[6] }}" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary">Required Skills (Comma Separated)</label>
+                    <input type="text" name="skills" class="form-control rounded-3" value="{{ job[7] }}" placeholder="e.g. Python, SQL, Git" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label small fw-semibold text-secondary">Job Description</label>
+                    <textarea name="description" class="form-control rounded-3" rows="6" required>{{ job[8] }}</textarea>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 border-top border-light pt-3">
+                    <a href="/dashboard" class="btn btn-light border px-4 rounded-pill text-secondary bg-white small fw-medium">Cancel</a>
+                    <button type="submit" class="btn btn-dark px-4 rounded-pill shadow-sm fw-medium">
+                        Save changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,117 @@
+<div class="row g-4">
+
+    <div class="col-12">
+        <div class="card border-0 shadow-sm p-4 rounded-4 bg-white">
+            <div class="d-flex align-items-center gap-3">
+                <div>
+                    <h3 class="fw-bold mb-1 text-dark" style="font-weight: 800; color: #0d233a;">Welcome back, {{ session.get('name') }}!</h3>
+                    <p class="text-muted small mb-0">Track your active applications.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="p-4 rounded-4 shadow-sm border-0 stat-card-primary">
+            <span class="text-secondary text-uppercase fw-semibold tracking-wider stat-label">Applications Sent</span>
+            <div class="fw-bold display-6 mt-1 stat-text-primary">{{ stats['apps_submitted'] }}</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-4 rounded-4 shadow-sm border-0 stat-card-success">
+            <span class="text-secondary text-uppercase fw-semibold tracking-wider stat-label">Interviews / Accepted</span>
+            <div class="fw-bold display-6 mt-1 stat-text-success">{{ stats['apps_accepted'] }}</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-4 rounded-4 shadow-sm border-0 stat-card-info">
+            <span class="text-secondary text-uppercase fw-semibold tracking-wider stat-label">Under Review</span>
+            <div class="fw-bold display-6 mt-1 stat-text-info">{{ stats['apps_pending'] }}</div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm p-4 rounded-4 bg-white h-100">
+            <h5 class="mb-3 section-title-bold text-dark">Applied Jobs Tracker</h5>
+            
+            {% if applications %}
+                <div class="table-responsive">
+                    <table class="table align-middle border-0 mb-0">
+                        <thead>
+                            <tr class="fs-7 text-uppercase text-secondary fw-bold border-bottom">
+                                <th class="pb-3 border-0">Job Info</th>
+                                <th class="pb-3 border-0">Resume </th>
+                                <th class="pb-3 border-0 text-end">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for app in applications %}
+                            <tr>
+                                <td class="py-3 border-0 border-bottom border-light">
+                                    <h6 class="fw-bold mb-0 text-dark">{{ app[4] }}</h6>
+                                    <small class="text-muted fs-7">{{ app[6] }}</small>
+                                </td>
+                                <td class="py-3 border-0 border-bottom border-light">
+                                    <span class="small text-secondary fw-medium">
+                                        <i class="fa-solid fa-file-pdf text-danger me-1"></i> 
+                                        {{ app[3].split('_')[-1] if '_' in app[3] else app[3] }}
+                                    </span>
+                                </td>
+                                <td class="py-3 border-0 border-bottom border-light text-end">
+                                    <span class="badge rounded-pill px-3 py-2 fw-semibold border-0
+                                        {% if app[2] == 'Accepted' or app[2] == 'Interview Scheduled' %}bg-success-subtle text-success
+                                        {% elif app[2] == 'Rejected' %}bg-danger-subtle text-danger
+                                        {% elif app[2] == 'Reviewed' %}bg-info-subtle text-info
+                                        {% else %}bg-warning-subtle text-warning{% endif %}">
+                                        {{ app[2] }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="text-center py-5 text-muted">
+                    <i class="fa-solid fa-folder-open d-block fs-2 mb-2 text-secondary"></i>
+                    <p class="small mb-0">You have not submitted any job applications yet.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm p-4 rounded-4 bg-white h-100">
+            <h5 class="mb-3 section-title-bold text-dark">Saved Job</h5>
+            
+            {% if saved_jobs %}
+                <div class="d-flex flex-column gap-3">
+                    {% for job in saved_jobs %}
+                    <div class="p-3 border rounded-4 bg-light-subtle position-relative job-card-hover border-light">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <span class="badge bg-white text-secondary border-0 mb-1 fs-7 px-2 py-1">{{ job['company_name'] }}</span>
+                            <!-- Unsave button -->
+                            <a href="/unsave/{{ job['job_id'] }}" class="btn btn-white bg-white text-secondary btn-sm rounded-3 border px-2 shadow-sm" title="Remove from watchlist">
+                                Unsave
+                            </a>
+                        </div>
+                        <h6 class="fw-bold text-dark mb-1 fs-6 mt-1">{{ job['job_title'] }}</h6>
+                        <small class="text-muted d-block mb-3">
+                            {{ job['location'] }}
+                        </small>
+                        <a href="/job/{{ job['job_id'] }}" class="btn btn-sm btn-dark w-100 py-2 rounded-pill fs-7 text-white shadow-sm">
+                            Apply Now
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-light text-center border-0 py-4 mb-0 small text-secondary rounded-4">
+                    <i class="fa-solid fa-bookmark d-block fs-3 mb-2 text-muted"></i>
+                    Your bookmarked jobs drawer is empty.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>

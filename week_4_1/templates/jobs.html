@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% block title %}All Jobs{% endblock %}
+
+{% block content %}
+<div class="row g-4 mt-2">
+    <!-- Left Column: Jobs Feed & Pagination -->
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="mb-0 text-dark section-title-bold">Available Opportunities ({{ total_jobs }})</h4>
+            <span class="text-muted small">Page {{ page }} of {{ total_pages }}</span>
+        </div>
+
+        {% if jobs %}
+            <div class="row g-3">
+                {% for job in jobs %}
+                {% set cycle_color = loop.index0 % 3 %}
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm p-4 rounded-4 d-flex flex-column justify-content-between job-card-hover
+                        {% if cycle_color == 0 %}bg-success-subtle
+                        {% elif cycle_color == 1 %}bg-primary-subtle
+                        {% else %}bg-info-subtle{% endif %}">
+                        
+                        <!-- Top Row: Information Block -->
+                        <div class="d-flex justify-content-between align-items-start gap-4 flex-wrap mb-3">
+                            <div class="d-flex align-items-start gap-4 flex-grow-1">
+                                <!-- The icon span block has been successfully removed from here -->
+                                <div>
+                                    <h5 class="fw-bold text-dark mb-2 job-title-card" style="font-size: 1.25rem;">{{ job[2] }}</h5>
+                                    
+                                    <div class="d-flex flex-wrap gap-3 align-items-center" style="font-size: 0.9rem;">
+                                        <span class="text-secondary fw-semibold">{{ job[3] }}</span>
+                                        <span class="text-muted">•</span>
+                                        <span class="text-secondary">{{ job[4] }}</span>
+                                        <span class="text-muted">•</span>
+                                        <span class="fw-bold text-success">{{ job[6] }}/yr</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action buttons -->
+                            <div class="d-flex gap-2 align-items-center mt-1">
+                                {% if session.get("user_id") and session.get("role") == "Candidate" %}
+                                    <a href="/save/{{ job[0] }}" class="btn btn-white bg-white text-secondary btn-sm rounded-pill border px-3 py-2 shadow-sm" title="Save Job" style="font-size: 0.85rem;">
+                                        Save
+                                    </a>
+                                {% endif %}
+                                <a href="/job/{{ job[0] }}" class="btn btn-dark btn-sm px-4 py-2 rounded-pill fw-medium shadow-sm" style="font-size: 0.85rem;">Details</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Row: Stack Matrix -->
+                        <div class="mt-3 pt-3 border-top border-light-subtle d-flex align-items-center gap-3">
+                            <small class="text-secondary fw-bold text-uppercase tracking-wider font-monospace mb-0" style="font-size: 0.7rem; letter-spacing: 0.05em;">Skills required:</small>
+                            <div class="d-flex flex-wrap gap-2">
+                                {% for skill in job[7].split(',') %}
+                                    <span class="badge bg-white text-secondary border border-light-subtle px-3 py-1.5 rounded-2 fw-normal" style="font-size: 0.8rem; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">{{ skill.strip() }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination Bar Controls -->
+            {% if total_pages > 1 %}
+            <nav aria-label="Page navigation" class="mt-5 d-flex justify-content-center">
+                <ul class="pagination pagination-sm gap-1 mb-0">
+                    <li class="page-item {% if page <= 1 %}disabled{% endif %}">
+                        <a class="page-item-link btn btn-sm border-0 rounded-pill px-3 {% if page <= 1 %}btn-light text-muted{% else %}btn-dark{% endif %}" 
+                        href="{{ url_for('jobs_catalog', page=page-1, **active_filters) }}">
+                            &laquo; Prev
+                        </a>
+                    </li>
+
+                    {% for p in range(1, total_pages + 1) %}
+                    <li class="page-item">
+                        <a class="btn btn-sm rounded-circle border-0 px-3 {% if p == page %}btn-dark text-white fw-bold{% else %}btn-light text-dark{% endif %}" 
+                        href="{{ url_for('jobs_catalog', page=p, **active_filters) }}">
+                            {{ p }}
+                        </a>
+                    </li>
+                    {% endfor %}
+
+                    <li class="page-item {% if page >= total_pages %}disabled{% endif %}">
+                        <a class="page-item-link btn btn-sm border-0 rounded-pill px-3 {% if page >= total_pages %}btn-light text-muted{% else %}btn-dark{% endif %}" 
+                        href="{{ url_for('jobs_catalog', page=page+1, **active_filters) }}">
+                            Next &raquo;
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            {% endif %}
+
+        {% else %}
+            <div class="card border-0 shadow-sm p-5 text-center rounded-4 bg-white text-muted small">
+                <i class="fa-solid fa-folder-minus d-block fs-2 mb-2 text-secondary"></i>
+                <h5 class="fw-bold text-dark mb-1">No matching job found.</h5>
+                <p class="text-muted small mb-0">Try clearing or adjusting your search keywords filter.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Right Column: Filter Sidebar Options -->
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm p-4 rounded-4 bg-white sticky-lg-top" style="top: 100px; z-index: 10;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="mb-0 text-dark section-title-bold">Filter Options</h5>
+                <a href="/jobs" class="text-decoration-none small text-muted">Clear All</a>
+            </div>
+            
+            <form method="GET" action="/jobs">
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary">Keywords</label>
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control border-light-subtle rounded-3 small" placeholder="enter the keywords to search" value="{{ query }}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary">Location</label>
+                    <div class="input-group">
+                        <input type="text" name="location" class="form-control border-light-subtle rounded-3 small" placeholder="Location" value="{{ location }}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-secondary">Experience</label>
+                    <select name="experience" class="form-select text-muted border-light-subtle rounded-3 small">
+                        <option value="" {% if not experience %}selected{% endif %}>All Experience Levels</option>
+                        <option value="Entry-Level" {% if experience == 'Entry-Level' %}selected{% endif %}>Fresher (0-2 Years)</option>
+                        <option value="Mid-Level" {% if experience == 'Mid-Level' %}selected{% endif %}>Experienced (2-5 Years)</option>
+                        <option value="Senior" {% if experience == 'Senior' %}selected{% endif %}>Senior (5+ Years)</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label small fw-semibold text-secondary">Salary</label>
+                    <div class="input-group">
+                        <input type="number" name="salary" class="form-control border-light-subtle rounded-3 small" placeholder="Salary" min="0" value="{{ salary }}">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-dark w-100 rounded-pill shadow-sm py-2 fw-semibold">Apply Filters</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

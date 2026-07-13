@@ -1,0 +1,227 @@
+body {
+    background-color: #f7f9fa;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #0d233a; /* Deep Slate Navy Text from mockup */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.fw-black {
+    font-weight: 800;
+}
+
+a {
+    transition: all 0.2s ease-in-out;
+}
+
+.hero-badge-dashed {
+    width: 100px;
+    height: 100px;
+    border: 1px dashed #ced4da !important;
+    background-color: #fffdec; /* Light cream tone */
+    font-size: 11px;
+    color: #5c6f84;
+}
+
+.hero-title-main {
+    font-weight: 800;
+    color: #0d233a;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+/* Signature Brand Button Styles */
+.btn-dark {
+    background-color: #0d233a !important;
+    border-color: #0d233a !important;
+    color: #ffffff !important;
+}
+.btn-dark:hover {
+    background-color: #1a3a5c !important;
+    border-color: #1a3a5c !important;
+}
+
+/* The neon lime green search/action button theme */
+.btn-brand-lime {
+    background-color: #b4f46c !important;
+    color: #0d233a !important;
+    border: none !important;
+    font-weight: 600;
+}
+.btn-brand-lime:hover {
+    background-color: #98dd52 !important;
+}
+
+/* Card 1 Pastel Green Mint */
+.bg-success-subtle {
+    background-color: #e3f5d8 !important; 
+}
+.bg-success-subtle .btn-dark {
+    background-color: #b4f46c !important;
+    border-color: #b4f46c !important;
+    color: #0d233a !important;
+}
+.bg-success-subtle .btn-dark:hover {
+    background-color: #98dd52 !important;
+}
+
+/* Card 2 Pastel Soft Purple/Blue */
+.bg-primary-subtle {
+    background-color: #e6e9f7 !important; 
+}
+
+/* Card 3 Pastel Light Gray/Cyan */
+.bg-info-subtle {
+    background-color: #e3edf7 !important; 
+}
+
+
+.job-card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.job-card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(13, 35, 58, 0.04) !important;
+}
+
+.icon-box-sm {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+}
+
+/* Statistics Blocks Layout Styles */
+.stat-card-success { background-color: #e3f5d8 !important; }
+.stat-text-success { color: #3e7a1d !important; }
+
+.stat-card-primary { background-color: #e6e9f7 !important; }
+.stat-text-primary { color: #2d42a5 !important; }
+
+.stat-card-info { background-color: #e3edf7 !important; }
+.stat-text-info { color: #1f588c !important; }
+
+.stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #5c6f84;
+}
+
+.navbar-custom {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #edf1f4;
+}
+.navbar-custom .navbar-brand {
+    color: #0d233a !important;
+}
+.navbar-custom .nav-link {
+    color: #5c6f84 !important;
+    font-weight: 500;
+}
+.navbar-custom .nav-link:hover {
+    color: #0d233a !important;
+}
+
+/* Lower Slim Footer */
+.footer-custom {
+    background-color: #ffffff;
+    border-top: 1px solid #edf1f4;
+    color: #5c6f84;
+}
+
+.form-control, .form-select {
+    border: 1px solid #edf1f4;
+    background-color: #ffffff;
+}
+.form-control:focus, .form-select:focus {
+    border-color: #b4f46c;
+    box-shadow: 0 0 0 3px rgba(180, 244, 108, 0.25);
+}
+
+
+.navbar-custom {
+    background-color: #0d233a !important; /* Deep Slate Navy Background */
+    border-bottom: 1px solid #1a3a5c !important;
+    box-shadow: 0 2px 10px rgba(13, 35, 58, 0.15) !important;
+}
+
+/* Brand logo ("HOME") visibility */
+.navbar-custom .navbar-brand {
+    color: #ffffff !important;
+    letter-spacing: -0.02em;
+}
+.navbar-custom .navbar-brand:hover {
+    color: #b4f46c !important; /* Glows lime on hover */
+}
+
+/* Nav links visibility ("Explore Jobs", "Logged in as...") */
+.navbar-custom .nav-link, 
+.navbar-custom .text-light-50 {
+    color: #cbd5e1 !important; /* Soft white/gray for high contrast readability */
+    font-weight: 500;
+}
+.navbar-custom .nav-link:hover {
+    color: #ffffff !important;
+}
+
+/* Dashboard & Profile button overrides to guarantee high contrast visibility */
+.navbar-custom .btn-outline-light,
+.navbar-custom .btn-outline-secondary {
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+.navbar-custom .btn-outline-light:hover,
+.navbar-custom .btn-outline-secondary:hover {
+    background-color: #ffffff !important;
+    color: #0d233a !important; /* Flips color cleanly on hover activation */
+    border-color: #ffffff !important;
+}
+
+/* Get Started / Register button configuration */
+.navbar-custom .btn-glow {
+    background-color: #b4f46c !important;
+    color: #0d233a !important;
+    font-weight: 600;
+}
+.navbar-custom .btn-glow:hover {
+    background-color: #98dd52 !important;
+    box-shadow: 0 0 12px rgba(180, 244, 108, 0.4);
+}
+
+/* Logout button override to ensure it stays sharp */
+.navbar-custom .btn-danger {
+    background-color: #ef4444 !important;
+    border-color: #ef4444 !important;
+    color: #ffffff !important;
+}
+.navbar-custom .btn-danger:hover {
+    background-color: #dc2626 !important;
+}
+
+/* Match the Slim Footer to the Dark Slate Theme */
+.footer-custom {
+    background-color: #0d233a !important; 
+    border-top: 1px solid #1a3a5c !important;
+    color: #94a3b8 !important; /* Clean muted silver text */
+}
+
+/* Standardizing link configurations inside the dark footer row */
+.footer-custom a {
+    color: #cbd5e1 !important;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.footer-custom a:hover {
+    color: #b4f46c !important; /* Pops into signature brand lime on hover */
+}
+
+/* Soft form text control parameters */
+.form-control, .form-select {
+    border: 1px solid #edf1f4;
+    background-color: #ffffff;
+}
+.form-control:focus, .form-select:focus {
+    border-color: #b4f46c;
+    box-shadow: 0 0 0 3px rgba(180, 244, 108, 0.25);
+}

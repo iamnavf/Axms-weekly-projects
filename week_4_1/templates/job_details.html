@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}{{ job[2] }}Explore jobs{% endblock %}
+
+{% block content %}
+<div class="row g-4 mt-2">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm p-4 rounded-4 bg-white mb-4">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 border-bottom border-light pb-3 mb-3">
+                <div>
+                    <span class="badge bg-dark text-white mb-2 px-3 py-1 fw-medium rounded-2 fs-7">{{ job[2] }}</span>
+                    <h3 class="fw-bold text-dark mb-1" style="font-weight: 800; color: #0d233a;">{{ job[3] }}</h3>
+                    <p class="text-muted small mb-0">
+                       {{ job[4] }} 
+                        <span class="mx-2">•</span> 
+                        {{ job[5] }}
+                    </p>
+                </div>
+                <div class="text-lg-end">
+                    <span class="fs-3 fw-bold text-dark">{{ job[6] }}</span>
+                    <p class="text-muted small mb-0">Annual salary</p>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h5 class="mb-3 section-title-bold text-dark">Job Description</h5>
+                <p class="text-secondary lh-lg mb-0" style="white-space: pre-line; font-size: 0.95rem;">{{ job[8] }}</p>
+            </div>
+
+            <div class="border-top border-light pt-4">
+                <h5 class="mb-3 section-title-bold text-dark">Required Skills</h5>
+                <div class="d-flex flex-wrap gap-2">
+                    {% for skill in job[7].split(',') %}
+                        <span class="badge bg-light text-dark border-0 px-3 py-2 fs-7 rounded-2 fw-medium text-secondary">{{ skill.strip() }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm p-4 rounded-4 bg-white sticky-lg-top border-top border-4 border-dark" style="top: 100px;">
+            <h5 class="mb-3 section-title-bold text-dark">Apply For Job</h5>
+            
+            {% if session.get('user_id') %}
+                {% if session.get('role') == 'Candidate' %}
+                    
+                    {% if job[0] in applied_job_ids %}
+                        <div class="alert alert-info border-0 text-center py-4 mb-0 rounded-4" style="background-color: #eff6ff;" role="alert">
+                            <i class="fa-solid fa-circle-check text-primary fs-2 mb-2 d-block"></i>
+                            <h6 class="fw-bold mb-1 text-dark">Application Active</h6>
+                            <p class="text-muted small mb-3">You have already applied to this job.</p>
+                            <a href="/dashboard" class="btn btn-dark btn-sm w-100 rounded-pill py-2">
+                                Track Live Status
+                            </a>
+                        </div>
+                    {% else %}
+                        <p class="text-muted small mb-3">select resume.</p>
+                        
+                        <form method="POST" action="/job/{{ job[0] }}" enctype="multipart/form-data">
+                            
+                            <!-- Fixed to check 'resume_file' key to match SQLite user database schema -->
+                            {% if current_user and (current_user['resume_file'] or current_user[5]) %}
+                            <div class="card bg-light border-0 p-3 rounded-4 mb-3">
+                                <label class="form-label small fw-bold text-secondary mb-2">Resume:</label>
+                                
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="resume_strategy" id="strategy_profile" value="profile" checked>
+                                    <label class="form-check-label small text-dark fw-medium" for="strategy_profile">
+                                        Use Default Profile Resume
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="resume_strategy" id="strategy_upload" value="new">
+                                    <label class="form-check-label small text-dark fw-medium" for="strategy_upload">
+                                        Upload New Resume
+                                    </label>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <div class="mb-4">
+                                <label class="form-label small text-secondary fw-semibold mb-2">New Attachment File (Optional)</label>
+                                <input class="form-control rounded-3" type="file" name="resume" accept=".pdf,.doc,.docx">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-dark w-100 rounded-pill py-2 shadow-sm fw-semibold">
+                                Submit Application
+                            </button>
+                        </form>
+                    {% endif %}
+
+                {% else %}
+                    <div class="alert alert-warning border-0 small mb-0 rounded-4" style="background-color: #fffbeb;" role="alert">
+                        <i class="fa-solid fa-triangle-exclamation me-1 text-warning"></i>
+                        You are signed into an <strong>Employer</strong> only candiate can apply.
+                    </div>
+                {% endif %}
+            {% else %}
+                <a href="/login" class="btn btn-dark w-100 rounded-pill py-2 text-center shadow-sm fw-semibold">Sign In to Apply</a>
+            {% endif %}
+            
+            <a href="/jobs" class="btn btn-light w-100 rounded-pill py-2 mt-2 text-secondary border small fw-medium bg-white">
+                <i class="fa-solid fa-arrow-left me-1"></i>Back to Jobs
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

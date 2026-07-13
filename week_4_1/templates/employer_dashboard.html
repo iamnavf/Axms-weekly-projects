@@ -1,0 +1,195 @@
+<div class="container py-4">
+
+    <div class="card border-0 rounded-4 shadow-sm mb-4 p-4 bg-white">
+        <div class="d-flex align-items-center gap-3">
+            <div>
+                <h3 class="fw-bold text-dark mb-1" style="font-weight: 800; color: #0f172a;">Welcome back, {{ session['name'] }}!</h3>
+                <p class="text-secondary mb-0 small">Follow up the job posted.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="p-4 rounded-4 shadow-sm border-0 stat-card-primary">
+                <span class="text-secondary text-uppercase fw-semibold tracking-wider stat-label">Posted Jobs</span>
+                <div class="fw-bold display-6 mt-1 stat-text-primary">{{ jobs|length }}</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 rounded-4 shadow-sm border-0 stat-card-info">
+                <span class="text-secondary text-uppercase fw-semibold tracking-wider stat-label">Total Applicants</span>
+                <div class="fw-bold display-6 mt-1 stat-text-info">{{ applicants|length }}</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 rounded-4 shadow-sm border-0 stat-card-success">
+                <span class="text-secondary text-uppercase fw-semibold tracking-wider stat-label">Actionable Reviews</span>
+                <div class="fw-bold display-6 mt-1 stat-text-success">
+                    {% set pending_count = namespace(value=0) %}
+                    {% for app in applicants %}
+                        {% if app[2] == 'Pending' %}
+                            {% set pending_count.value = pending_count.value + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ pending_count.value }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row g-4">
+        
+
+        <div class="col-lg-5">
+            <div class="card border-0 rounded-4 shadow-sm p-4 bg-white h-100">
+                <h5 class="mb-3 section-title-bold text-dark">Post New Job Opening</h5>
+                <hr class="text-muted my-3 border-light">
+                
+                <form method="POST" action="/dashboard">
+                    <input type="hidden" name="action_type" value="create_job">
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-secondary small fw-medium">Company Name</label>
+                        <input type="text" name="company_name" class="form-control rounded-3" value="{{(company_name)}}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-secondary small fw-medium">Job Role Title</label>
+                        <input type="text" name="job_title" class="form-control rounded-3" placeholder="enter role" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-secondary small fw-medium">Location</label>
+                        <input type="text" name="location" class="form-control rounded-3" placeholder="location" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-secondary small fw-medium">Experience Tier</label>
+                        <select name="experience" class="form-select rounded-3 text-muted">
+                            <option value="" {% if not experience %}selected{% endif %}>All Experience Levels</option>
+                            <option value="Entry-Level">Fresher (0-2 Years)</option>
+                            <option value="Mid-Level">Experienced (2-5 Years)</option>
+                            <option value="Senior">Senior (5+ Years)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-secondary small fw-medium">Salary per Year</label>
+                        <input type="text" name="salary" class="form-control rounded-3" placeholder="enter the salary" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-secondary small fw-medium">Skills (Comma Separated)</label>
+                        <input type="text" name="skills" class="form-control rounded-3" placeholder="skills" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label text-secondary small fw-medium">Job Description</label>
+                        <textarea name="description" class="form-control rounded-3" rows="4" placeholder="roles and responsibility" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-dark w-100 rounded-pill py-2 fw-semibold shadow-sm">
+                        Post Job
+                    </button>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="col-lg-7 d-flex flex-column gap-4">
+            
+
+            <div class="card border-0 rounded-4 shadow-sm p-4 bg-white">
+                <h5 class="mb-3 section-title-bold text-dark">Active Job Listings</h5>
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead>
+                            <tr class="fs-7 text-secondary text-uppercase fw-bold border-bottom">
+                                <th class="pb-2 border-0">Position</th>
+                                <th class="pb-2 border-0 text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for job in jobs %}
+                            <tr>
+                                <td class="py-3 border-0 border-bottom border-light">
+                                    <h6 class="fw-bold text-dark mb-1">{{ job['job_title'] }}</h6>
+                                    <span class="text-muted small">{{ job['location'] }} • {{ job['salary'] }}/year</span>
+                                </td>
+                                <td class="py-3 border-0 border-bottom border-light text-end">
+                                    <a href="/job/edit/{{ job['job_id'] }}" class="btn btn-sm btn-light border px-3 rounded-pill me-1 text-secondary">Edit</a>
+                                    <form action="/job/delete/{{ job['job_id'] }}" method="POST" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger px-3 rounded-pill">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="2" class="text-center py-4 text-muted small border-0">No job posted.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="card border-0 rounded-4 shadow-sm p-4 bg-white flex-grow-1">
+                <h5 class="mb-3 section-title-bold text-dark">Candidate</h5>
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead>
+                            <tr class="fs-7 text-secondary text-uppercase fw-bold border-bottom">
+                                <th class="pb-2 border-0">Role</th>
+                                <th class="pb-2 border-0">Resume</th>
+                                <th class="pb-2 border-0 text-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for app in applicants %}
+                            <tr>
+                                <td class="py-3 border-0 border-bottom border-light">
+                                    <h6 class="fw-bold mb-0 text-dark">{{ app[4] }}</h6>
+                                    <small class="text-muted fs-7">Role: <strong>{{ app[6] }}</strong></small>
+                                </td>
+                                <td class="py-3 border-0 border-bottom border-light">
+                                    {% if app[3] %}
+                                        <a href="{{ url_for('static', filename='uploads/' ~ app[3]) }}" class="text-decoration-none small fw-semibold link-dark">
+                                            <i class="fa-solid fa-file-pdf text-danger me-1"></i> 
+                                            {{ app[3].split('_')[-1] if '_' in app[3] else app[3] }}
+                                        </a>
+                                    {% else %}
+                                        <span class="small text-muted italic">No file attached</span>
+                                    {% endif %}
+                                </td>
+                                <td class="py-3 border-0 border-bottom border-light text-end">
+                                    <form method="POST" action="/dashboard" class="d-inline-flex gap-1 justify-content-end align-items-center">
+                                        <input type="hidden" name="action_type" value="update_status">
+                                        <input type="hidden" name="application_id" value="{{ app[0] }}">
+                                        
+                                        <select name="status" class="form-select form-select-sm rounded-3 py-1 text-muted small border-light-subtle" style="width: 150px;">
+                                            <option value="Pending" {% if app[2] == 'Pending' %}selected{% endif %}>Pending</option>
+                                            <option value="Reviewed" {% if app[2] == 'Reviewed' %}selected{% endif %}>Reviewed</option>
+                                            <option value="Interview Scheduled" {% if app[2] == 'Interview Scheduled' %}selected{% endif %}>Interview Scheduled</option>
+                                            <!--<option value="Accepted" {% if app[2] == 'Accepted' %}selected{% endif %}>Accepted</option>-->
+                                            <option value="Rejected" {% if app[2] == 'Rejected' %}selected{% endif %}>Rejected</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-sm btn-dark px-2 rounded-3 fs-7">Save</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center py-4 text-muted small border-0">No candidate application.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

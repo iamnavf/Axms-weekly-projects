@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="text-center py-5 my-4 position-relative">
+    <h1 class="display-4 text-dark mb-3 tracking-tight hero-title-main">
+        Get The Right Job <br> You Deserve
+    </h1>
+    <p class="text-muted small mb-0">
+        Discover open tracks across elite sectors! Manage active rows and track submissions effortlessly.
+    </p>
+</div>
+
+<div class="container my-5">
+    <div class="row g-4 text-center">
+        <div class="col-md-4">
+            <div class="p-4 rounded-4 shadow-sm border-0 stat-card-success">
+                <div class="fs-1 fw-bold mb-1 stat-text-success">{{ stats['jobs'] }}</div>
+                <div class="text-secondary text-uppercase fw-semibold tracking-wider stat-label">Active Openings</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="p-4 rounded-4 shadow-sm border-0 stat-card-primary">
+                <div class="fs-1 fw-bold mb-1 stat-text-primary">{{ stats['candidates'] }}</div>
+                <div class="text-secondary text-uppercase fw-semibold tracking-wider stat-label">Registered Candidates</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="p-4 rounded-4 shadow-sm border-0 stat-card-info">
+                <div class="fs-1 fw-bold mb-1 stat-text-info">{{ stats['companies'] }}</div>
+                <div class="text-secondary text-uppercase fw-semibold tracking-wider stat-label">Partner</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FEATURED COMPANIES SECTION (FIXED TEXT VISIBILITY) -->
+<div class="container my-5 pt-2">
+    <div class="mb-4">
+        <h4 class="text-dark mb-1 section-title-bold">Featured Companies</h4>
+        <p class="text-muted small mb-0">Top tier organizations sourcing talent across our ecosystem.</p>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card bg-dark text-white border-0 shadow-sm p-3 rounded-4 d-flex flex-row align-items-center justify-content-start gap-3">
+                <span class="p-3 rounded-3 bg-light fs-4 text-warning d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="fa-brands fa-amazon"></i>
+                </span>
+                <div>
+                    <h5 class="fw-bold text-white mb-0 fs-6">Amazon Inc.</h5>
+                    <small class="text-white-50">Cloud & E-Commerce</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+           <div class="card bg-dark text-white border-0 shadow-sm p-3 rounded-4 d-flex flex-row align-items-center justify-content-start gap-3">
+                <span class="p-3 rounded-3 bg-light fs-4 text-primary d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="fa-brands fa-google"></i>
+                </span>
+                <div>
+                    <h5 class="fw-bold text-white mb-0 fs-6">Google LLC</h5>
+                    <small class="text-white-50">Search & Technology</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-dark text-white border-0 shadow-sm p-3 rounded-4 d-flex flex-row align-items-center justify-content-start gap-3">
+                <span class="p-3 rounded-3 bg-light fs-4 text-info d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="fa-brands fa-microsoft"></i>
+                </span>
+                <div>
+                    <h5 class="fw-bold text-white mb-0 fs-6">Microsoft Corp.</h5>
+                    <small class="text-white-50">Software & Enterprise</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-5 border-light-subtle">
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="text-dark mb-0 section-title-bold">Recent Opportunities</h4>
+        <a href="/jobs" class="text-decoration-none small text-secondary fw-semibold">
+            See All Jobs <i class="fa-solid fa-arrow-right ms-1"></i>
+        </a>
+    </div>
+
+    {% if jobs %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for job in jobs %}
+            {% set cycle_color = loop.index0 % 3 %}
+            <div class="col">
+                <div class="card h-100 border-0 rounded-4 p-4 d-flex flex-column justify-content-between shadow-sm job-card-hover
+                    {% if cycle_color == 0 %}bg-success-subtle
+                    {% elif cycle_color == 1 %}bg-primary-subtle
+                    {% else %}bg-info-subtle{% endif %}">
+                    
+                    <div>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="w-75">
+                                <h5 class="fw-bold text-dark mb-1 text-truncate job-title-card">{{ job['job_title'] }}</h5>
+                                <span class="small text-secondary fw-medium text-truncate d-block">{{ job['company_name'] }}</span>
+                            </div>
+                           
+                            <span class="p-2 rounded-3 bg-white shadow-sm border fs-6 d-flex align-items-center justify-content-center icon-box-sm">
+                                <i class="fa-solid {% if cycle_color == 0 %}fa-code text-success{% elif cycle_color == 1 %}fa-bezier-curve text-primary{% else %}fa-chart-simple text-info{% endif %}"></i>
+                            </span>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-white text-dark border-0 rounded-2 px-2 py-1 small fw-normal text-truncate badge-truncate-140">
+                                {{ job['location'] }}
+                            </span>
+                            <span class="badge bg-white text-dark border-0 rounded-2 px-2 py-1 small fw-normal">
+                                {{ job['experience'] }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center pt-3 border-top border-light-subtle mt-4">
+                        <div>
+                            <span class="fs-5 fw-bold text-dark">{{ job['salary'] }}/yr</span>
+                            <small class="text-muted d-block salary-subtext">Compensation base</small>
+                        </div>
+                        <div class="d-flex gap-2">
+                            {% if session.get('user_id') and session.get('role') == 'Candidate'  %}
+                            <a href="/save/{{ job['job_id'] }}" class="btn btn-white bg-white text-secondary btn-sm rounded-3 border px-2 shadow-sm" title="Save Job">
+                                 Save
+                            </a>
+                            {% endif %}
+                            <a href="/job/{{ job['job_id'] }}" class="btn btn-dark btn-sm rounded-pill px-3 fw-medium shadow-sm">
+                                Details
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card border-0 shadow-sm p-5 text-center rounded-4 bg-white text-muted small">
+            <i class="fa-regular fa-folder-open d-block fs-3 mb-2 text-secondary"></i>
+            No active vacancy yet.
+        </div>
+    {% endif %}
+</div>
+
+<div class="container mt-5 pt-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="text-dark mb-1 section-title-bold">One platform Many Solutions</h4>
+        </div>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-4 g-3">
+        <div class="col">
+            <div class="card bg-dark text-white border-0 shadow-sm p-3 rounded-4 d-flex flex-row align-items-center justify-content-between">
+                <div>
+                    <h6 class="fw-bold text-white mb-1 small">Marketing</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-white border border-light shadow-sm p-3 rounded-4 d-flex flex-row align-items-center justify-content-between">
+                <div>
+                    <h6 class="fw-bold text-dark mb-1 small">Development</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-dark text-white border-0 shadow-sm p-3 rounded-4 d-flex flex-row align-items-center justify-content-between">
+                <div>
+                    <h6 class="fw-bold text-white mb-1 small">UI/UX Design</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-white border border-light shadow-sm p-3 rounded-4 d-flex flex-row align-items-center justify-content-between">
+                <div>
+                    <h6 class="fw-bold text-dark mb-1 small">Finance</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

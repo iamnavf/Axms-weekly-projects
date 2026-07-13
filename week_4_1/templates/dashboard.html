@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-0 mt-2">
+    {% if session.get('role') == 'Candidate' %}
+        
+        {% include 'candidate_dashboard.html' %}
+    {% else %}
+     
+        {% include 'employer_dashboard.html' %}
+    {% endif %}
+</div>
+{% endblock %}
