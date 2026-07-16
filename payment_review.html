@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Payment & Review Analytics{% endblock %}
+
+{% block content %}
+<div class="topbar">
+    <h2>Payment &amp; Review Analytics</h2>
+    <p class="subtitle">Evaluate billing patterns, user satisfaction distributions, and operational impact markers</p>
+</div>
+
+<!-- KPI Cards Grid -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card text-center py-2 shadow-none">
+            <div class="card-body">
+                <h6 class="kpi-title mb-2">Preferred Payment Method</h6>
+                <h5 class="fw-bold text-primary mb-0" style="font-size: 15px;">{{ most_payment_method }}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center py-2 shadow-none">
+            <div class="card-body">
+                <h6 class="kpi-title mb-2">Avg Transaction Value</h6>
+                <h3 class="fw-bold text-success mb-0">{{ "{:,.2f}".format(avg_payment_value) }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center py-2 shadow-none">
+            <div class="card-body">
+                <h6 class="kpi-title mb-2">Avg Installments Used</h6>
+                <h3 class="fw-bold text-warning mb-0">{{ "%.1f"|format(avg_installments) }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center py-2 shadow-none">
+            <div class="card-body">
+                <h6 class="kpi-title mb-2">Avg Satisfaction Score</h6>
+                <h3 class="fw-bold text-danger mb-0">{{ "%.2f"|format(avg_review_score) }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Matrix -->
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5>Payment Method Preferences</h5></div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <img src="{{ url_for('static', filename='images/payment_methods.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5>Credit Installments Usage Profiles</h5></div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <img src="{{ url_for('static', filename='images/installment_usage.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5>Review Score Distribution</h5></div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <img src="{{ url_for('static', filename='images/review_score_distribution.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5>Delivery Lags vs Customer Satisfaction</h5></div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <img src="{{ url_for('static', filename='images/delivery_review_scatter.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Insights Block -->
+<div class="card mt-4">
+    <div class="card-header" style="border: none;"><h5 class="mb-0 fw-bold" style="font-size: 16px;">Key Transaction &amp; Sentiment Insights</h5></div>
+    <div class="card-body pt-0">
+        <ul class="text-secondary ps-3" style="font-size: 14px; line-height: 2;">
+            <li class="mb-1">{{ insight_1 }}</li>
+            <li class="mb-1">{{ insight_2 }}</li>
+            <li class="mb-1">{{ insight_3 }}</li>
+            <li class="mb-1">{{ insight_4 }}</li>
+            <li>{{ insight_5 }}</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
