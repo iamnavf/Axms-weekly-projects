@@ -1,0 +1,64 @@
+DATA QUALITY REPORT
+
+Name : brazilian E commerce Dataset
+
+
+Total records  = 112650 rows
+Total features = 35 columns
+
+final record = 110174
+total features= 50
+
+total missing values = 13667
+    removed critical missing vales 
+    fillied missing values with median mode where required
+
+final missing value =0
+
+duplicated row = 0
+
+chnage the data type where required
+    *delivery time 
+    *shipping time 
+
+droped columns
+    comment review title
+    comment review message
+they were with high amount of missing values
+
+outlier:
+    price
+    freight values
+    delivery time
+    shipping time
+
+instead of removing capped the outlier with IQR method
+
+New Features created
+
+    * Delivery Time
+    * Shipping Duration
+    * Order Processing Time
+    * Customer Lifetime Value
+    * Total Order Value
+    * Average Product Price
+    * Average Review Score
+    * Customer Purchase Count
+    * Seller Performance Score
+    * Revenue per Customer
+    * Monthly Sales
+    * Repeat Customer Indicator
+
+Tables mergred
+    *order_item
+    *order_item
+    *Seller
+    *Customer
+    *Product
+    *product_category
+    *payment
+    *Review
+
+Final datset
+    Rows    : 110,174
+    Columns : 50
