@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Product Analytics{% endblock %}
+
+{% block content %}
+<div class="topbar">
+    <h2>Product Analytics</h2>
+    <p class="subtitle">Evaluate inventory price margins, product velocity, and top categories</p>
+</div>
+
+<!-- KPI Cards Grid -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card text-center py-2 shadow-none">
+            <div class="card-body">
+                <h6 class="kpi-title mb-2">Products Sold</h6>
+                <h3 class="fw-bold text-primary mb-0">{{ "{:,}".format(total_products_sold) }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center py-2 shadow-none">
+            <div class="card-body">
+                <h6 class="kpi-title mb-2">Total Categories</h6>
+                <h3 class="fw-bold text-success mb-0">{{ total_categories }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center py-2 shadow-none">
+            <div class="card-body">
+                <h6 class="kpi-title mb-2">Avg Product Price</h6>
+                <h3 class="fw-bold text-warning mb-0">{{ "{:,.2f}".format(avg_product_price) }}</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Charts Matrix -->
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5>Best Selling Products (Volume Rank)</h5></div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <img src="{{ url_for('static', filename='images/best_selling_products.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5>Volume Sales Performance by Category</h5></div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <img src="{{ url_for('static', filename='images/category_performance.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5>Product Pricing Distribution Profile</h5></div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <img src="{{ url_for('static', filename='images/product_pricing.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Insights Block -->
+<div class="card mt-4">
+    <div class="card-header" style="border: none;"><h5 class="mb-0 fw-bold" style="font-size: 16px;">Key Inventory Insights</h5></div>
+    <div class="card-body pt-0">
+        <ul class="text-secondary ps-3" style="font-size: 14px; line-height: 2;">
+            <li class="mb-1">{{ insight_1 }}</li>
+            <li class="mb-1">{{ insight_2 }}</li>
+            <li class="mb-1">{{ insight_3 }}</li>
+            <li>{{ insight_4 }}</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

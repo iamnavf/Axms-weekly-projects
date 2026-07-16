@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Customer Analytics{% endblock %}
+
+{% block content %}
+<div class="topbar">
+    <h2>Customer Analytics</h2>
+    <p class="subtitle">Understand user retention metrics, registration density, and location profiles</p>
+</div>
+
+<!-- KPI Cards Grid -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card text-center py-2 shadow-none">
+            <div class="card-body">
+                <h6 class="kpi-title mb-2">Total Customers</h6>
+                <h3 class="fw-bold  text-primary mb-0">{{ "{:,}".format(total_customers) }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center py-2 shadow-none">
+            <div class="card-body">
+                <h6 class="kpi-title mb-2">Repeat Customers</h6>
+                <h3 class="fw-bold text-success mb-0">{{ "{:,}".format(repeat_customers) }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center py-2 shadow-none">
+            <div class="card-body">
+                <h6 class="kpi-title mb-2">Customer Cities</h6>
+                <h3 class="fw-bold text-warning mb-0">{{ "{:,}".format(total_cities) }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center py-2 shadow-none">
+            <div class="card-body">
+                <h6 class="kpi-title mb-2">Avg Customer Spending</h6>
+                <h3 class="fw-bold text-danger mb-0">{{ "{:,.2f}".format(avg_customer_spending) }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Matrix -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5>Customer Distribution by State</h5></div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <img src="{{ url_for('static', filename='images/customer_distribution.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5>Retention Breakdown (Repeat Customers)</h5></div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <img src="{{ url_for('static', filename='images/repeat_customers.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5>Top 10 Purchasing Cities</h5></div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <img src="{{ url_for('static', filename='images/top_purchasing_cities.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header"><h5>Customer Spending Distribution</h5></div>
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
+                <img src="{{ url_for('static', filename='images/customer_spending.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Insights Block -->
+<div class="card mb-4">
+    <div class="card-header" style="border: none;"><h5 class="mb-0 fw-bold" style="font-size: 16px;">Key Customer Insights</h5></div>
+    <div class="card-body pt-0">
+        <ul class="text-secondary ps-3" style="font-size: 14px; line-height: 2;">
+            <li class="mb-1">{{ insight_1 }}</li>
+            <li class="mb-1">{{ insight_2 }}</li>
+            <li class="mb-1">{{ insight_3 }}</li>
+            <li>{{ insight_4 }}</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
