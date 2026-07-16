@@ -80,5 +80,7 @@ Tech stack
     -flask
     -HTML
     -css
+    -Bootstrap5
+    -jinja2
     
     
