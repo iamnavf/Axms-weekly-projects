@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Dataset Explorer{% endblock %}
+
+{% block content %}
+<div class="topbar">
+    <h2>Dataset Explorer</h2>
+    <p class="subtitle">Query, filter, and inspect core system datasets dynamically</p>
+</div>
+
+<!-- Search & Filter Controls -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="GET" action="{{ url_for('explorer') }}">
+            <div class="row g-3">
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="search" placeholder="Search Order ID or Customer City..." value="{{ search }}">
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" name="state">
+                        <option value="">All Regions / States</option>
+                        {% for s in states %}
+                        <option value="{{ s }}" {% if s == selected_state %}selected{% endif %}>{{ s }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-search me-1"></i> Search</button>
+                </div>
+                <div class="col-md-2">
+                    <a href="{{ url_for('explorer') }}" class="btn btn-secondary w-100">Reset</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Table Card Block -->
+<div class="card">
+    <div class="card-body p-0" style="overflow: hidden; border-radius: 16px;">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0 align-middle">
+                <thead>
+                    <tr>
+                        <th class="ps-4">Order ID</th>
+                        <th>Customer ID</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Payment</th>
+                        <th>Review</th>
+                        <th class="pe-4">Delivery (Days)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if table_data.empty %}
+                    <tr>
+                        <td colspan="9" class="text-center p-5 text-muted">No records found matching current query parameters.</td>
+                    </tr>
+                {% else %}
+                    {% for row in table_data.itertuples() %}
+                    <tr>
+                        <td class="ps-4 font-monospace text-secondary" style="font-size: 13px;">{{ row.order_id }}</td>
+                        <td class="font-monospace text-secondary" style="font-size: 13px;">{{ row.customer_unique_id }}</td>
+                        <td>{{ row.customer_city|title }}</td>
+                        <td class="fw-medium">{{ row.customer_state }}</td>
+                        <td>{{ row.product_category_name_english|replace('_', ' ')|title }}</td>
+                        <td class="fw-semibold">{{ "{:,.2f}".format(row.price) }}</td>
+                        <td>{{ row.primary_payment_type|replace('_', ' ')|title }}</td>
+                        <td>
+                            {% if row.avg_review_score %}
+                                <span class="text-warning"></span> {{ "%.1f"|format(row.avg_review_score) }}
+                            {% else %}
+                                <span class="text-muted">-</span>
+                            {% endif %}
+                        </td>
+                        <td class="pe-4">
+                            {% if row.delivery_time_days >= 0 %}
+                                <span class="badge bg-light text-dark fw-normal px-2 py-1.5">{{ row.delivery_time_days|int }} days</span>
+                            {% else %}
+                                <span class="text-muted">-</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Pagination Controls -->
+{% if total_pages > 1 %}
+<nav class="mt-4">
+    <ul class="pagination justify-content-center">
+        <li class="page-item {% if page == 1 %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('explorer', page=page-1, search=search, state=selected_state) }}">Previous</a>
+        </li>
+        <li class="page-item active">
+            <span class="page-link">Page {{ page }} of {{ total_pages }}</span>
+        </li>
+        <li class="page-item {% if page == total_pages %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('explorer', page=page+1, search=search, state=selected_state) }}">Next</a>
+        </li>
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}
