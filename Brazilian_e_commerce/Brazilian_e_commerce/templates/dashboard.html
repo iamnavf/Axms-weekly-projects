@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="topbar">
+    <h2>Dashboard</h2>
+    <p class="subtitle">Overview of key business performance</p>
+</div>
+
+<!-- KPI Cards Grid -->
+<div class="row g-4 mb-4">
+    <!-- Revenue -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card kpi-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="kpi-title mb-1">Total Revenue</p>
+                    <p class="kpi-value my-1">{{ "{:,.0f}".format(total_revenue) }}</p>
+                    <span class="kpi-growth">Business Revenue</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Orders -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card kpi-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="kpi-title mb-1">Total Orders</p>
+                    <p class="kpi-value my-1">{{ "{:,}".format(total_orders) }}<p>
+                    <span class="kpi-growth">Completed Orders</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customers -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card kpi-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="kpi-title mb-1">Customers</p>
+                    <p class="kpi-value my-1">{{ "{:,}".format(total_customers) }}</p>
+                    <span class="kpi-growth">Registered Customers</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sellers -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card kpi-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="kpi-title mb-1">Sellers</p>
+                    <p class="kpi-value my-1">{{ "{:,}".format(total_sellers) }}</p>
+                    <span class="kpi-growth">Active Sellers</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Trend Chart & Insights Card -->
+<div class="card chart-card mb-4">
+    <div class="chart-header">
+        <div>
+            <h4 class="chart-title">Monthly Revenue Trend</h4>
+            <p class="chart-subtitle">Revenue generated across different months</p>
+        </div>
+    </div>
+    <div class="chart-body">
+        <img src="{{ url_for('static', filename='images/monthly_sales.png') }}" class="img-fluid rounded">
+    </div>
+    <div class="px-4 pb-4">
+        <div class="insight-box">
+            <h6>Business Insight</h6>
+            <p>Revenue increased consistently throughout 2017, indicating healthy business growth.</p>
+        </div>
+        <div class="recommend-box">
+            <h6>Recommendation</h6>
+            <p>Increase inventory before high-sales months to maximize revenue opportunities.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Business Summary Table Card -->
+<div class="card mb-4 shadow-none">
+    <div class="card-body">
+        <h4 class="mb-4 fw-semibold" style="font-size: 18px;">Business Summary</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <span class="text-secondary">Total Revenue:</span> <strong>R$ {{ "{:,.2f}".format(total_revenue) }}</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <span class="text-secondary">Total Orders:</span> <strong>{{ "{:,}".format(total_orders) }}</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <span class="text-secondary">Customers:</span> <strong>{{ "{:,}".format(total_customers) }}</strong>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <span class="text-secondary">Active Sellers:</span> <strong>{{ "{:,}".format(total_sellers) }}</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <span class="text-secondary">Average Review Score:</span> <strong>{{ "%.2f"|format(avg_review_score) }} / 5</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <span class="text-secondary">Average Delivery Time:</span> <strong>{{ "%.1f"|format(avg_delivery_days) }} Days</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Sales Analytics{% endblock %}
+
+{% block content %}
+<div class="topbar">
+    <h2>Sales Analytics</h2>
+    <p class="subtitle">Analyze revenue trends, category performance, and regional sales insights</p>
+</div>
+
+<!-- KPI Cards Grid -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-3 col-md-6">
+        <div class="card kpi-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="kpi-title">Revenue</p>
+                    <p class="kpi-value"> {{ "{:,.0f}".format(total_revenue) }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card kpi-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="kpi-title">Avg Order</p>
+                    <p class="kpi-value">{{ avg_order_value }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card kpi-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="kpi-title">Top Category</p>
+                    <p class="fw-bold my-2 text-truncate" style="max-width: 140px;">{{ top_category }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card kpi-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="kpi-title">Top State</p>
+                    <p class="kpi-value">{{ top_state }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Matrix -->
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5>Monthly Revenue Trend</h5>
+            </div>
+            <div class="card-body text-center">
+                <img src="{{ url_for('static', filename='images/monthly_sales.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5>Revenue by Category</h5>
+            </div>
+            <div class="card-body text-center">
+                <img src="{{ url_for('static', filename='images/category_performance.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5>Revenue by State</h5>
+            </div>
+            <div class="card-body text-center">
+                <img src="{{ url_for('static', filename='images/revenue_state.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5>Average Order Value Distribution</h5>
+            </div>
+            <div class="card-body text-center">
+                <img src="{{ url_for('static', filename='images/average_order_value.png') }}" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recommendations Board -->
+<div class="card mt-4">
+    <div class="card-body p-4">
+        <h5 class="fw-bold mb-3" style="font-size: 16px;">Strategic Business Recommendations</h5>
+        <ul class="mb-0 text-secondary ps-3" style="font-size: 14px; line-height: 2;">
+            <li>Optimize fulfillment inventory layers right before mapped historical peak sales months.</li>
+            <li>Launch dedicated co-marketing campaigns for low-performing niche product categories.</li>
+            <li>Strengthen local logistics hubs in dense regions like São Paulo to handle heavy transaction volumes.</li>
+            <li>Utilize product grouping offers to steadily improve individual average order value (AOV) metrics.</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
