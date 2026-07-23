@@ -1,0 +1,348 @@
+/* ==========================
+   Google Font
+========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f7fc;
+    overflow-x:hidden;
+}
+
+/* ==========================
+   Layout
+========================== */
+
+.wrapper{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ==========================
+   Sidebar
+========================== */
+
+.sidebar{
+    width:260px;
+    background:#1e293b;
+    color:white;
+    position:fixed;
+    height:100vh;
+    left:0;
+    top:0;
+    transition:.3s;
+}
+
+.logo{
+    text-align:center;
+    padding:30px 15px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.logo i{
+    font-size:45px;
+    color:#38bdf8;
+    margin-bottom:10px;
+}
+
+.logo h3{
+    font-size:22px;
+    font-weight:600;
+}
+
+.nav-links{
+    list-style:none;
+    margin-top:30px;
+}
+
+.nav-links li{
+    margin:8px 15px;
+}
+
+.nav-links a{
+    color:#cbd5e1;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    padding:14px 18px;
+    border-radius:10px;
+    transition:.3s;
+    font-size:16px;
+}
+
+.nav-links a:hover{
+    background:#2563eb;
+    color:white;
+}
+
+.nav-links i{
+    width:28px;
+    font-size:18px;
+}
+
+/* ==========================
+   Main Content
+========================== */
+
+.main-content{
+    margin-left:260px;
+    width:calc(100% - 260px);
+    display:flex;
+    flex-direction:column;
+}
+
+/* ==========================
+   Top Navbar
+========================== */
+
+.top-navbar{
+    background:white;
+    height:75px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 35px;
+    box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+.top-navbar h4{
+    font-weight:600;
+    color:#1e293b;
+}
+
+.profile{
+    color:#2563eb;
+}
+
+/* ==========================
+   Content
+========================== */
+
+.content{
+    flex:1;
+    padding:35px;
+}
+
+/* ==========================
+   Dashboard Cards
+========================== */
+
+.dashboard-card{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+    transition:.3s;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-5px);
+}
+
+.dashboard-card h5{
+    color:#64748b;
+    font-size:16px;
+}
+
+.dashboard-card h2{
+    margin-top:10px;
+    color:#1e293b;
+    font-weight:700;
+}
+
+/* ==========================
+   Tables
+========================== */
+
+.table{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.table thead{
+    background:#2563eb;
+    color:white;
+}
+
+.table th,
+.table td{
+    vertical-align:middle;
+}
+
+/* ==========================
+   Prediction Form
+========================== */
+
+.form-section{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+
+.form-label{
+    font-weight:500;
+    color:#334155;
+}
+
+.form-control,
+.form-select{
+    border-radius:10px;
+    height:48px;
+}
+
+.form-control:focus,
+.form-select:focus{
+    border-color:#2563eb;
+    box-shadow:none;
+}
+
+.predict-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:10px;
+    transition:.3s;
+    font-weight:500;
+}
+
+.predict-btn:hover{
+    background:#1d4ed8;
+}
+
+/* ==========================
+   Result Box
+========================== */
+
+.result-box{
+    background:#ecfeff;
+    border-left:6px solid #06b6d4;
+    padding:25px;
+    border-radius:10px;
+    margin-top:25px;
+}
+
+.result-box h3{
+    color:#0f172a;
+    font-weight:700;
+}
+
+.result-box p{
+    margin-top:10px;
+    color:#475569;
+}
+
+/* ==========================
+   Analytics
+========================== */
+
+.chart-box{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+    margin-bottom:25px;
+}
+
+/* ==========================
+   Report Cards
+========================== */
+
+.report-card{
+    background:white;
+    border-radius:15px;
+    text-align:center;
+    padding:35px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+    transition:.3s;
+}
+
+.report-card:hover{
+    transform:translateY(-6px);
+}
+
+.report-card i{
+    font-size:45px;
+    color:#2563eb;
+    margin-bottom:15px;
+}
+
+.download-btn{
+    margin-top:15px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:10px 20px;
+}
+
+.download-btn:hover{
+    background:#1d4ed8;
+}
+
+/* ==========================
+   Footer
+========================== */
+
+.footer{
+    background:white;
+    text-align:center;
+    padding:18px;
+    color:#64748b;
+    border-top:1px solid #e2e8f0;
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width:992px){
+
+    .sidebar{
+        width:80px;
+    }
+
+    .logo h3{
+        display:none;
+    }
+
+    .nav-links a span{
+        display:none;
+    }
+
+    .main-content{
+        margin-left:80px;
+        width:calc(100% - 80px);
+    }
+
+}
+
+@media(max-width:768px){
+
+    .sidebar{
+        display:none;
+    }
+
+    .main-content{
+        margin-left:0;
+        width:100%;
+    }
+
+    .top-navbar{
+        padding:15px;
+    }
+
+    .content{
+        padding:20px;
+    }
+
+}

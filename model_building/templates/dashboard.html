@@ -1,0 +1,339 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block page_title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- =======================
+        Top Cards
+    ======================== -->
+
+    <div class="row g-4">
+
+        <div class="col-lg-3 col-md-6">
+            <div class="dashboard-card">
+                <h5>Total Records</h5>
+                <h2>{{total_rows}}</h2>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="dashboard-card">
+                <h5>Original Features</h5>
+                <h2>{{total_col}}</h2>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="dashboard-card">
+                <h5>Selected Features</h5>
+                <h2>15</h2>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="dashboard-card">
+                <h5>Models Built</h5>
+                <h2>7</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+    <!-- =======================
+        Dataset Overview
+    ======================== -->
+
+    <div class="row">
+
+        <div class="col-lg-6">
+
+            <div class="dashboard-card">
+
+                <h4 class="mb-4">
+                    <i class="fa-solid fa-database"></i>
+                    Dataset Overview
+                </h4>
+
+                <table class="table">
+
+                    <tbody>
+
+                        <tr>
+                            <th>Dataset</th>
+                            <td>Ames Housing Dataset</td>
+                        </tr>
+
+                        <tr>
+                            <th>Total Records</th>
+                            <td>1460</td>
+                        </tr>
+
+                        <tr>
+                            <th>Target Variable</th>
+                            <td>SalePrice</td>
+                        </tr>
+
+                        <tr>
+                            <th>Missing Values</th>
+                            <td>Handled</td>
+                        </tr>
+
+                        <tr>
+                            <th>Encoding</th>
+                            <td>Ordinal + One Hot Encoding</td>
+                        </tr>
+
+                        <tr>
+                            <th>Scaling</th>
+                            <td>MinMaxScaler</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- =======================
+            Best Model
+        ======================== -->
+
+        <div class="col-lg-6">
+
+            <div class="dashboard-card">
+
+                <h4 class="mb-4">
+
+                    <i class="fa-solid fa-trophy"></i>
+
+                    Best Model
+
+                </h4>
+
+                <table class="table">
+
+                    <tbody>
+
+                        <tr>
+                            <th>Model</th>
+                            <td>CatBoost Regressor</td>
+                        </tr>
+
+                        <tr>
+                            <th>R² Score</th>
+                            <td>0.9062</td>
+                        </tr>
+
+                        <tr>
+                            <th>MAE</th>
+                            <td>22,000</td>
+                        </tr>
+
+                        <tr>
+                            <th>RMSE</th>
+                            <td>31,000</td>
+                        </tr>
+
+                        <tr>
+                            <th>Status</th>
+                            <td class="text-success">
+                                Ready For Deployment
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <!-- =======================
+        Model Summary
+    ======================== -->
+
+    <div class="dashboard-card">
+
+        <h4 class="mb-4">
+
+            <i class="fa-solid fa-chart-column"></i>
+
+            Model Performance Summary
+
+        </h4>
+
+        <table class="table table-hover text-center">
+
+            <thead>
+
+                <tr>
+
+                    <th>Model</th>
+
+                    <th>R²</th>
+
+                    <th>MAE</th>
+
+                    <th>RMSE</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>Linear Regression</td>
+                    <td>0.768</td>
+                    <td>22363</td>
+                    <td>37785</td>
+                </tr>
+
+                <tr>
+                    <td>Decision Tree</td>
+                    <td>0.811</td>
+                    <td>-----</td>
+                    <td>-----</td>
+                </tr>
+
+                <tr>
+                    <td>Random Forest</td>
+                    <td>-----</td>
+                    <td>-----</td>
+                    <td>-----</td>
+                </tr>
+
+                <tr>
+                    <td>Gradient Boosting</td>
+                    <td>-----</td>
+                    <td>-----</td>
+                    <td>-----</td>
+                </tr>
+
+                <tr>
+                    <td>XGBoost</td>
+                    <td>-----</td>
+                    <td>-----</td>
+                    <td>-----</td>
+                </tr>
+
+                <tr>
+                    <td>LightGBM</td>
+                    <td>-----</td>
+                    <td>-----</td>
+                    <td>-----</td>
+                </tr>
+
+                <tr class="table-success">
+
+                    <td><strong>CatBoost</strong></td>
+
+                    <td><strong>0.9062</strong></td>
+
+                    <td><strong>-----</strong></td>
+
+                    <td><strong>-----</strong></td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <br>
+
+    <!-- =======================
+        Quick Insights
+    ======================== -->
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="dashboard-card">
+
+                <h5>
+
+                    <i class="fa-solid fa-check-circle text-success"></i>
+
+                    Data Cleaning
+
+                </h5>
+
+                <p>
+
+                    Missing values handled successfully and duplicate records removed.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="dashboard-card">
+
+                <h5>
+
+                    <i class="fa-solid fa-gears text-primary"></i>
+
+                    Feature Engineering
+
+                </h5>
+
+                <p>
+
+                    Top 15 important features selected using CatBoost Feature Importance.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="dashboard-card">
+
+                <h5>
+
+                    <i class="fa-solid fa-rocket text-warning"></i>
+
+                    Deployment
+
+                </h5>
+
+                <p>
+
+                    CatBoost Regressor selected as the final deployment model.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

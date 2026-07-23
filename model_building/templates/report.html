@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}Reports{% endblock %}
+
+{% block page_title %}
+Reports
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="row g-4">
+
+        <!-- Prediction Report -->
+
+        <div class="col-lg-4">
+
+            <div class="report-card">
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+                <h4>Prediction Report</h4>
+
+                <p>
+
+                    Download the complete prediction report.
+
+                </p>
+
+                <a href="/download/prediction"
+                   class="btn btn-primary">
+
+                    Download PDF
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Model Evaluation -->
+
+        <div class="col-lg-4">
+
+            <div class="report-card">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <h4>Model Evaluation</h4>
+
+                <p>
+
+                    Performance metrics of every regression model.
+
+                </p>
+
+                <a href="/download/evaluation"
+                   class="btn btn-primary">
+
+                    Download PDF
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Comparison -->
+
+        <div class="col-lg-4">
+
+            <div class="report-card">
+
+                <i class="fa-solid fa-scale-balanced"></i>
+
+                <h4>Comparison Report</h4>
+
+                <p>
+
+                    Compare all trained regression models.
+
+                </p>
+
+                <a href="/download/comparison"
+                   class="btn btn-primary">
+
+                    Download PDF
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <!-- Second Row -->
+
+    <div class="row g-4">
+
+        <!-- Analytics -->
+
+        <div class="col-lg-4">
+
+            <div class="report-card">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <h4>Analytics Report</h4>
+
+                <p>
+
+                    Correlation, feature importance and EDA.
+
+                </p>
+
+                <a href="/download/analytics"
+                   class="btn btn-primary">
+
+                    Download PDF
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Dataset -->
+
+        <div class="col-lg-4">
+
+            <div class="report-card">
+
+                <i class="fa-solid fa-database"></i>
+
+                <h4>Dataset Summary</h4>
+
+                <p>
+
+                    Download cleaned dataset summary.
+
+                </p>
+
+                <a href="/download/dataset"
+                   class="btn btn-success">
+
+                    Download CSV
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Model -->
+
+        <div class="col-lg-4">
+
+            <div class="report-card">
+
+                <i class="fa-solid fa-microchip"></i>
+
+                <h4>Deployment Model</h4>
+
+                <p>
+
+                    Information about the deployed CatBoost model.
+
+                </p>
+
+                <a href="/download/model"
+                   class="btn btn-warning">
+
+                    Download Details
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

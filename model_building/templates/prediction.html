@@ -1,0 +1,350 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction{% endblock %}
+
+{% block page_title %}
+House Price Prediction
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <!-- ===============================
+                Prediction Form
+        ================================ -->
+
+        <div class="col-lg-8">
+
+            <div class="form-section">
+
+                <h3 class="mb-4">
+                    <i class="fa-solid fa-house"></i>
+                    Property Details
+                </h3>
+
+                <form action="/predict" method="POST">
+
+                    <div class="row">
+
+                        <!-- Overall Quality -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                Overall Quality
+                            </label>
+
+                            <select class="form-select" name="OverallQual">
+
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- Living Area -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Ground Living Area (Sq Ft)
+
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="GrLivArea">
+
+                        </div>
+
+                        <!-- Garage Cars -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Garage Cars
+
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="GarageCars">
+
+                        </div>
+
+                        <!-- Garage Area -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Garage Area
+
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="GarageArea">
+
+                        </div>
+
+                        <!-- Basement -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Basement Area
+
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="TotalBsmtSF">
+
+                        </div>
+
+                        <!-- Lot Area -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Lot Area
+
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="LotArea">
+
+                        </div>
+
+                        <!-- House Age -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                House Age
+
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="HouseAge">
+
+                        </div>
+
+                        <!-- Kitchen Quality -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Kitchen Quality
+
+                            </label>
+
+                            <select
+                                class="form-select"
+                                name="KitchenQual">
+
+                                <option>Excellent</option>
+                                <option>Good</option>
+                                <option>Typical</option>
+                                <option>Fair</option>
+                                <option>Poor</option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- Overall Condition -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Overall Condition
+
+                            </label>
+
+                            <select
+                                class="form-select"
+                                name="OverallCond">
+
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- Neighborhood -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Neighborhood
+
+                            </label>
+
+                            <select
+                                class="form-select"
+                                name="Neighborhood">
+
+                                <option>NAmes</option>
+                                <option>CollgCr</option>
+                                <option>OldTown</option>
+                                <option>Edwards</option>
+                                <option>Gilbert</option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- Remaining 5 Features -->
+
+                        <!-- Add your remaining selected
+                             features here exactly the
+                             same way -->
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="predict-btn">
+
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                        Predict House Price
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- ===============================
+                Prediction Result
+        ================================ -->
+
+        <div class="col-lg-4">
+
+            <div class="dashboard-card">
+
+                <h4>
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    Prediction
+
+                </h4>
+
+                <hr>
+
+                {% if prediction %}
+
+                <div class="result-box">
+
+                    <h2>
+
+                        ₹ {{ prediction }}
+
+                    </h2>
+
+                    <p>
+
+                        Estimated Market Price
+
+                    </p>
+
+                </div>
+
+                {% else %}
+
+                <div class="result-box">
+
+                    <h5>
+
+                        Prediction will appear here.
+
+                    </h5>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+            <br>
+
+            <!-- Feature Importance -->
+
+            <div class="dashboard-card">
+
+                <h4>
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    Important Features
+
+                </h4>
+
+                <hr>
+
+                <ol>
+
+                    <li>Overall Quality</li>
+
+                    <li>Ground Living Area</li>
+
+                    <li>Garage Area</li>
+
+                    <li>Garage Cars</li>
+
+                    <li>Kitchen Quality</li>
+
+                </ol>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
