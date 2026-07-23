@@ -25,7 +25,7 @@ House Price Prediction
                     Property Details
                 </h3>
 
-                <form action="/predict" method="POST">
+                <form action="{{url_for('prediction')}}"method="POST">
 
                     <div class="row">
 
@@ -54,13 +54,30 @@ House Price Prediction
 
                         </div>
 
-                        <!-- Living Area -->
+                        <!-- total square feet -->
 
                         <div class="col-md-6 mb-3">
 
                             <label class="form-label">
 
-                                Ground Living Area (Sq Ft)
+                                TOTAL SQUARE FEET (Sq Ft)
+
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="TotalSf">
+
+                        </div>
+
+                         <!-- Ground living arae -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                GROUND LIVING AREA (Sq Ft)
 
                             </label>
 
@@ -71,54 +88,20 @@ House Price Prediction
 
                         </div>
 
-                        <!-- Garage Cars -->
+                        <!-- 1st Floor -->
 
                         <div class="col-md-6 mb-3">
 
                             <label class="form-label">
 
-                                Garage Cars
+                                1st floor
 
                             </label>
 
                             <input
                                 type="number"
                                 class="form-control"
-                                name="GarageCars">
-
-                        </div>
-
-                        <!-- Garage Area -->
-
-                        <div class="col-md-6 mb-3">
-
-                            <label class="form-label">
-
-                                Garage Area
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="GarageArea">
-
-                        </div>
-
-                        <!-- Basement -->
-
-                        <div class="col-md-6 mb-3">
-
-                            <label class="form-label">
-
-                                Basement Area
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="TotalBsmtSF">
+                                name="1stFlrSF">
 
                         </div>
 
@@ -139,6 +122,62 @@ House Price Prediction
 
                         </div>
 
+                        
+                        <!-- total liv area -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                               TotalLivArea 
+
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="TotalLivArea">
+
+                        </div>
+
+                            
+                        <!-- Total bathrooms -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                               TotalBathrooms
+
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="TotalBathrooms">
+
+                        </div>
+
+                        		
+                        <!-- year built -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                built year
+
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="YearBuilt">
+
+                        </div>
+
+                        
+
                         <!-- House Age -->
 
                         <div class="col-md-6 mb-3">
@@ -156,88 +195,22 @@ House Price Prediction
 
                         </div>
 
-                        <!-- Kitchen Quality -->
+                        <!-- garageArea -->
 
                         <div class="col-md-6 mb-3">
 
                             <label class="form-label">
 
-                                Kitchen Quality
+                                GarageArea
 
                             </label>
 
-                            <select
-                                class="form-select"
-                                name="KitchenQual">
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="GarageArea">
 
-                                <option>Excellent</option>
-                                <option>Good</option>
-                                <option>Typical</option>
-                                <option>Fair</option>
-                                <option>Poor</option>
-
-                            </select>
-
-                        </div>
-
-                        <!-- Overall Condition -->
-
-                        <div class="col-md-6 mb-3">
-
-                            <label class="form-label">
-
-                                Overall Condition
-
-                            </label>
-
-                            <select
-                                class="form-select"
-                                name="OverallCond">
-
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-
-                            </select>
-
-                        </div>
-
-                        <!-- Neighborhood -->
-
-                        <div class="col-md-6 mb-3">
-
-                            <label class="form-label">
-
-                                Neighborhood
-
-                            </label>
-
-                            <select
-                                class="form-select"
-                                name="Neighborhood">
-
-                                <option>NAmes</option>
-                                <option>CollgCr</option>
-                                <option>OldTown</option>
-                                <option>Edwards</option>
-                                <option>Gilbert</option>
-
-                            </select>
-
-                        </div>
-
-                        <!-- Remaining 5 Features -->
-
-                        <!-- Add your remaining selected
-                             features here exactly the
-                             same way -->
+                        </div>                           
 
                     </div>
 
@@ -275,22 +248,10 @@ House Price Prediction
 
                 <hr>
 
-                {% if prediction %}
+                {% if Result %}
 
                 <div class="result-box">
-
-                    <h2>
-
-                        ₹ {{ prediction }}
-
-                    </h2>
-
-                    <p>
-
-                        Estimated Market Price
-
-                    </p>
-
+                    <h2>{{ Result }}</h2>
                 </div>
 
                 {% else %}
