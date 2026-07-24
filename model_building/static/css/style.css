@@ -1,348 +1,423 @@
-/* ==========================
-   Google Font
-========================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+:root {
+    --bg-main: #f4f7fc;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --sidebar-bg: #1e293b;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --border-radius: 10px;
 }
 
-body{
-    background:#f4f7fc;
-    overflow-x:hidden;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* ==========================
-   Layout
-========================== */
-
-.wrapper{
-    display:flex;
-    min-height:100vh;
+body {
+    background: var(--bg-main);
+    overflow-x: hidden;
+    color: #334155;
+    font-size: 14px;
 }
 
-/* ==========================
-   Sidebar
-========================== */
+/* Layout */
 
-.sidebar{
-    width:260px;
-    background:#1e293b;
-    color:white;
-    position:fixed;
-    height:100vh;
-    left:0;
-    top:0;
-    transition:.3s;
+.wrapper {
+    display: flex;
+    min-height: 100vh;
 }
 
-.logo{
-    text-align:center;
-    padding:30px 15px;
-    border-bottom:1px solid rgba(255,255,255,.1);
+/* Sidebar*/
+
+.sidebar {
+    width: 230px;
+    background: var(--sidebar-bg);
+    color: white;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    transition: width 0.3s ease;
+    z-index: 101;
 }
 
-.logo i{
-    font-size:45px;
-    color:#38bdf8;
-    margin-bottom:10px;
+.logo {
+    text-align: center;
+    padding: 15px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.logo h3{
-    font-size:22px;
-    font-weight:600;
+.logo i {
+    font-size: 28px;
+    color: #38bdf8;
+    margin-bottom: 4px;
 }
 
-.nav-links{
-    list-style:none;
-    margin-top:30px;
+.logo h3 {
+    font-size: 16px;
+    font-weight: 600;
 }
 
-.nav-links li{
-    margin:8px 15px;
+.nav-links {
+    list-style: none;
+    margin-top: 15px;
 }
 
-.nav-links a{
-    color:#cbd5e1;
-    text-decoration:none;
-    display:flex;
-    align-items:center;
-    padding:14px 18px;
-    border-radius:10px;
-    transition:.3s;
-    font-size:16px;
+.nav-links li {
+    margin: 4px 10px;
 }
 
-.nav-links a:hover{
-    background:#2563eb;
-    color:white;
+.nav-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 9px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-size: 13.5px;
 }
 
-.nav-links i{
-    width:28px;
-    font-size:18px;
+.nav-links a:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.nav-links i {
+    width: 24px;
+    font-size: 15px;
 }
 
 /* ==========================
    Main Content
 ========================== */
 
-.main-content{
-    margin-left:260px;
-    width:calc(100% - 260px);
-    display:flex;
-    flex-direction:column;
+.main-content {
+    margin-left: 230px;
+    width: calc(100% - 230px);
+    display: flex;
+    flex-direction: column;
 }
 
 /* ==========================
-   Top Navbar
+   Top Navbar (Standardized Height)
 ========================== */
 
-.top-navbar{
-    background:white;
-    height:75px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 35px;
-    box-shadow:0 3px 12px rgba(0,0,0,.05);
+.top-navbar {
+    background: var(--text-muted);
+    height: 64px; /* Standard header height */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.top-navbar h4{
-    font-weight:600;
-    color:#1e293b;
+.top-navbar h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--bg-main);
 }
-
-.profile{
-    color:#2563eb;
-}
-
 /* ==========================
-   Content
+   Content Container
 ========================== */
 
-.content{
-    flex:1;
-    padding:35px;
+.content {
+    flex: 1;
+    padding: 20px;
 }
 
 /* ==========================
    Dashboard Cards
 ========================== */
 
-.dashboard-card{
-    background:white;
-    border-radius:15px;
-    padding:25px;
-    box-shadow:0 8px 20px rgba(0,0,0,.05);
-    transition:.3s;
+.dashboard-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--card-shadow);
 }
 
-.dashboard-card:hover{
-    transform:translateY(-5px);
+.dashboard-card h5 {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    font-weight: 500;
 }
 
-.dashboard-card h5{
-    color:#64748b;
-    font-size:16px;
-}
-
-.dashboard-card h2{
-    margin-top:10px;
-    color:#1e293b;
-    font-weight:700;
+.dashboard-card h2 {
+    margin-top: 6px;
+    color: var(--text-dark);
+    font-size: 22px;
+    font-weight: 700;
 }
 
 /* ==========================
    Tables
 ========================== */
 
-.table{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
+.table {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    font-size: 13.5px;
 }
 
-.table thead{
-    background:#2563eb;
-    color:white;
+.table thead {
+    background: var(--primary);
+    color: white;
 }
 
 .table th,
-.table td{
-    vertical-align:middle;
+.table td {
+    vertical-align: middle;
+    padding: 10px 14px;
 }
 
 /* ==========================
    Prediction Form
 ========================== */
 
-.form-section{
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 8px 20px rgba(0,0,0,.05);
+.form-section {
+    background: white;
+    padding: 22px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
 }
 
-.form-label{
-    font-weight:500;
-    color:#334155;
+.form-label {
+    font-weight: 500;
+    font-size: 13px;
+    color: #334155;
 }
 
 .form-control,
-.form-select{
-    border-radius:10px;
-    height:48px;
+.form-select {
+    border-radius: 8px;
+    height: 40px;
+    font-size: 13.5px;
 }
 
 .form-control:focus,
-.form-select:focus{
-    border-color:#2563eb;
-    box-shadow:none;
+.form-select:focus {
+    border-color: var(--primary);
+    box-shadow: none;
 }
 
-.predict-btn{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:12px 25px;
-    border-radius:10px;
-    transition:.3s;
-    font-weight:500;
+.predict-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
 }
 
-.predict-btn:hover{
-    background:#1d4ed8;
+.predict-btn:hover {
+    background: var(--primary-hover);
 }
 
 /* ==========================
    Result Box
 ========================== */
 
-.result-box{
-    background:#ecfeff;
-    border-left:6px solid #06b6d4;
-    padding:25px;
-    border-radius:10px;
-    margin-top:25px;
+.result-box {
+    background: #ecfeff;
+    border-left: 4px solid #06b6d4;
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 18px;
 }
 
-.result-box h3{
-    color:#0f172a;
-    font-weight:700;
+.result-box h3 {
+    color: #0f172a;
+    font-size: 15px;
+    font-weight: 700;
 }
 
-.result-box p{
-    margin-top:10px;
-    color:#475569;
+.result-box p {
+    margin-top: 4px;
+    color: #475569;
+    font-size: 13px;
 }
 
 /* ==========================
-   Analytics
+   Analytics & Chart Layouts (Equal Sizing Grid)
 ========================== */
-
-.chart-box{
-    background:white;
-    border-radius:15px;
-    padding:25px;
-    box-shadow:0 8px 20px rgba(0,0,0,.05);
-    margin-bottom:25px;
+/* 2 Equal Columns Grid */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
 }
+
+/* Base Chart Card Styling */
+.chart-box {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--card-shadow);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-box h3, 
+.chart-box h4 {
+    color: var(--text-dark);
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.chart-box hr {
+    margin-top: 0;
+    margin-bottom: 16px;
+    border-color: #f1f5f9;
+}
+
+/* Full Width spanning for Heatmaps & Residual Plots */
+.chart-box.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Image Fit & Visibility Fix */
+.chart-box img {
+    width: 100%;             /* Fills the card width to make details readable */
+    height: auto;            /* Adjusts height naturally without distorting */
+    max-height: 420px;       /* High enough so charts remain sharp and readable */
+    object-fit: contain;     /* Prevents awkward stretching */
+    border-radius: 6px;
+}
+
+/* Heatmap image specific height */
+.chart-box.full-width img {
+    max-height: 520px;
+}
+
+
+@media (max-width: 992px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 /* ==========================
    Report Cards
 ========================== */
 
-.report-card{
-    background:white;
-    border-radius:15px;
-    text-align:center;
-    padding:35px;
-    box-shadow:0 8px 20px rgba(0,0,0,.05);
-    transition:.3s;
+.report-card {
+    background: white;
+    border-radius: var(--border-radius);
+    text-align: center;
+    padding: 24px;
+    box-shadow: var(--card-shadow);
 }
 
-.report-card:hover{
-    transform:translateY(-6px);
+.report-card i {
+    font-size: 34px;
+    color: var(--primary);
+    margin-bottom: 10px;
 }
 
-.report-card i{
-    font-size:45px;
-    color:#2563eb;
-    margin-bottom:15px;
+.report-card h5 {
+    font-size: 15px;
 }
 
-.download-btn{
-    margin-top:15px;
-    background:#2563eb;
-    color:white;
-    border:none;
-    border-radius:8px;
-    padding:10px 20px;
+.download-btn {
+    margin-top: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-.download-btn:hover{
-    background:#1d4ed8;
+.download-btn:hover {
+    background: var(--primary-hover);
 }
 
 /* ==========================
    Footer
 ========================== */
 
-.footer{
-    background:white;
-    text-align:center;
-    padding:18px;
-    color:#64748b;
-    border-top:1px solid #e2e8f0;
+.footer {
+    background: white;
+    text-align: center;
+    padding: 12px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    border-top: 1px solid #e2e8f0;
 }
 
 /* ==========================
-   Responsive
+   Responsive Styles
 ========================== */
 
-@media(max-width:992px){
-
-    .sidebar{
-        width:80px;
+@media (max-width: 992px) {
+    .sidebar {
+        width: 70px;
     }
 
-    .logo h3{
-        display:none;
+    .logo h3,
+    .nav-links a span {
+        display: none;
     }
 
-    .nav-links a span{
-        display:none;
+    .main-content {
+        margin-left: 70px;
+        width: calc(100% - 70px);
+    }
+    
+    /* Stack charts on smaller screens */
+    .charts-grid {
+        grid-template-columns: 1fr;
     }
 
-    .main-content{
-        margin-left:80px;
-        width:calc(100% - 80px);
+    .chart-container {
+        height: 280px;
     }
-
 }
 
-@media(max-width:768px){
-
-    .sidebar{
-        display:none;
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
     }
 
-    .main-content{
-        margin-left:0;
-        width:100%;
+    .main-content {
+        margin-left: 0;
+        width: 100%;
     }
 
-    .top-navbar{
-        padding:15px;
+    .top-navbar {
+        height: 56px;
+        padding: 0 16px;
     }
 
-    .content{
-        padding:20px;
+    .content {
+        padding: 15px;
     }
-
+    
+    .chart-container {
+        height: 250px;
+    }
+    
+    .chart-box.full-width .chart-container {
+        height: 300px;
+    }
 }

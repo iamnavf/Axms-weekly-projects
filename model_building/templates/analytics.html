@@ -17,14 +17,14 @@ Analytics Dashboard
         <div class="col-lg-3">
             <div class="dashboard-card">
                 <h5>Total Features</h5>
-                <h2>15</h2>
+                <h2>{{total_col}}</h2>
             </div>
         </div>
 
         <div class="col-lg-3">
             <div class="dashboard-card">
-                <h5>Correlation</h5>
-                <h2>Available</h2>
+                <h5>Highly Related</h5>
+                <h2>{{high_related}}</h2>
             </div>
         </div>
 
@@ -46,122 +46,46 @@ Analytics Dashboard
 
     <br>
 
-    <!-- Correlation Heatmap -->
+    <!-- Grid Layout for Charts -->
+    <div class="charts-grid">
 
-    <div class="chart-box">
-
-        <h3>Correlation Heatmap</h3>
-
-        <hr>
-
-        <img src="{{ url_for('static', filename='images/heatmap.png') }}"
-             class="img-fluid rounded">
-
-    </div>
-
-    <br>
-
-    <!-- Feature Distribution -->
-
-    <div class="row">
-
-        <div class="col-lg-6">
-
-            <div class="chart-box">
-
-                <h4>SalePrice Distribution</h4>
-
-                <hr>
-
-                <img src="{{ url_for('static', filename='images/saleprice_distribution.png') }}"
-                     class="img-fluid rounded">
-
-            </div>
-
+        <!-- Correlation Heatmap (Kept Full Width) -->
+        <div class="chart-box full-width">
+            <h3>Correlation Heatmap</h3>
+            <hr>
+            <img src="{{ url_for('static', filename='images/correlation.png') }}"
+                 class="img-fluid rounded">
         </div>
 
-        <div class="col-lg-6">
-
-            <div class="chart-box">
-
-                <h4>Living Area Distribution</h4>
-
-                <hr>
-
-                <img src="{{ url_for('static', filename='images/grlivarea_distribution.png') }}"
-                     class="img-fluid rounded">
-
-            </div>
-
+        <!-- Row 1: Distribution & Predicted vs Actual -->
+        <div class="chart-box">
+            <h4>SalePrice Distribution</h4>
+            <hr>
+            <img src="{{ url_for('static', filename='images/feature-importance.png') }}"
+                 class="img-fluid rounded">
         </div>
 
-    </div>
-
-    <br>
-
-    <!-- Scatter Plot -->
-
-    <div class="row">
-
-        <div class="col-lg-6">
-
-            <div class="chart-box">
-
-                <h4>Overall Quality vs SalePrice</h4>
-
-                <hr>
-
-                <img src="{{ url_for('static', filename='images/overallqual_scatter.png') }}"
-                     class="img-fluid rounded">
-
-            </div>
-
+        <div class="chart-box">
+            <h4>predicted vs SalePrice</h4>
+            <hr>
+            <img src="{{ url_for('static', filename='images/act-vs-prd.png') }}"
+                 class="img-fluid rounded">
         </div>
 
-        <div class="col-lg-6">
-
-            <div class="chart-box">
-
-                <h4>Ground Living Area vs SalePrice</h4>
-
-                <hr>
-
-                <img src="{{ url_for('static', filename='images/grlivarea_scatter.png') }}"
-                     class="img-fluid rounded">
-
-            </div>
-
+        <!-- Row 2: Ground Living Area & Residual Analysis Side-by-Side -->
+        <div class="chart-box">
+            <h4>Ground Living Area vs SalePrice</h4>
+            <hr>
+            <img src="{{ url_for('static', filename='images/totalsf-linear.png') }}"
+                 class="img-fluid rounded">
         </div>
 
-    </div>
-
-    <br>
-
-    <!-- Feature Importance -->
-
-    <div class="chart-box">
-
-        <h3>Top 15 Feature Importance</h3>
-
-        <hr>
-
-        <img src="{{ url_for('static', filename='images/feature_importance.png') }}"
-             class="img-fluid rounded">
-
-    </div>
-
-    <br>
-
-    <!-- Residual Analysis -->
-
-    <div class="chart-box">
-
-        <h3>Residual Analysis</h3>
-
-        <hr>
-
-        <img src="{{ url_for('static', filename='images/residual_plot.png') }}"
-             class="img-fluid rounded">
+        <div class="chart-box">
+            <h4>Residual Analysis</h4>
+            <hr>
+            <img src="{{ url_for('static', filename='images/residual.png') }}"
+                 class="img-fluid rounded">
+        </div>
 
     </div>
 

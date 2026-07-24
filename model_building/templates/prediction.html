@@ -12,16 +12,12 @@ House Price Prediction
 
     <div class="row">
 
-        <!-- ===============================
-                Prediction Form
-        ================================ -->
-
         <div class="col-lg-8">
 
             <div class="form-section">
 
                 <h3 class="mb-4">
-                    <i class="fa-solid fa-house"></i>
+                    
                     Property Details
                 </h3>
 
@@ -65,7 +61,7 @@ House Price Prediction
                             </label>
 
                             <input
-                                type="number"
+                                type="text"
                                 class="form-control"
                                 name="TotalSf">
 
@@ -82,7 +78,7 @@ House Price Prediction
                             </label>
 
                             <input
-                                type="number"
+                                type="text"
                                 class="form-control"
                                 name="GrLivArea">
 
@@ -99,7 +95,7 @@ House Price Prediction
                             </label>
 
                             <input
-                                type="number"
+                                type="text"
                                 class="form-control"
                                 name="1stFlrSF">
 
@@ -116,7 +112,7 @@ House Price Prediction
                             </label>
 
                             <input
-                                type="number"
+                                type="text"
                                 class="form-control"
                                 name="LotArea">
 
@@ -134,7 +130,7 @@ House Price Prediction
                             </label>
 
                             <input
-                                type="number"
+                                type="text"
                                 class="form-control"
                                 name="TotalLivArea">
 
@@ -152,7 +148,7 @@ House Price Prediction
                             </label>
 
                             <input
-                                type="number"
+                                type="text"
                                 class="form-control"
                                 name="TotalBathrooms">
 
@@ -170,7 +166,7 @@ House Price Prediction
                             </label>
 
                             <input
-                                type="number"
+                                type="text"
                                 class="form-control"
                                 name="YearBuilt">
 
@@ -189,7 +185,7 @@ House Price Prediction
                             </label>
 
                             <input
-                                type="number"
+                                type="text"
                                 class="form-control"
                                 name="HouseAge">
 
@@ -206,7 +202,7 @@ House Price Prediction
                             </label>
 
                             <input
-                                type="number"
+                                type="text"
                                 class="form-control"
                                 name="GarageArea">
 
@@ -218,7 +214,6 @@ House Price Prediction
                         type="submit"
                         class="predict-btn">
 
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
 
                         Predict House Price
 
@@ -240,18 +235,16 @@ House Price Prediction
 
                 <h4>
 
-                    <i class="fa-solid fa-money-bill-wave"></i>
-
                     Prediction
 
                 </h4>
 
                 <hr>
 
-                {% if Result %}
+                {% if predicted_result %}
 
                 <div class="result-box">
-                    <h2>{{ Result }}</h2>
+                    <h2>{{ predicted_result }}</h2>
                 </div>
 
                 {% else %}
@@ -272,35 +265,12 @@ House Price Prediction
 
             <br>
 
-            <!-- Feature Importance -->
+             <table class="table">
+                    {% for col in columns %}
+                    <tr>{{col}}</tr>
+                    {% endfor%}
+             </table>
 
-            <div class="dashboard-card">
-
-                <h4>
-
-                    <i class="fa-solid fa-chart-column"></i>
-
-                    Important Features
-
-                </h4>
-
-                <hr>
-
-                <ol>
-
-                    <li>Overall Quality</li>
-
-                    <li>Ground Living Area</li>
-
-                    <li>Garage Area</li>
-
-                    <li>Garage Cars</li>
-
-                    <li>Kitchen Quality</li>
-
-                </ol>
-
-            </div>
 
         </div>
 

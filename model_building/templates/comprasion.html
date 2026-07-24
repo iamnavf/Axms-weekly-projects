@@ -40,7 +40,7 @@ Model Comparison Dashboard
 
                 <h2>
 
-                    0.9062
+                   {{ '%.4f' | format(catboost_dict['r2']) }}
 
                 </h2>
 
@@ -56,7 +56,7 @@ Model Comparison Dashboard
 
                 <h2>
 
-                    18,500
+                    {{ '{:,.2f}'.format(catboost_dict['mae']) }}
 
                 </h2>
 
@@ -72,7 +72,7 @@ Model Comparison Dashboard
 
                 <h2>
 
-                    29,800
+                    {{ '{:,.0f}'.format(catboost_dict['mse']) }}
 
                 </h2>
 
@@ -90,224 +90,43 @@ Model Comparison Dashboard
 
     <div class="dashboard-card">
 
-        <h3 class="mb-4">
-
-            <i class="fa-solid fa-table"></i>
-
-            Model Performance
-
-        </h3>
+        <h3 class="mb-4">Model Performance</h3>
 
         <table class="table table-striped table-hover text-center">
-
             <thead>
-
                 <tr>
-
                     <th>Model</th>
-
-                    <th>R² Score</th>
-
+                    <th>R2</th>
                     <th>MAE</th>
-
+                    <th>MSE</th>
                     <th>RMSE</th>
-
-                    <th>Status</th>
-
                 </tr>
-
             </thead>
 
-            <tbody>
 
-                <tr>
-
-                    <td>Linear Regression</td>
-
-                    <td>0.768</td>
-
-                    <td>22363</td>
-
-                    <td>37785</td>
-
-                    <td>
-
-                        <span class="badge bg-secondary">
-
-                            Baseline
-
-                        </span>
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <td>Decision Tree</td>
-
-                    <td>0.811</td>
-
-                    <td>-----</td>
-
-                    <td>-----</td>
-
-                    <td>
-
-                        <span class="badge bg-info">
-
-                            Improved
-
-                        </span>
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <td>Random Forest</td>
-
-                    <td>-----</td>
-
-                    <td>-----</td>
-
-                    <td>-----</td>
-
-                    <td>
-
-                        <span class="badge bg-primary">
-
-                            Trained
-
-                        </span>
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <td>Gradient Boosting</td>
-
-                    <td>-----</td>
-
-                    <td>-----</td>
-
-                    <td>-----</td>
-
-                    <td>
-
-                        <span class="badge bg-primary">
-
-                            Trained
-
-                        </span>
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <td>XGBoost</td>
-
-                    <td>-----</td>
-
-                    <td>-----</td>
-
-                    <td>-----</td>
-
-                    <td>
-
-                        <span class="badge bg-primary">
-
-                            Trained
-
-                        </span>
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <td>LightGBM</td>
-
-                    <td>-----</td>
-
-                    <td>-----</td>
-
-                    <td>-----</td>
-
-                    <td>
-
-                        <span class="badge bg-primary">
-
-                            Trained
-
-                        </span>
-
-                    </td>
-
-                </tr>
-
-                <tr class="table-success">
-
-                    <td>
-
-                        <strong>
-
-                            CatBoost
-
-                        </strong>
-
-                    </td>
-
-                    <td>
-
-                        <strong>
-
-                            0.9062
-
-                        </strong>
-
-                    </td>
-
-                    <td>
-
-                        <strong>
-
-                            ----- 
-
-                        </strong>
-
-                    </td>
-
-                    <td>
-
-                        <strong>
-
-                            ----- 
-
-                        </strong>
-
-                    </td>
-
-                    <td>
-
-                        <span class="badge bg-success">
-
-                            Best Model
-
-                        </span>
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
+        <tbody>
+
+            {% set display_names = {
+                'linear_regression': 'Linear Regression',
+                'decision_tree': 'Decision Tree',
+                'random_forest': 'Random Forest',
+                'gradient_boost': 'Gradient Boosting',
+                'Xgb': 'XGBoost',
+                'lgbm': 'LightGBM',
+                'catboost': 'CatBoost'
+            } %}
+
+            {% for key, label in display_names.items() %}
+            <tr {% if key == 'catboost' %}class="table-success"{% endif %}>
+                <td>{% if key == 'catboost' %}<strong>{{ label }}</strong>{% else %}{{ label }}{% endif %}</td>
+                <td>{{ '{:,.2f}'.format(model_dict[key]['r2']) }}</td>
+                <td>{{ '{:,.2f}'.format(model_dict[key]['mae']) }}</td>
+                <td>{{ '{:,.2f}'.format(model_dict[key]['mse']) }}</td>
+                <td>{{ '{:,.2f}'.format(model_dict[key]['rmse']) }}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
         </table>
 
     </div>
@@ -322,109 +141,38 @@ Model Comparison Dashboard
 
         <div class="col-lg-6">
 
-            <div class="chart-box">
+           <div class="chart-box">
 
-                <h4>
+        <h3>model performance</h3>
 
-                    R² Score Comparison
+        <hr>
 
-                </h4>
+        <img src="{{ url_for('static', filename='images/model_comparaison.png') }}"
+             class="img-fluid rounded">
 
-                <hr>
-
-                <canvas id="r2Chart" height="250"></canvas>
-
-            </div>
-
+           </div>
         </div>
 
-        <div class="col-lg-6">
-
-            <div class="chart-box">
-
-                <h4>
-
-                    RMSE Comparison
-
-                </h4>
-
-                <hr>
-
-                <canvas id="rmseChart" height="250"></canvas>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <br>
-
-    <div class="row">
-
-        <div class="col-lg-6">
-
-            <div class="chart-box">
-
-                <h4>
-
-                    MAE Comparison
-
-                </h4>
-
-                <hr>
-
-                <canvas id="maeChart" height="250"></canvas>
-
-            </div>
-
-        </div>
 
         <div class="col-lg-6">
 
             <div class="dashboard-card">
 
-                <h3>
-
-                    <i class="fa-solid fa-trophy"></i>
-
-                    Final Selected Model
-
-                </h3>
+                <h3>Final Selected Model</h3>
 
                 <hr>
 
-                <h2 class="text-success">
-
-                    CatBoost Regressor
-
-                </h2>
+                <h2 class="text-success">CatBoost Regressor</h2>
 
                 <br>
 
-                <p>
+                <p>Highest Prediction Accuracy</p>
 
-                    ✔ Highest Prediction Accuracy
+                <p>Stable Cross Validation Score</p>
 
-                </p>
+                <p>Best Generalization Performance</p>
 
-                <p>
-
-                    ✔ Stable Cross Validation Score
-
-                </p>
-
-                <p>
-
-                    ✔ Best Generalization Performance
-
-                </p>
-
-                <p>
-
-                    ✔ Selected for Flask Deployment
-
-                </p>
+                <p>Selected for Flask Deployment</p>
 
             </div>
 
@@ -433,19 +181,5 @@ Model Comparison Dashboard
     </div>
 
 </div>
-
-{% endblock %}
-
-{% block scripts %}
-
-<!-- Chart.js -->
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-
-    // You will add Chart.js code later
-
-</script>
 
 {% endblock %}

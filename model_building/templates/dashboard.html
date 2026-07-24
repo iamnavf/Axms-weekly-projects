@@ -10,10 +10,6 @@ Dashboard
 
 <div class="container-fluid">
 
-    <!-- =======================
-        Top Cards
-    ======================== -->
-
     <div class="row g-4">
 
         <div class="col-lg-3 col-md-6">
@@ -48,9 +44,6 @@ Dashboard
 
     <br>
 
-    <!-- =======================
-        Dataset Overview
-    ======================== -->
 
     <div class="row">
 
@@ -59,7 +52,6 @@ Dashboard
             <div class="dashboard-card">
 
                 <h4 class="mb-4">
-                    <i class="fa-solid fa-database"></i>
                     Dataset Overview
                 </h4>
 
@@ -68,13 +60,8 @@ Dashboard
                     <tbody>
 
                         <tr>
-                            <th>Dataset</th>
-                            <td>Ames Housing Dataset</td>
-                        </tr>
-
-                        <tr>
                             <th>Total Records</th>
-                            <td>1460</td>
+                            <td>{{total_rows}}</td>
                         </tr>
 
                         <tr>
@@ -86,17 +73,6 @@ Dashboard
                             <th>Missing Values</th>
                             <td>Handled</td>
                         </tr>
-
-                        <tr>
-                            <th>Encoding</th>
-                            <td>Ordinal + One Hot Encoding</td>
-                        </tr>
-
-                        <tr>
-                            <th>Scaling</th>
-                            <td>MinMaxScaler</td>
-                        </tr>
-
                     </tbody>
 
                 </table>
@@ -105,55 +81,33 @@ Dashboard
 
         </div>
 
-        <!-- =======================
-            Best Model
-        ======================== -->
-
         <div class="col-lg-6">
 
             <div class="dashboard-card">
 
                 <h4 class="mb-4">
 
-                    <i class="fa-solid fa-trophy"></i>
-
                     Best Model
 
                 </h4>
 
                 <table class="table">
-
-                    <tbody>
-
-                        <tr>
-                            <th>Model</th>
-                            <td>CatBoost Regressor</td>
-                        </tr>
-
-                        <tr>
-                            <th>R² Score</th>
-                            <td>0.9062</td>
-                        </tr>
-
-                        <tr>
-                            <th>MAE</th>
-                            <td>22,000</td>
-                        </tr>
-
-                        <tr>
-                            <th>RMSE</th>
-                            <td>31,000</td>
-                        </tr>
-
-                        <tr>
-                            <th>Status</th>
-                            <td class="text-success">
-                                Ready For Deployment
-                            </td>
-                        </tr>
-
-                    </tbody>
-
+                    <tr>
+                        <th>R²</th>
+                        <td>{{ '%.4f' | format(catboost_dict['r2']) }}</td>
+                    </tr>
+                    <tr>
+                        <th>MAE</th>
+                        <td>{{ '{:,.2f}'.format(catboost_dict['mae']) }}</td>
+                    </tr>
+                    <tr>
+                        <th>MSE</th>
+                        <td>{{ '{:,.0f}'.format(catboost_dict['mse']) }}</td>
+                    </tr>
+                    <tr>
+                        <th>RMSE</th>
+                        <td>{{ '{:,.2f}'.format(catboost_dict['rmse']) }}</td>
+                    </tr>
                 </table>
 
             </div>
@@ -164,15 +118,9 @@ Dashboard
 
     <br>
 
-    <!-- =======================
-        Model Summary
-    ======================== -->
-
     <div class="dashboard-card">
 
         <h4 class="mb-4">
-
-            <i class="fa-solid fa-chart-column"></i>
 
             Model Performance Summary
 
@@ -190,6 +138,8 @@ Dashboard
 
                     <th>MAE</th>
 
+                    <th>MSE</th>
+
                     <th>RMSE</th>
 
                 </tr>
@@ -198,59 +148,25 @@ Dashboard
 
             <tbody>
 
-                <tr>
-                    <td>Linear Regression</td>
-                    <td>0.768</td>
-                    <td>22363</td>
-                    <td>37785</td>
-                </tr>
+            {% set display_names = {
+                'linear_regression': 'Linear Regression',
+                'decision_tree': 'Decision Tree',
+                'random_forest': 'Random Forest',
+                'gradient_boost': 'Gradient Boosting',
+                'Xgb': 'XGBoost',
+                'lgbm': 'LightGBM',
+                'catboost': 'CatBoost'
+            } %}
 
-                <tr>
-                    <td>Decision Tree</td>
-                    <td>0.811</td>
-                    <td>-----</td>
-                    <td>-----</td>
-                </tr>
-
-                <tr>
-                    <td>Random Forest</td>
-                    <td>-----</td>
-                    <td>-----</td>
-                    <td>-----</td>
-                </tr>
-
-                <tr>
-                    <td>Gradient Boosting</td>
-                    <td>-----</td>
-                    <td>-----</td>
-                    <td>-----</td>
-                </tr>
-
-                <tr>
-                    <td>XGBoost</td>
-                    <td>-----</td>
-                    <td>-----</td>
-                    <td>-----</td>
-                </tr>
-
-                <tr>
-                    <td>LightGBM</td>
-                    <td>-----</td>
-                    <td>-----</td>
-                    <td>-----</td>
-                </tr>
-
-                <tr class="table-success">
-
-                    <td><strong>CatBoost</strong></td>
-
-                    <td><strong>0.9062</strong></td>
-
-                    <td><strong>-----</strong></td>
-
-                    <td><strong>-----</strong></td>
-
-                </tr>
+            {% for key, label in display_names.items() %}
+            <tr {% if key == 'catboost' %}class="table-success"{% endif %}>
+                <td>{% if key == 'catboost' %}<strong>{{ label }}</strong>{% else %}{{ label }}{% endif %}</td>
+                <td>{{ '{:,.2f}'.format(model_dict[key]['r2']) }}</td>
+                <td>{{ '{:,.2f}'.format(model_dict[key]['mae']) }}</td>
+                <td>{{ '{:,.2f}'.format(model_dict[key]['mse']) }}</td>
+                <td>{{ '{:,.2f}'.format(model_dict[key]['rmse']) }}</td>
+            </tr>
+            {% endfor %}
 
             </tbody>
 
@@ -259,81 +175,6 @@ Dashboard
     </div>
 
     <br>
-
-    <!-- =======================
-        Quick Insights
-    ======================== -->
-
-    <div class="row g-4">
-
-        <div class="col-md-4">
-
-            <div class="dashboard-card">
-
-                <h5>
-
-                    <i class="fa-solid fa-check-circle text-success"></i>
-
-                    Data Cleaning
-
-                </h5>
-
-                <p>
-
-                    Missing values handled successfully and duplicate records removed.
-
-                </p>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-
-            <div class="dashboard-card">
-
-                <h5>
-
-                    <i class="fa-solid fa-gears text-primary"></i>
-
-                    Feature Engineering
-
-                </h5>
-
-                <p>
-
-                    Top 15 important features selected using CatBoost Feature Importance.
-
-                </p>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-
-            <div class="dashboard-card">
-
-                <h5>
-
-                    <i class="fa-solid fa-rocket text-warning"></i>
-
-                    Deployment
-
-                </h5>
-
-                <p>
-
-                    CatBoost Regressor selected as the final deployment model.
-
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
 </div>
 
 {% endblock %}

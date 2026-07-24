@@ -8,6 +8,7 @@ flask ="*"
 pandas = "*"
 joblib = "*"
 catboost = "*"
+reportlab = "*"
 
 [dev-packages]
 
