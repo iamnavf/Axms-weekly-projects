@@ -9,6 +9,7 @@ pandas = "*"
 joblib = "*"
 catboost = "*"
 reportlab = "*"
+platypus = "*"
 
 [dev-packages]
 

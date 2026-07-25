@@ -6,7 +6,6 @@ from reportlab.platypus import (SimpleDocTemplate,Paragraph,Spacer,Table)
 
 from reportlab.lib.styles import getSampleStyleSheet
 
-import os
 
 import pandas as pd
 import numpy as np
@@ -20,13 +19,13 @@ report_data ={}
 
 app = Flask(__name__)
 
-df = pd.read_csv(r"./data/cleaned/cleand_train.csv")
+df = pd.read_csv(r"./data/cleaned/cleand_train.csv")#clean csv
 
-df_train =pd.read_csv(r"./data/predict_feature/featured_columns.csv")
+df_train =pd.read_csv(r"./data/predict_feature/featured_columns.csv")#43 col csv
 
-df_model = pd.read_csv(r"./data/predict_feature/performance.csv",index_col=0)
+df_model = pd.read_csv(r"./data/predict_feature/performance.csv",index_col=0)#performance comparaison csv
 
-model = joblib.load(r"./model/model.pkl")
+model = joblib.load(r"./model/model.pkl")#catboost modle
 
 #home
 @app.route("/")
@@ -50,6 +49,7 @@ def dashboard():
 #prediction module
 @app.route("/prediction",methods =["GET","POST"])
 def prediction():
+    senddt={}
     if request.method == "POST":
         #getting the 10 user input
         overall_quality = int(request.form.get("OverallQual"))
@@ -63,6 +63,7 @@ def prediction():
         houseage = int(request.form.get("HouseAge"))
         GarageArea = int(request.form.get("GarageArea"))
 
+            #setting the dict to make preport by given val
         global report_data
         report_data={"overall-quality":overall_quality,"total_sq":total_sq,
             "ground_living":ground_living,
@@ -73,6 +74,8 @@ def prediction():
             "year_built":year_built,
             "houseage":houseage,
             "garageage":GarageArea}
+        
+        senddt=report_data
 
         #these are being skewd in the cleaning
         ground_living = np.log1p(ground_living)
@@ -106,10 +109,10 @@ def prediction():
 
         columns = df_train.columns[0:5].tolist()
         report_data["prediction"]=formated_result
-        return render_template("prediction.html",predicted_result=formated_result)
-    
+        return render_template("prediction.html",predicted_result=formated_result,sample_data=report_data)
+
     #result =request.args.get("Result")
-    return render_template("prediction.html")  #"""predicted_result=result"""
+    return render_template("prediction.html",sample_data=senddt)  #"""predicted_result=result"""
 
 #comparasion
 @app.route("/comprasion")
@@ -131,6 +134,7 @@ def analytics():
 def report():
     return render_template("report.html")
 
+#download prediction
 @app.route("/report/prediction")
 def prediction_report():
 
@@ -140,16 +144,20 @@ def prediction_report():
 
     data.append(Paragraph("House Price Prediction Report", style))
     data.append(Spacer(1,20))
-    data.append(Paragraph(f"Predicted Price : ${report_data["prediction"]}", style))
-    data.append(Paragraph(f"Overall Quality : {report_data["overall-quality"]}", style))
-    data.append(Paragraph(f"Ground Living Area : {report_data['ground_living']}", style))
-    data.append(Paragraph(f"Lot Area : {report_data['lot_area']}", style))
-    pdf.build(data)
-    return send_file(
-        "prediction_report.pdf",
-        as_attachment=True
-    )
-
+    try:
+        data.append(Paragraph(f"Predicted Price : ${report_data["prediction"]}", style))
+        data.append(Paragraph(f"Overall Quality : {report_data["overall-quality"]}", style))#try catch to prevent carsh if try to download without predicting price
+        data.append(Paragraph(f"Ground Living Area : {report_data['ground_living']}", style))
+        data.append(Paragraph(f"Lot Area : {report_data['lot_area']}", style))
+        pdf.build(data)
+        return send_file(
+            "prediction_report.pdf",
+            as_attachment=True
+        )
+    except Exception as e:
+        return render_template("report.html",message='prediction is not calculated')
+    
+#evalualtion report
 @app.route("/report/evaluation")
 def download_evaluation():
     pdf = SimpleDocTemplate("evaluation_report.pdf")
@@ -163,8 +171,35 @@ def download_evaluation():
     pdf.build(story)
     return send_file("evaluation_report.pdf",as_attachment=True)
 
+#camparison report
+@app.route("/report/comparison")
+def download_comparison():
+
+    pdf_path = "comparison_report.pdf"
+    pdf = SimpleDocTemplate(pdf_path)
+    story = [] 
+    story.append(Paragraph("Model Comparison Report", styles["Title"]))
+    story.append(Spacer(1, 20))
+    data = [["Model", "R²", "MAE", "MSE", "RMSE"]]
+    for model in df_model.columns:
+        data.append([
+            model,
+            str(round(df_model.loc["r2", model], 4)),
+            str(round(df_model.loc["mae", model], 2)),
+            str(round(df_model.loc["mse", model], 2)),
+            str(round(df_model.loc["rmse", model], 2))
+        ])
+    table = Table(data)
+    ''' table.setStyle(TableStyle([
+        ("GRID", (0,0), (-1,-1), 1, colors.black),
+        ("ALIGN", (0,0), (-1,-1), "CENTER")
+    ]))'''
+    story.append(table)
+    pdf.build(story)
+    return send_file(pdf_path, as_attachment=True)
+ 
 if __name__ =="__main__":
-    app.run()
+    app.run(debug=True)
 
 
 

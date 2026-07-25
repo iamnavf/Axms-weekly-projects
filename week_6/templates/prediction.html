@@ -49,7 +49,7 @@ House Price Prediction
                             </select>
 
                         </div>
-
+                
                         <!-- total square feet -->
 
                         <div class="col-md-6 mb-3">
@@ -63,7 +63,8 @@ House Price Prediction
                             <input
                                 type="text"
                                 class="form-control"
-                                name="TotalSf">
+                                name="TotalSf"
+                                value="{{sample_data['total_sq']}}" >
 
                         </div>
 
@@ -80,7 +81,8 @@ House Price Prediction
                             <input
                                 type="text"
                                 class="form-control"
-                                name="GrLivArea">
+                                name="GrLivArea"
+                                value="{{sample_data['ground_living']}}">
 
                         </div>
 
@@ -97,7 +99,8 @@ House Price Prediction
                             <input
                                 type="text"
                                 class="form-control"
-                                name="1stFlrSF">
+                                name="1stFlrSF"
+                                value="{{sample_data['floor_sq']}}">
 
                         </div>
 
@@ -114,7 +117,8 @@ House Price Prediction
                             <input
                                 type="text"
                                 class="form-control"
-                                name="LotArea">
+                                name="LotArea"
+                                value="{{sample_data['lot_area']}}">
 
                         </div>
 
@@ -132,7 +136,8 @@ House Price Prediction
                             <input
                                 type="text"
                                 class="form-control"
-                                name="TotalLivArea">
+                                name="TotalLivArea"
+                                value="{{sample_data['total_living']}}">
 
                         </div>
 
@@ -150,7 +155,8 @@ House Price Prediction
                             <input
                                 type="text"
                                 class="form-control"
-                                name="TotalBathrooms">
+                                name="TotalBathrooms"
+                                value="{{sample_data['total-bathroom']}}">
 
                         </div>
 
@@ -168,7 +174,8 @@ House Price Prediction
                             <input
                                 type="text"
                                 class="form-control"
-                                name="YearBuilt">
+                                name="YearBuilt"
+                                value="{{sample_data['year_built']}}">
 
                         </div>
 
@@ -187,7 +194,8 @@ House Price Prediction
                             <input
                                 type="text"
                                 class="form-control"
-                                name="HouseAge">
+                                name="HouseAge"
+                                value="{{sample_data['houseage']}}">
 
                         </div>
 
@@ -204,7 +212,8 @@ House Price Prediction
                             <input
                                 type="text"
                                 class="form-control"
-                                name="GarageArea">
+                                name="GarageArea"
+                                value="{{sample_data['garageage']}}">
 
                         </div>                           
 
@@ -218,6 +227,8 @@ House Price Prediction
                         Predict House Price
 
                     </button>
+
+                        <a href="/prediction" class="text-decoration-none small text-muted">Clear All</a>
 
                 </form>
 

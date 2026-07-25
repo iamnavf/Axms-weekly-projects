@@ -18,7 +18,6 @@ Reports
 
             <div class="report-card">
 
-                <i class="fa-solid fa-file-pdf"></i>
 
                 <h4>Prediction Report</h4>
 
@@ -28,12 +27,24 @@ Reports
 
                 </p>
 
+
+                
                 <a href="/report/prediction"
                    class="btn btn-primary">
 
                     Download PDF
 
                 </a>
+                <br>
+
+                {% if message %}
+  
+
+                <p>{{message}}</p>
+
+           
+                {% endif %}
+
 
             </div>
 
@@ -45,7 +56,6 @@ Reports
 
             <div class="report-card">
 
-                <i class="fa-solid fa-chart-line"></i>
 
                 <h4>Model Evaluation</h4>
 
@@ -66,9 +76,34 @@ Reports
 
         </div>
 
+
+        <div class="col-lg-4">
+
+            <div class="report-card">
+
+                <h4>Model Comparaison</h4>
+
+                <p>
+
+                    Performance comparaison of the model.
+
+                </p>
+
+                <a href="/report/comparison"
+                   class="btn btn-primary">
+
+                    Download PDF
+
+                </a>
+
+            </div>
+
+        </div>
+
         
     </div>
 
 </div>
+
 
 {% endblock %}
