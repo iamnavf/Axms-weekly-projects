@@ -4,17 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-numpy = "*"
 pandas = "*"
-seaborn = "*"
+numpy = "*"
 matplotlib = "*"
-ipykernel = "*"
+seaborn = "*"
 opencv-python = "*"
 scikit-learn = "*"
+ipykernel = "*"
 tensorflow = "*"
 
 [dev-packages]
-ipykernel = "*"
 
 [requires]
-python_version = "3.11"
+python_version = "3.12"
+python_full_version = "3.12.3"
