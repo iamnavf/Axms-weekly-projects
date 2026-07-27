@@ -82,5 +82,42 @@ Tech stack
     -css
     -Bootstrap5
     -jinja2
+
+week 6 - house prediction ml model
+House Price Prediction System using Machine Learning Overview
+
+The House Price Prediction System is a Machine Learning-based web application developed using Python, CatBoost, and Flask. The system predicts the selling price of a residential property based on user-provided house features. It also provides model analysis, comparison dashboards, analytics, and downloadable reports.
+
+The project uses the Housing Dataset from Kaggle and compares multiple regression algorithms to identify the best-performing model. After evaluation, the CatBoost Regressor was selected as the final deployment model.
+
+Features 
+    -House price prediction Interactive Flask dashboard 
+    -Dataset overview 
+    -Model comparison dashboard 
+    -Analytics dashboard 
+    -Feature importance visualization 
+    -Actual vs Predicted analysis Residual analysis 
+    -Download Prediction Report (PDF) 
+    -Download Model Evaluation Report (PDF) 
+    -Download Model Comparison Report (PDF)
+    
+Tech stack
+    -Python
+    -CatBoost
+    -Scikit-Learn
+    -XGBoost
+    -LightGBM
+    -Pandas
+    -NumPy
+    -Data Visualization
+       -Matplotlib
+       -Seaborn
+   -Web Framework
+    -Flask
+   -Frontend
+    -HTML5
+    -CSS3
+    -Bootstrap
+    -ReportLab
     
     
