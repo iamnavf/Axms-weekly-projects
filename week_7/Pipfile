@@ -12,6 +12,7 @@ opencv-python = "*"
 scikit-learn = "*"
 ipykernel = "*"
 tensorflow = "*"
+flask = "*"
 
 [dev-packages]
 
