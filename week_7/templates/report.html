@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}
+Reports
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <h2 class="mb-4">Reports</h2>
+
+    <div class="row">
+
+        <!-- Diagnosis Report -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow mb-4">
+
+                <div class="card-header">
+
+                    <h4>Diagnosis Report</h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <p>
+                        Download the latest diagnosis report generated after
+                        image prediction.
+                    </p>
+
+                    <a href="/download_diagnosis_report"
+                       class="btn btn-primary">
+
+                        Download Diagnosis Report
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Model Comparison Report -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow mb-4">
+
+                <div class="card-header">
+
+                    <h4>Model Comparison Report</h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <p>
+                        Download the complete comparison of all trained deep
+                        learning models.
+                    </p>
+
+                    <a href="/download_model_report"
+                       class="btn btn-success">
+
+                        Download Model Report
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Report Summary -->
+
+    <div class="card shadow">
+
+        <div class="card-header">
+
+            <h4>Report Information</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <tr>
+                    <th>Diagnosis Report</th>
+                    <td>Contains uploaded image, predicted disease, confidence score, probability distribution and Grad-CAM visualization.</td>
+                </tr>
+
+                <tr>
+                    <th>Model Comparison Report</th>
+                    <td>Contains accuracy, loss, model comparison table, evaluation metrics, confusion matrix and ROC curve.</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

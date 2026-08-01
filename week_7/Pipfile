@@ -13,6 +13,8 @@ scikit-learn = "*"
 ipykernel = "*"
 tensorflow = "*"
 flask = "*"
+keras-tuner = "*"
+tensorboard = "*"
 
 [dev-packages]
 

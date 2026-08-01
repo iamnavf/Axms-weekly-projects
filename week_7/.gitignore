@@ -1,1 +1,4 @@
 /data/all_image
+/models
+notebook/hyperparameter_tuning/
+log/

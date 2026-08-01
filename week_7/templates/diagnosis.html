@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}
+Image Diagnosis
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <h2 class="mb-4">Image Diagnosis</h2>
+
+    <div class="row">
+
+        <!-- Upload Image -->
+        <div class="col-md-5">
+
+            <div class="card shadow">
+
+                <div class="card-header">
+                    <h5>Upload Skin Image</h5>
+                </div>
+
+                <div class="card-body">
+
+                    <form action="/diagnosis" method="POST" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Select Image
+                            </label>
+
+                            <input
+                                type="file"
+                                class="form-control"
+                                name="image"
+                                accept="image/*"
+                                required>
+
+                        </div>
+
+                        <button
+                            class="btn btn-primary w-100"
+                            type="submit">
+
+                            Predict Disease
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Uploaded Image -->
+
+        <div class="col-md-7">
+
+            <div class="card shadow">
+
+                <div class="card-header">
+                    <h5>Uploaded Image</h5>
+                </div>
+
+                <div class="card-body text-center">
+
+                    {% if image_path %}
+
+                    <img
+                        src="{{ url_for('static', filename=image_path) }}"
+                        class="img-fluid rounded"
+                        width="350">
+
+                    {% else %}
+
+                    <p class="text-muted">
+
+                        No image uploaded.
+
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Prediction -->
+
+    {% if predicted_class %}
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header">
+            <h5>Prediction Result</h5>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <h4>
+
+                        Predicted Disease
+
+                    </h4>
+
+                    <h2 class="text-primary">
+
+                        {{ predicted_class }}
+
+                    </h2>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <h4>
+
+                        Confidence
+
+                    </h4>
+
+                    <h2 class="text-success">
+
+                        {{ confidence }} %
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+    <!-- Probability Table -->
+
+    {% if probabilities %}
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header">
+
+            <h5>
+
+                Probability for All Classes
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Disease</th>
+
+                        <th>Probability (%)</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                   {% for i in range(7) %}
+                    
+                    <tr>
+                        <td>{{ probabilities["class"][i] }}</td>
+                        <td>{{ "%.2f"|format(probabilities["score"][i] * 100) }}%</td>
+                    </tr>
+                    
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

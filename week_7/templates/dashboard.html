@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page Title -->
+    <div class="mb-4">
+        <h2>Dashboard</h2>
+        <p class="text-muted">
+            Skin Disease Classification using Deep Learning
+        </p>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row">
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-secondary">Total Images</h6>
+                    <h2>{{ total_images }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-secondary">Disease Classes</h6>
+                    <h2>{{ total_classes }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-secondary">Best Model</h6>
+                    <h4>{{ best_model }}</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-secondary">Test Accuracy</h6>
+                    <h2>{{ test_accuracy }}%</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Dataset Information -->
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card shadow mb-4">
+
+                <div class="card-header">
+                    <h5>Dataset Summary</h5>
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th>Training Images</th>
+                            <td>{{ train_images }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Validation Images</th>
+                            <td>{{ validation_images }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Test Images</th>
+                            <td>{{ test_images }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Image Size</th>
+                            <td>{{ image_size }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Number of Classes</th>
+                            <td>{{ total_classes }}</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Best Model -->
+        <div class="col-md-6">
+
+            <div class="card shadow mb-4">
+
+                <div class="card-header">
+                    <h5>Best Performing Model</h5>
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th>Model Name</th>
+                            <td>{{ best_model }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Validation Accuracy</th>
+                            <td>{{ validation_accuracy }}%</td>
+                        </tr>
+
+                        <tr>
+                            <th>Test Accuracy</th>
+                            <td>{{ test_accuracy }}%</td>
+                        </tr>
+
+                        <tr>
+                            <th>Test Loss</th>
+                            <td>{{ test_loss }}</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+    <div class="card shadow mt-4">
+
+    <div class="card-header">
+        <h4>Model Comparison</h4>
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>S.No</th>
+                    <th>Model</th>
+                    <th>Accuracy</th>
+                    <th>Loss</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for row in model_table %}
+
+                <tr>
+
+                    <td>{{ loop.index }}</td>
+
+                    <td>{{ row.MODEL }}</td>
+
+                    <td>{{ row.ACCURACY }}</td>
+
+                    <td>{{ row.LOSS }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

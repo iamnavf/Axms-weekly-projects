@@ -1,0 +1,59 @@
+base cnn  
+    base cnn early stop
+    test accuracy : 0.4803725779056549
+    test loss  1.2556341886520386
+
+    base cnn lr
+    accuracy  0.5462 
+    loss 1.3054
+
+    b cnn sgd 
+    accuracy: 0.4125 
+    loss: 1.5304
+
+    b cnn adam
+    accuracy: 0.4458 - 
+    loss: 1.4226
+
+    b cnn rms
+    accuracy: 0.6075 - 
+    loss: 0.9738
+
+    b cnn batch 64
+    accuracy: 0.7152 - 
+    loss: 0.7411
+
+    hyperparameter
+    accuracy: 0.5090 - 
+    loss: 1.2230
+
+ 
+deep cnn
+
+ deep cn eraly stop
+ accuracy: 0.5875 - 
+ loss: 1.3248
+
+ deep cn learning rate 
+ loss 1.1476404666900635, 
+ accuracy 0.5469061732292175
+
+ deep cnn sgd
+ accuracy: 0.5828 
+ loss: 1.1433
+
+ deep cnn rmsprop
+ accuracy: 0.5782 
+ loss: 1.1410
+
+ deep cnn 64
+ accuracy: 0.5788 
+ loss: 1.0787
+
+ deep adam
+ accuracy: 0.5030 - 
+ loss: 1.4019
+
+ deep cnn hyperparameter
+ accuracy: 0.4258 - 
+ loss: 1.9219

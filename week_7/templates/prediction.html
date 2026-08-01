@@ -1,0 +1,53 @@
+<!-- Prediction Result -->
+
+{% if prediction %}
+
+<div class="card shadow mt-4">
+
+    <div class="card-header bg-success text-white">
+
+        <h4>Prediction Result</h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="row text-center">
+
+            <div class="col-md-4">
+
+                <h6 class="text-muted">Predicted Disease</h6>
+
+                <h3 class="text-primary">
+                    {{ prediction }}
+                </h3>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h6 class="text-muted">Confidence Score</h6>
+
+                <h3 class="text-success">
+                    {{ confidence }}%
+                </h3>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h6 class="text-muted">Model Used</h6>
+
+                <h3 class="text-dark">
+                    {{ model_name }}
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}

@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+
+{% block title %}
+Model Analytics
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <h2 class="mb-4">Model Analytics</h2>
+
+    <!-- Performance Summary -->
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="card shadow">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+
+                        Best Model
+
+                    </h6>
+
+                    <h3>
+
+                        {{ best_model }}
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+
+                        Best Accuracy
+
+                    </h6>
+
+                    <h3>
+
+                        {{ best_accuracy }}%
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+
+                        Lowest Loss
+
+                    </h6>
+
+                    <h3>
+
+                        {{ lowest_loss }}
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Model Comparison Table -->
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header">
+
+            <h4>Model Performance Comparison</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>S.No</th>
+                        <th>Model</th>
+                        <th>Accuracy</th>
+                        <th>Loss</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for row in model_table %}
+
+                    <tr>
+                        <td>{{ loop.index }}</td>
+
+                        <td>{{ row.MODEL }}</td>
+
+                        <td>{{ row.ACCURACY }}</td>
+
+                        <td>{{ row.LOSS }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- Charts -->
+
+    <div class="row mt-4">
+
+        <div class="col-md-6">
+
+            <div class="card shadow">
+
+                <div class="card-header">
+
+                    <h5>Accuracy Comparison</h5>
+
+                </div>
+
+                <div class="card-body text-center">
+
+                    <img
+                        src="{{ url_for('static', filename='plots/accuracy_chart.png') }}"
+                        class="img-fluid">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card shadow">
+
+                <div class="card-header">
+
+                    <h5>Loss Comparison</h5>
+
+                </div>
+
+                <div class="card-body text-center">
+
+                    <img
+                        src="{{ url_for('static', filename='plots/loss_chart.png') }}"
+                        class="img-fluid">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Confusion Matrix -->
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header">
+
+            <h4>Confusion Matrix</h4>
+
+        </div>
+
+        <div class="card-body text-center">
+
+            <img
+                src="{{ url_for('static', filename='plots/confusion_matrix.png') }}"
+                class="img-fluid">
+
+        </div>
+
+    </div>
+
+    <!-- ROC Curve -->
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header">
+
+            <h4>ROC Curve</h4>
+
+        </div>
+
+        <div class="card-body text-center">
+
+            <img
+                src="{{ url_for('static', filename='plots/roc_curve.png') }}"
+                class="img-fluid">
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
