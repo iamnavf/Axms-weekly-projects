@@ -1,46 +1,328 @@
-<!-- Prediction Result -->
+{% extends "base.html" %}
 
-{% if prediction %}
+{% block title %}
+Prediction Result
+{% endblock %}
 
-<div class="card shadow mt-4">
+{% block content %}
 
-    <div class="card-header bg-success text-white">
+<div class="container-fluid">
 
-        <h4>Prediction Result</h4>
+    <h2 class="mb-4">
+        Prediction Result
+    </h2>
+
+    <!-- Top Row -->
+
+    <div class="row">
+
+        <!-- Original Image -->
+
+        <div class="col-lg-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h5 class="mb-0">
+                        Original Image
+                    </h5>
+
+                </div>
+
+                <div class="card-body text-center">
+
+                    <img src="{{ url_for('static', filename=image_path) }}"
+                         class="img-fluid rounded"
+                         style="max-height:350px;">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- GradCAM -->
+
+        <div class="col-lg-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-header bg-danger text-white">
+
+                    <h5 class="mb-0">
+                        Grad-CAM Heatmap
+                    </h5>
+
+                </div>
+
+                <div class="card-body text-center">
+
+                    <img src="{{ url_for('static', filename=gradcam_path) }}"
+                         class="img-fluid rounded"
+                         style="max-height:350px;">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Prediction -->
+
+        <div class="col-lg-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-header bg-success text-white">
+
+                    <h5 class="mb-0">
+                        Diagnosis Result
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="mb-4">
+
+                        <h6 class="text-muted">
+
+                            Predicted Disease
+
+                        </h6>
+
+                        <h3 class="text-primary">
+
+                            {{ prediction }}
+
+                        </h3>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <h6 class="text-muted">
+
+                            Confidence
+
+                        </h6>
+
+                        <h2 class="text-success">
+
+                            {{ "%.2f"|format(confidence) }} %
+
+                        </h2>
+
+                    </div>
+
+                    <div>
+
+                        <h6 class="text-muted">
+
+                            Model
+
+                        </h6>
+
+                        <h5>
+
+                            {{ model_name }}
+
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="card-body">
+    <!-- Probability Table -->
 
-        <div class="row text-center">
+    <div class="card shadow mt-4">
 
-            <div class="col-md-4">
+        <div class="card-header bg-dark text-white">
 
-                <h6 class="text-muted">Predicted Disease</h6>
+            <h5 class="mb-0">
 
-                <h3 class="text-primary">
-                    {{ prediction }}
-                </h3>
+                Probability for All Classes
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-primary">
+
+                    <tr>
+
+                        <th>Disease</th>
+
+                        <th>Probability (%)</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for i in range(probabilities|length) %}
+
+                    <tr>
+
+                        <td>
+
+                            {% if i==0 %}Actinic Keratoses{% endif %}
+                            {% if i==1 %}Basal Cell Carcinoma{% endif %}
+                            {% if i==2 %}Benign Keratosis-like Lesions{% endif %}
+                            {% if i==3 %}Dermatofibroma{% endif %}
+                            {% if i==4 %}Melanoma{% endif %}
+                            {% if i==5 %}Melanocytic Nevi{% endif %}
+                            {% if i==6 %}Vascular Lesions{% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {{ "%.2f"|format(probabilities[i]*100) }} %
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- Highlighted Region -->
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header bg-warning">
+
+            <h5 class="mb-0">
+
+                Highlighted Region
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <p>
+
+                The Grad-CAM heatmap highlights the image regions
+                that contributed the most to the model's prediction.
+
+            </p>
+
+            <ul>
+
+                <li>
+
+                    <span class="text-danger">
+                        <b>Red / Yellow</b>
+                    </span>
+
+                    indicates the highest importance.
+
+                </li>
+
+                <li>
+
+                    <span class="text-success">
+                        <b>Green</b>
+                    </span>
+
+                    indicates moderate importance.
+
+                </li>
+
+                <li>
+
+                    <span class="text-primary">
+                        <b>Blue</b>
+                    </span>
+
+                    indicates little or no contribution.
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- Visual Explanation -->
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header bg-info text-white">
+
+            <h5 class="mb-0">
+
+                Explain Prediction Visually
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <p>
+
+                {{ explanation }}
+
+            </p>
+
+            <div class="alert alert-secondary">
+
+                <b>Interpretation</b>
+
+                <hr>
+
+                The AI model predicted
+
+                <b>{{ prediction }}</b>
+
+                with a confidence of
+
+                <b>{{ "%.2f"|format(confidence) }}%</b>.
+
+                <br><br>
+
+                The highlighted lesion shown in the Grad-CAM
+                heatmap was the primary region used by the model
+                during classification.
+
+                Surrounding skin had comparatively little influence
+                on the final prediction.
 
             </div>
 
-            <div class="col-md-4">
+            <div class="alert alert-warning">
 
-                <h6 class="text-muted">Confidence Score</h6>
+                <b>Disclaimer</b>
 
-                <h3 class="text-success">
-                    {{ confidence }}%
-                </h3>
+                <br>
 
-            </div>
-
-            <div class="col-md-4">
-
-                <h6 class="text-muted">Model Used</h6>
-
-                <h3 class="text-dark">
-                    {{ model_name }}
-                </h3>
+                This AI prediction is intended for educational
+                and decision-support purposes only.
+                It should not replace professional medical diagnosis.
 
             </div>
 
@@ -50,4 +332,4 @@
 
 </div>
 
-{% endif %}
+{% endblock %}

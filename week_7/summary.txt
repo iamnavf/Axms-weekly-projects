@@ -57,3 +57,114 @@ deep cnn
  deep cnn hyperparameter
  accuracy: 0.4258 - 
  loss: 1.9219
+
+batch normalization
+
+    early
+     accuracy: 0.5921
+     oss: 1.7076
+
+    learning
+     accuracy: 0.5888 
+     loss: 1.6402
+
+    adam
+    accuracy: 0.5116 
+    loss: 1.7921
+
+    sgd
+    accuracy: 0.4787 -
+     loss: 1.4630
+
+    rms 
+     accuracy: 0.4118 - 
+     loss: 1.5251
+
+    64 
+    accuracy: 0.5236 - 
+    loss: 1.6494
+
+    hyperparameter
+    accuracy: 0.6693 - 
+    loss: c300
+
+drop out 
+
+    early stop 
+    accuracy: 0.5968 - 
+    loss: 1.3598
+
+    lr
+    accuracy: 0.5363 - 
+    loss: 1.2174
+
+    adam drop out 0.2
+    accuracy: 0.6094 - 
+    loss: 1.1744
+
+    sgd 
+     accuracy: 0.5349 -
+     loss: 1.3472
+
+    rms 
+    accuracy: 0.6374 - 
+    loss: 1.0302
+
+    64 
+    val_accuracy: 0.5556 - 
+    val_loss: 1.1860
+
+    hyper 
+    accuracy: 0.5948 -
+    loss: 1.3620
+
+
+mobile net
+    early 
+    accuracy: 0.5722 - 
+    loss: 1.1204
+
+    lr
+    accuracy: 0.6081 - 
+    loss: 1.0754
+
+    adam
+    accuracy: 0.5183 - 
+    loss: 1.1768
+
+    sgd
+    accuracy: 0.5083 - 
+    loss: 1.2419
+
+    rms
+    accuracy: 0.6660 - 
+    loss: 0.9216
+
+    64
+    accuracy: 0.6174 - 
+    loss: 1.0029
+
+    hyper
+    accuracy: 0.5981 - 
+    loss: 1.0884
+
+effevient 
+    early
+    accuracy: 0.6534 - 
+    loss: 0.8822
+
+    lr
+    accuracy 0.5855 - 
+    loss: 1.0610
+
+    adam
+    accuracy: 0.6680 - 
+    loss: 0.8232
+
+    sgd
+    accuracy: 0.6068 -
+     loss: 1.0139
+
+    rms
+    0.6913 - 
+    val_loss: 0.8220

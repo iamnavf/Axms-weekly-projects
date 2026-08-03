@@ -1,0 +1,376 @@
+/* ==========================================
+   GLOBAL
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    font-family:"Poppins",sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+}
+
+
+/* ==========================================
+   NAVBAR
+========================================== */
+
+.navbar{
+    background:#0d6efd;
+    box-shadow:0 2px 10px rgba(0,0,0,.12);
+}
+
+.navbar-brand{
+    color:black !important;
+    font-size:24px;
+    font-weight:700;
+}
+
+.nav-link{
+    color:#fff !important;
+    margin-left:15px;
+    transition:color .3s ease;
+}
+
+.nav-link:hover{
+    color:#ffc107 !important;
+}
+
+/* ==========================================
+   SIDEBAR
+========================================== */
+
+.sidebar{
+    background:#0d6efd;
+    min-height:100vh;
+    padding-top:25px;
+}
+
+.sidebar a{
+    display:block;
+    color:#fff;
+    text-decoration:none;
+    padding:15px 20px;
+    font-size:17px;
+    transition:background .3s ease;
+}
+
+.sidebar a:hover{
+    background:#0b5ed7;
+}
+
+.sidebar .active{
+    background:#084298;
+}
+
+/* ==========================================
+   PAGE TITLE
+========================================== */
+
+.page-title{
+    font-size:32px;
+    font-weight:700;
+    color:#0d6efd;
+    margin-bottom:25px;
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.card{
+    border:none;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    overflow:hidden;
+    transition:box-shadow .3s ease;
+}
+
+.card:hover{
+    box-shadow:0 12px 25px rgba(0,0,0,.12);
+}
+
+.card-header{
+    background:#0d6efd;
+    color:#fff;
+    font-weight:600;
+    font-size:20px;
+}
+
+.card-body{
+    padding:25px;
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.btn{
+    border-radius:8px;
+    font-weight:600;
+    padding:10px 20px;
+}
+
+.btn-primary{
+    background:#0d6efd;
+}
+
+.btn-success{
+    background:#198754;
+}
+
+.btn-warning{
+    color:white;
+}
+
+/* ==========================================
+   DASHBOARD CARDS
+========================================== */
+
+.stat-card{
+    border-radius:15px;
+    color:white;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:box-shadow .3s ease;
+}
+
+.stat-card:hover{
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+
+.stat-card h2{
+    font-size:38px;
+    font-weight:700;
+}
+
+.stat-card p{
+    margin-top:10px;
+    font-size:17px;
+}
+
+.bg-blue{
+    background:#0d6efd;
+}
+
+.bg-green{
+    background:#198754;
+}
+
+.bg-orange{
+    background:#fd7e14;
+}
+
+.bg-purple{
+    background:#6f42c1;
+}
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.table{
+    margin-bottom:0;
+}
+
+.table thead{
+    background:#0d6efd;
+    color:white;
+}
+
+.table th,
+.table td{
+    text-align:center;
+    vertical-align:middle;
+}
+
+.table-hover tbody tr:hover{
+    background:#eef5ff;
+}
+
+.best-model{
+    background:#d4edda !important;
+    font-weight:bold;
+}
+
+/* ==========================================
+   UPLOAD
+========================================== */
+
+.upload-box{
+    border:2px dashed #0d6efd;
+    border-radius:15px;
+    background:white;
+    padding:40px;
+    text-align:center;
+}
+
+.upload-box:hover{
+    background:#eef5ff;
+}
+
+/* ==========================================
+   RESULT
+========================================== */
+
+.result-card{
+    text-align:center;
+}
+
+.result-card h3{
+    color:#0d6efd;
+    font-weight:700;
+}
+
+.result-card h1{
+    color:#198754;
+    font-size:46px;
+}
+
+/* ==========================================
+   IMAGE
+========================================== */
+
+img{
+    border-radius:10px;
+}
+
+.img-fluid{
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+/* ==========================================
+   GRAD CAM
+========================================== */
+
+.gradcam-card{
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+.gradcam-card img{
+    width:100%;
+}
+
+/* ==========================================
+   EXPLANATION
+========================================== */
+
+.explanation{
+    background:#eef6ff;
+    border-left:5px solid #0d6efd;
+    border-radius:10px;
+    padding:20px;
+    line-height:1.8;
+}
+
+/* ==========================================
+   ANALYTICS
+========================================== */
+
+.chart-card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.chart-card h4{
+    color:#0d6efd;
+    margin-bottom:20px;
+}
+
+/* ==========================================
+   REPORT
+========================================== */
+
+.report-section{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.report-section h3{
+    color:#0d6efd;
+    margin-bottom:20px;
+}
+
+.download-report{
+    margin-top:25px;
+}
+
+/* ==========================================
+   BADGES
+========================================== */
+
+.badge-success{
+    background:#198754;
+}
+
+.badge-warning{
+    background:#ffc107;
+    color:black;
+}
+
+.badge-danger{
+    background:#dc3545;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.footer{
+    margin-top:40px;
+    text-align:center;
+    color:#777;
+    padding:15px;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:992px){
+
+    .page-title{
+        font-size:26px;
+    }
+
+    .navbar-brand{
+        font-size:20px;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .container-fluid{
+        padding:15px;
+    }
+
+    .page-title{
+        font-size:24px;
+    }
+
+    .card-header{
+        font-size:18px;
+    }
+
+    .result-card h1{
+        font-size:36px;
+    }
+
+    .table{
+        font-size:14px;
+    }
+
+    .upload-box{
+        padding:20px;
+    }
+
+}

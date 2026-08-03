@@ -1,9 +1,9 @@
 ,MODEL,ACCURACY,LOSS
-0,Baseline cnn,0.48,1.34
-1,Deep cnn,0.65,1.91
-2,Cnn batch normalization,0.5,1.7
-3,Cnn Dropout,0.46,1.35
-4,Mobile net,0.61,0.96
-5,Efficentnet,0.67,0.74
-6,Resnet,0.66,1.21
-7,Densenet,0.58,1.07
+0,baseline cnn,0.6074517631403858,0.74
+1,deep_cnn,0.5029940119760479,1.32
+2,batch_cnn,0.669328010645376,1.92
+3,drop_cnn,0.6373918829008649,1.17
+4,mobile_net,0.6660013306719893,0.92
+5,effecient_net,0.7139055222887558,0.8
+6,resnet_net,0.6753160345974717,0.87
+7,densenet,0.612109115103127,1.01

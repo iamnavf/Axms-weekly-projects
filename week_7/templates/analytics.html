@@ -52,7 +52,7 @@ Model Analytics
 
                     <h3>
 
-                        {{ best_accuracy }}%
+                      {{"%.2f"| format(best_accuracy) }}  
 
                     </h3>
 
@@ -123,7 +123,7 @@ Model Analytics
 
                         <td>{{ row.MODEL }}</td>
 
-                        <td>{{ row.ACCURACY }}</td>
+                        <td>{{"%.2f"| format(row.ACCURACY) }}</td>
 
                         <td>{{ row.LOSS }}</td>
 
@@ -156,7 +156,7 @@ Model Analytics
                 <div class="card-body text-center">
 
                     <img
-                        src="{{ url_for('static', filename='plots/accuracy_chart.png') }}"
+                        src="{{ url_for('static', filename='images/accuracy.png') }}"
                         class="img-fluid">
 
                 </div>
@@ -178,7 +178,7 @@ Model Analytics
                 <div class="card-body text-center">
 
                     <img
-                        src="{{ url_for('static', filename='plots/loss_chart.png') }}"
+                        src="{{ url_for('static', filename='images/loss.png') }}"
                         class="img-fluid">
 
                 </div>
@@ -202,8 +202,9 @@ Model Analytics
         <div class="card-body text-center">
 
             <img
-                src="{{ url_for('static', filename='plots/confusion_matrix.png') }}"
-                class="img-fluid">
+                src="{{ url_for('static', filename='images/confusion.png') }}"
+                class="img-fluid"
+                style="max-width: 500px; width: 100%;">
 
         </div>
 
@@ -222,8 +223,9 @@ Model Analytics
         <div class="card-body text-center">
 
             <img
-                src="{{ url_for('static', filename='plots/roc_curve.png') }}"
-                class="img-fluid">
+                src="{{ url_for('static', filename='images/roc.png') }}"
+                class="img-fluid"
+                style="max-width: 500px; width: 100%;">
 
         </div>
 

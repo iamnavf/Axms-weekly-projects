@@ -55,42 +55,6 @@ Image Diagnosis
             </div>
 
         </div>
-
-        <!-- Uploaded Image -->
-
-        <div class="col-md-7">
-
-            <div class="card shadow">
-
-                <div class="card-header">
-                    <h5>Uploaded Image</h5>
-                </div>
-
-                <div class="card-body text-center">
-
-                    {% if image_path %}
-
-                    <img
-                        src="{{ url_for('static', filename=image_path) }}"
-                        class="img-fluid rounded"
-                        width="350">
-
-                    {% else %}
-
-                    <p class="text-muted">
-
-                        No image uploaded.
-
-                    </p>
-
-                    {% endif %}
-
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
 
     <!-- Prediction -->
@@ -199,7 +163,12 @@ Image Diagnosis
     </div>
 
     {% endif %}
+    <a href="{{ url_for('prediction') }}"
+class="btn btn-warning mt-3">
 
+Explain Prediction
+
+</a>
 </div>
 
 {% endblock %}

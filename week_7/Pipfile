@@ -15,6 +15,7 @@ tensorflow = "*"
 flask = "*"
 keras-tuner = "*"
 tensorboard = "*"
+reportlab = "*"
 
 [dev-packages]
 

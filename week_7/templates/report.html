@@ -31,7 +31,7 @@ Reports
                         image prediction.
                     </p>
 
-                    <a href="/download_diagnosis_report"
+                    <a href="{{ url_for('diagnosis_report') }}"
                        class="btn btn-primary">
 
                         Download Diagnosis Report
@@ -63,7 +63,7 @@ Reports
                         learning models.
                     </p>
 
-                    <a href="/download_model_report"
+                    <a href='{{ url_for("model_comparison_report") }}'
                        class="btn btn-success">
 
                         Download Model Report
