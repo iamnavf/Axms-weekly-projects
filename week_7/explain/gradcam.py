@@ -8,35 +8,34 @@ from tensorflow.keras.models import load_model
 
 class GradCAM:
 
-    def __init__(self, model_path, last_conv_layer_name=None):
+    def __init__(self, model_path, last_conv_layer_name=None, input_shape=(224, 224, 3)):
 
-        # Load trained model
         self.model = load_model(model_path)
 
-        # Sequential Model
-        self.base_model = self.model.layers[0]
-
-        # Classification head
-        self.classifier = tf.keras.Sequential(
-            self.model.layers[1:]
-        )
-
-  
         if last_conv_layer_name is None:
-            try:
-                self.last_conv_layer = self.base_model.get_layer("top_activation")
-            except ValueError:
-                self.last_conv_layer = self.base_model.get_layer("top_conv")
+            self.last_conv_layer_name = self._find_last_conv_layer_name()
         else:
-            self.last_conv_layer = self.base_model.get_layer(last_conv_layer_name)
+            self.last_conv_layer_name = last_conv_layer_name
 
-  
+   
+        inputs = tf.keras.Input(shape=input_shape)
+        x = inputs
+        conv_output_tensor = None
+
+        for layer in self.model.layers:
+            x = layer(x)
+            if layer.name == self.last_conv_layer_name:
+                conv_output_tensor = x
+
+        if conv_output_tensor is None:
+            raise ValueError(
+                f"Layer '{self.last_conv_layer_name}' not found while "
+                f"rebuilding the functional graph."
+            )
+
         self.grad_model = tf.keras.models.Model(
-            inputs=self.base_model.input,
-            outputs=[
-                self.last_conv_layer.output,
-                self.base_model.output
-            ]
+            inputs=inputs,
+            outputs=[conv_output_tensor, x]
         )
 
         self.class_names = [
@@ -48,6 +47,12 @@ class GradCAM:
             "Melanocytic Nevi",
             "Vascular Lesions"
         ]
+
+    def _find_last_conv_layer_name(self):
+        for layer in reversed(self.model.layers):
+            if isinstance(layer, tf.keras.layers.Conv2D):
+                return layer.name
+        raise ValueError("No Conv2D layer found in model.")
 
     def preprocess(self, image_path):
 
@@ -63,7 +68,6 @@ class GradCAM:
             (224, 224)
         )
 
-  
         image = tf.cast(
             image,
             tf.float32
@@ -77,23 +81,14 @@ class GradCAM:
         return image
 
     def generate(self, image_path, save_path, alpha=0.6, blur_ksize=15):
-        """
-        alpha: max blending strength at the hottest point of the heatmap.
-        blur_ksize: Gaussian blur kernel used to smooth the (low-resolution)
-                    heatmap before it's upscaled to the image size.
-        """
-
+       
         image = self.preprocess(image_path)
 
         with tf.GradientTape() as tape:
 
-            # Forward pass through EfficientNet
-            conv_outputs, features = self.grad_model(image)
+            conv_outputs, predictions = self.grad_model(image)
 
             tape.watch(conv_outputs)
-
-            # Forward pass through classifier head
-            predictions = self.classifier(features)
 
             predicted_index = tf.argmax(predictions[0])
 
@@ -139,9 +134,6 @@ class GradCAM:
             (original.shape[1], original.shape[0])
         )
 
-        # Smooth the heatmap - Grad-CAM's native resolution is only 7x7
-        # for EfficientNetB0, so upscaling it to a 224x224+ image without
-        # smoothing gives blocky, unnatural-looking regions.
         if blur_ksize and blur_ksize > 1:
             k = blur_ksize if blur_ksize % 2 == 1 else blur_ksize + 1
             heatmap = cv2.GaussianBlur(heatmap, (k, k), 0)
@@ -158,8 +150,7 @@ class GradCAM:
             cv2.COLOR_BGR2RGB
         )
 
-    
-        weight = (heatmap * alpha)[..., np.newaxis]  # (H, W, 1), 0..alpha
+        weight = (heatmap * alpha)[..., np.newaxis]
 
         overlay = (
             original.astype(np.float32) * (1 - weight)
@@ -192,18 +183,7 @@ class GradCAM:
 
         probabilities = prediction.tolist()
 
-        return {
-
-            "prediction":
-                self.class_names[predicted_class],
-
-            "confidence":
-                confidence,
-
-            "probabilities":
-                probabilities,
-
-            "gradcam_path":
-                save_path
-
-        }
+        return {"prediction":self.class_names[predicted_class],
+                "confidence":confidence,
+                "probabilities":probabilities,
+                "gradcam_path":save_path}

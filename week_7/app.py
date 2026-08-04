@@ -15,6 +15,7 @@ from explain.gradcam import GradCAM
 
 
 app = Flask(__name__)
+
 app.secret_key = 'this is my app'
 
 df = pd.read_csv(r'./data/HAM10000_metadata.csv')
@@ -28,19 +29,21 @@ def dashboard():
 
     total_images = df.shape[0]
     total_classes =len(df['dx'].unique())
-    best_model = 'BATCH NORMALIZATION'
+    best_model = 'DROP OUT CNN'
     test_accuracy = 71
     train_images = 7009
     validation_images =1503
     test_images =1503
     image_size = (650,450)
     validation_accuracy=69
-    test_accuracy=67
-    test_loss=1.71
+    test_accuracy=63
+    test_loss=1.17
 
-    return render_template('dashboard.html',model_table=model_table,total_images=total_images,total_classes=total_classes,best_model=best_model,
-                           test_accuracy=test_accuracy,train_images=train_images,validation_images=validation_images,
-                           validation_accuracy=validation_accuracy,image_size=image_size,test_loss=test_loss,test_images=test_images)
+    return render_template('dashboard.html',model_table=model_table,total_images=total_images,
+                           total_classes=total_classes,best_model=best_model,test_accuracy=test_accuracy,
+                           train_images=train_images,validation_images=validation_images,
+                           validation_accuracy=validation_accuracy,image_size=image_size,
+                           test_loss=test_loss,test_images=test_images)
 
 
 @app.route('/diagnosis',methods=['GET','POST'])
@@ -49,8 +52,6 @@ def diagnosis():
 
     image_file = request.files.get("image")
 
-    if image_file is None or image_file.filename == "":
-        return "No image selected."
 
     filename = secure_filename(image_file.filename)
     upload_path = os.path.join("static/uploads", filename)
@@ -60,8 +61,6 @@ def diagnosis():
     session["filename"] = filename
 
     image_bytes = tf.io.read_file(upload_path)
-
-# Decode into a tensor
     image = tf.io.decode_image(image_bytes, channels=3)
     image = tf.image.resize(image, (224, 224))
     image = tf.cast(image, tf.float32) / 255.0
@@ -114,7 +113,7 @@ def prediction():
 
     gradcam_path = os.path.join("static", "gradcam", filename)
 
-    gradcam = GradCAM("./models/hyper_effecient.keras")
+    gradcam = GradCAM(r'./models/dropout_rms.keras')
 
     result = gradcam.generate(
         image_path=upload_path,
@@ -134,17 +133,19 @@ def prediction():
 
     session["gradcam"] = "gradcam/" + filename
 
+    print(result)
+
     return render_template("prediction.html",image_path="uploads/" + filename,gradcam_path="gradcam/" + filename,
             prediction=result["prediction"],confidence=result["confidence"],probabilities=result["probabilities"],
-            explanation=explanation,model_name="EfficientNetB0")
+            explanation=explanation,model_name="Dropout CNN")
 
 @app.route('/analytics')
 def analytics():
-    model_dict = df_performance.to_dict(orient='records')[2]
+    model_dict = df_performance.to_dict(orient='records')[3]
     model_table = df_performance.to_dict(orient='records')
     best_model = model_dict['MODEL']
     best_accuracy = model_dict['ACCURACY']
-    lowest_loss = 1.71
+    lowest_loss = 1.17
 
 
     return render_template('analytics.html',model_table=model_table,best_model=best_model,best_accuracy = best_accuracy,lowest_loss =lowest_loss)
@@ -215,8 +216,8 @@ def model_comparison_report():
 
     story.append(
         Paragraph(
-            "EfficientNetB0 achieved the highest validation accuracy "
-            "(67%) with the lowest validation loss (0.74), making it "
+            "Dropout CNN achieved the highest validation accuracy "
+            "(67%) with the lowest validation loss (1.17), making it "
             "the best-performing architecture among all evaluated models. "
             "Therefore, EfficientNetB0 was selected as the final model "
             "for skin disease diagnosis and Explainable AI analysis.",
@@ -227,4 +228,4 @@ def model_comparison_report():
 
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run()
