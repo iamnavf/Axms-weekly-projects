@@ -188,26 +188,12 @@ def model_comparison_report():
     story.append(Paragraph("<b>Skin Disease Classification</b>",styles["Title"]))
     story.append(Paragraph("<b>Model Comparison Report</b>",styles["Heading1"]))
 
+    data = [["Model", "Accuracy", "Loss"]]
 
-    data = [
+    print(df_performance)
 
-        ["Model", "Accuracy", "Loss"],
-
-        ["Baseline CNN", "0.48", "1.34"],
-
-        ["Deep CNN", "0.65", "1.91"],
-
-        ["CNN + BatchNorm", "0.50", "1.70"],
-
-        ["CNN + Dropout", "0.46", "1.35"],
-
-        ["MobileNetV2", "0.61", "0.96"],
-
-        ["EfficientNetB0", "0.67", "0.74"],
-
-        ["ResNet50", "0.66", "1.21"],
-
-        ["DenseNet121", "0.58", "1.07"]]
+    for i in range(len(df_performance)):
+        data.append(df_performance.iloc[i, :].tolist())
 
     table = Table(data)
 
