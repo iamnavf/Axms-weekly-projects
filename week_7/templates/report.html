@@ -108,6 +108,22 @@ Reports
 
     </div>
 
+    {% if message %}
+
+    <div class="report-alert">
+
+        <div class="report-alert-content">
+
+            <h4>No Diagnosis Available</h4>
+
+            <p>{{ message }}</p>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
 </div>
 
 {% endblock %}

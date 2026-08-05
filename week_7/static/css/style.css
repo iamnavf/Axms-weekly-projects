@@ -331,6 +331,27 @@ img{
     padding:15px;
 }
 
+.report-alert{
+
+    max-width:700px;
+
+    margin:60px auto;
+
+    background:#fff3cd;
+
+    border-left:8px solid #ffc107;
+
+    border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:25px;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+
+}
 /* ==========================================
    RESPONSIVE
 ========================================== */

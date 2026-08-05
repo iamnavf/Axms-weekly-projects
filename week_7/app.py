@@ -4,7 +4,7 @@ import numpy as np
 import keras
 import tensorflow as tf
 
-from reportlab.platypus import SimpleDocTemplate, Paragraph ,  Table
+from reportlab.platypus import SimpleDocTemplate, Paragraph ,Table,Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 from flask import send_file
 
@@ -135,6 +135,8 @@ def prediction():
 
     print(result)
 
+    print(session["probabilities"])
+
     return render_template("prediction.html",image_path="uploads/" + filename,gradcam_path="gradcam/" + filename,
             prediction=result["prediction"],confidence=result["confidence"],probabilities=result["probabilities"],
             explanation=explanation,model_name="Dropout CNN")
@@ -157,21 +159,62 @@ def report():
 
 @app.route("/diagnosis_report")
 def diagnosis_report():
+    try:
+        filename = "Diagnosis_Report.pdf"
+        doc = SimpleDocTemplate(filename)
+        styles = getSampleStyleSheet()
+        story = []
 
-    filename = "Diagnosis_Report.pdf"
-    doc = SimpleDocTemplate(filename)
-    styles = getSampleStyleSheet()
-    story = []
+        story.append(Paragraph("<b>Skin Disease Diagnosis Report</b>", styles["Title"]))
+        story.append(Spacer(1, 20))
 
-    story.append(Paragraph("<b>Skin Disease Diagnosis Report</b>", styles["Title"]))
-    story.append(Paragraph(f"<b>Prediction:</b> {session.get('prediction')}",styles["Normal"]))
+        story.append(Paragraph("<b>Lession Name</b>", styles["Normal"]))
+        story.append(Spacer(1, 10))
 
-    confidence = session.get("confidence", 0.0)
+        story.append(Paragraph(f"<b>Prediction:</b> {session.get('prediction')}",styles["Normal"]))
+        story.append(Spacer(1, 20))
 
-    story.append(Paragraph(f"<b>Confidence:</b> {float(confidence):.2f} %",styles["Normal"])) 
-    doc.build(story)
+        confidence = session.get("confidence", 0.0)
 
-    return send_file(filename,as_attachment=True)
+        story.append(Paragraph("<b>Confidence score</b>", styles["Normal"]))
+        story.append(Spacer(1, 10))
+        story.append(Paragraph(f"<b>Confidence:</b> {float(confidence):.2f} %",styles["Normal"]))
+        story.append(Spacer(1, 20))
+
+        probabilities = session.get("probabilities")
+        dx_class =['Actinic Keratoses','Basal Cell Carcinoma ','Benign Keratosis-like Lesions ',
+                    'Dermatofibroma','Melanoma','Melanocytic Nevi','Vascular Lesions']
+
+        data = [["Disease", "Probability (%)"]]
+
+        for disease, score in zip(dx_class, probabilities):
+            data.append([disease, f"{score*100:.2f}"])
+
+        table = Table(data, colWidths=[260,120])
+
+
+        story.append(Paragraph("<b>Probabilities of lession</b>", styles["Normal"]))
+        story.append(Spacer(1, 10))
+        story.append(table)
+        story.append(Spacer(1, 20))
+
+        story.append(Paragraph("<b>Observation</b>", styles["Normal"]))
+        story.append(Spacer(1, 10))
+        story.append(
+                Paragraph(
+                    "Dropout CNN model have predicted that provided lession have probability of this lession"
+                    f"The heighest predicted probility lession is {session.get('prediction')} with confidence of {float(confidence):.2f}"
+                    "this is ai predicted lession for better conformation please diagonissi with the nearby Hospitals . "
+                    "Therefore, Dropout CNN was selected as the final model "
+                    "for skin disease diagnosis and Explainable AI analysis.",
+                    styles["BodyText"]))
+        
+
+        doc.build(story)
+        return send_file(filename,as_attachment=True)
+    
+    except :
+        return render_template('report.html',message = 'please first diagonosis lession')
 
 
 @app.route("/model_comparison_report")
@@ -186,7 +229,10 @@ def model_comparison_report():
     story = []
 
     story.append(Paragraph("<b>Skin Disease Classification</b>",styles["Title"]))
+    story.append(Spacer(1, 20))
+
     story.append(Paragraph("<b>Model Comparison Report</b>",styles["Heading1"]))
+    story.append(Spacer(1, 20))
 
     data = [["Model", "Accuracy", "Loss"]]
 
@@ -197,8 +243,13 @@ def model_comparison_report():
 
     table = Table(data)
 
+    story.append(Paragraph("<b>Performance of all models</b>", styles["Normal"]))
+    story.append(Spacer(1, 10))
     story.append(table)
+    story.append(Spacer(1, 20))
+
     story.append(Paragraph("<br/><b>Observation</b>", styles["Heading2"]))
+    story.append(Spacer(1, 20))
 
     story.append(
         Paragraph(
@@ -208,6 +259,7 @@ def model_comparison_report():
             "Therefore, EfficientNetB0 was selected as the final model "
             "for skin disease diagnosis and Explainable AI analysis.",
             styles["BodyText"]))
+    story.append(Spacer(1, 20))
 
     doc.build(story)
     return send_file(filename,as_attachment=True)
