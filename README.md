@@ -121,3 +121,47 @@ Tech stack
     -ReportLab
     
     
+week 7
+This project presents a Skin Disease Classification System developed using Deep Learning and Explainable Artificial Intelligence (XAI). The system classifies dermoscopic skin lesion images into seven disease categories using Dropout CNN, provides visual explanations through Grad-CAM, and deploys the model using a Flask web application.
+
+The application allows users to upload a skin lesion image, receive a predicted disease class, confidence score, probability distribution, Grad-CAM heatmap, model analytics, and downloadable PDF reports.
+
+Features Dashboard Dataset summary Training, Validation and Test statistics Model comparison Performance overview
+
+Image Diagnosis Upload skin lesion image Predict disease class Display confidence score Display probability of all classes
+This project presents a Skin Disease Classification System developed using Deep Learning and Explainable Artificial Intelligence (XAI). The system classifies dermoscopic skin lesion images into seven disease categories using Dropout CNN, provides visual explanations through Grad-CAM, and deploys the model using a Flask web application.
+
+The application allows users to upload a skin lesion image, receive a predicted disease class, confidence score, probability distribution, Grad-CAM heatmap, model analytics, and downloadable PDF reports.
+
+Features Dashboard Dataset summary Training, Validation and Test statistics Model comparison Performance overview
+
+Image Diagnosis Upload skin lesion image Predict disease class Display confidence score Display probability of all classes
+
+Explain Prediction Generate Grad-CAM heatmap Highlight affected lesion region Visual explanation of prediction Confidence score visualization
+
+Tech stack
+Programming Language 
+    -Python
+Deep Learning 
+    -TensorFlow 
+    -Keras
+Transfer Learning 
+    -MobileNetV2 
+    -EfficientNetB0 
+    -ResNet50 
+    -DenseNet121 
+Machine Learning 
+    -Scikit-learn
+Image Processing 
+    -OpenCV 
+    -NumPy
+Data Visualization 
+    -Matplotlib 
+    -Seaborn
+Web Development 
+    -Flask 
+    -HTML 
+    -CSS 
+    -Bootstrap
+Report Generation 
+    -ReportLab
