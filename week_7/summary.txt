@@ -168,3 +168,63 @@ effevient
     rms
     0.6913 - 
     val_loss: 0.8220
+
+resnet 
+
+    early 
+     accuracy: 0.5988 -
+     loss: 1.0569
+
+    learning
+    accuracy: 0.6168 - 
+    loss: 0.9888
+
+    hyperparameter
+    accuracy: 0.6786 - 
+    loss: 0.8783
+
+    adam
+    accuracy: 0.6201 - 
+    loss: 0.9677
+
+    sgd
+     accuracy: 0.5749 - 
+     loss: 1.1770
+
+    rms
+    accuracy: 0.6753 -
+     loss: 0.8642
+
+    64
+    accuracy: 0.5862 - 
+    loss: 1.0507
+
+dense net
+
+    EARLY
+     0.3925 - 
+     loss: 1.6467
+    
+    dense
+    accuracy: 0.4983 - 
+    loss: 1.2669
+
+    adam 
+     accuracy: 0.4185 - 
+     loss: 1.4439
+
+    sgd
+     accuracy: 0.4444 -
+      loss: 1.7481
+
+    rms
+    accuracy: 0.5915 -
+     loss: 1.0935
+
+    64
+    accuracy: 0.4997 - 
+    loss: 1.3228
+
+    hyperparameter
+    accuracy: 0.6121 - 
+    loss: 1.0192
