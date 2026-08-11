@@ -11,6 +11,8 @@ seaborn = "*"
 ipykernel = "*"
 scikit-learn = "*"
 tensorflow = "*"
+keras-tuner = "*"
+tensorboard = "*"
 
 [dev-packages]
 
