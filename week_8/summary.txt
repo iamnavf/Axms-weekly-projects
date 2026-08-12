@@ -1,0 +1,297 @@
+baseline rnn
+    drop 0.3
+
+    MAE:  1545.17 MW
+    RMSE: 2137.41 MW
+    MAPE: 4.84%
+    R2:   0.8899
+
+    drop 0.5
+
+    MAE:  1626.73 MW
+    RMSE: 2192.86 MW
+    MAPE: 5.20%
+    R2:   0.8842
+
+    drop 0.2
+
+    MAE:  1552.73 MW
+    RMSE: 2112.70 MW
+    MAPE: 4.97%
+    R2:   0.8925
+
+    batch normalization
+
+    MAE:  1635.97 MW
+    RMSE: 2206.60 MW
+    MAPE: 5.19%
+    R2:   0.8827
+
+    adam
+    MAE:  1486.33 MW
+    RMSE: 2049.95 MW
+    MAPE: 4.76%
+    R2:   0.8988
+
+    sgd
+    MAE:  3315.68 MW
+    RMSE: 4207.07 MW
+    MAPE: 10.92%
+    R2:   0.5736
+
+    RMS
+    MAE:  1534.33 MW
+    RMSE: 2114.51 MW
+    MAPE: 4.91%
+    R2:   0.8923
+
+    lr
+    MAE:  1464.36 MW
+    RMSE: 2037.44 MW
+    MAPE: 4.68%
+    R2:   0.9000
+
+    early
+    MAE:  1463.41 MW
+    RMSE: 2034.92 MW
+    MAPE: 4.67%
+    R2:   0.9002
+
+    16
+    MAE:  1493.23 MW
+    RMSE: 2083.45 MW
+    MAPE: 4.79%
+    R2:   0.8954
+
+    32
+    MAE:  1546.34 MW
+    RMSE: 2115.80 MW
+    MAPE: 4.98%
+    R2:   0.8922
+
+    layers
+    MAE:  1573.88 MW
+    RMSE: 2152.38 MW
+    MAPE: 4.97%
+    R2:   0.8884
+
+    hyper
+    MAE:  1559.91 MW
+    RMSE: 2150.08 MW
+    MAPE: 4.90%
+    R2:   0.8886
+
+lstm
+    0.2
+    MAE:  1388.15 MW
+    RMSE: 1958.44 MW
+    MAPE: 4.38%
+    R2: 0.91%
+
+    0.3
+    MAE:  1455.97 MW
+    RMSE: 1999.42 MW
+    MAPE: 4.67%
+    R2: 0.90%
+
+    0.5
+    MAE:  1537.21 MW
+    RMSE: 2104.62 MW
+    MAPE: 4.84%
+    R2: 0.89%
+
+    batch normalization 
+    MAE:  1459.67 MW
+    RMSE: 2010.76 MW
+    MAPE: 4.63%
+    R2: 0.90%
+
+    adam
+    MAE:  1395.00 MW
+    RMSE: 1957.30 MW
+    MAPE: 4.40%
+    R2: 0.91%
+
+    sgd
+    MAE:  3577.38 MW
+    RMSE: 4564.26 MW
+    MAPE: 11.68%
+    R2: 0.50%
+
+    rmsprop
+    MAE:  1493.50 MW
+    RMSE: 2080.44 MW
+    MAPE: 4.71%
+    R2: 0.90%
+
+    early (----------------------------star)
+    MAE:  1364.05 MW
+    RMSE: 1927.57 MW
+    MAPE: 4.28%
+    R2: 0.91%
+
+    lr
+    MAE:  1410.04 MW
+    RMSE: 1971.45 MW
+    MAPE: 4.42%
+    R2: 0.91%
+
+    32
+    MAE:  1418.46 MW
+    RMSE: 1966.94 MW
+    MAPE: 4.43%
+    R2: 0.91%
+
+    16
+    MAE:  18670.27 MW
+    RMSE: 20896.33 MW
+    MAPE: 58.40%
+    R2: -9.52%
+
+    layers
+    MAE:  1502.87 MW
+    RMSE: 2076.88 MW
+    MAPE: 4.73%
+    R2: 0.90%
+
+    hyper
+    MAE:  1661.34 MW
+    RMSE: 2180.08 MW
+    MAPE: 5.43%
+    R2:   0.8855
+
+GRU
+
+    0.2
+    MAE:  1438.84 MW
+    RMSE: 2002.50 MW
+    MAPE: 4.51%
+    R2:   0.9034
+
+    0.3
+    MAE:  1489.41 MW
+    RMSE: 2028.77 MW
+    MAPE: 4.77%
+    R2:   0.9008
+
+    0.5
+    MAE:  1598.60 MW
+    RMSE: 2158.66 MW
+    MAPE: 5.06%
+    R2:   0.8877
+
+    BN
+    MAE:  1652.86 MW
+    RMSE: 2270.09 MW
+    MAPE: 5.10%
+    R2:   0.8759
+
+    adam
+    MAE:  1388.34 MW
+    RMSE: 1954.88 MW
+    MAPE: 4.40%
+    R2:   0.9079
+
+    sgd
+    MAE:  3627.66 MW
+    RMSE: 4637.41 MW
+    MAPE: 12.06%
+    R2:   0.4819
+
+    rmsprop
+    MAE:  1527.82 MW
+    RMSE: 2132.19 MW
+    MAPE: 4.80%
+    R2:   0.8905
+
+    early stop
+    MAE:  1571.57 MW
+    RMSE: 2168.76 MW
+    MAPE: 5.04%
+    R2:   0.8867
+
+    learing
+    MAE:  1773.74 MW
+    RMSE: 2348.85 MW
+    MAPE: 5.84%
+    R2:   0.8671
+
+    32
+    MAE:  1386.11 MW
+    RMSE: 1943.91 MW
+    MAPE: 4.42%
+    R2:   0.9090
+
+    16 (----------------------------star2)
+    MAE:  1338.70 MW
+    RMSE: 1915.71 MW
+    MAPE: 4.18%
+    R2:   0.9116
+
+    layers
+    MAE:  1622.88 MW
+    RMSE: 2196.55 MW
+    MAPE: 5.05%
+    R2:   0.8838
+
+    hyper
+    MAE:  1591.72 MW
+    RMSE: 2145.07 MW
+    MAPE: 5.03%
+    R2:   0.8891
+
+bi 
+
+    0.2
+    MAE:  1483.72 MW
+    RMSE: 2104.47 MW
+    MAPE: 4.57%
+    R2:   0.8932
+
+    0.3
+    MAE:  1469.83 MW
+    RMSE: 2007.76 MW
+    MAPE: 4.66%
+    R2:   0.9028
+
+    0.5
+    MAE:  1500.72 MW
+    RMSE: 2065.52 MW
+    MAPE: 4.72%
+    R2:   0.8971
+
+    early
+    MAE:  1488.85 MW
+    RMSE: 2028.45 MW
+    MAPE: 4.75%
+    R2:   0.9008
+
+    lr
+    MAE:  1457.88 MW
+    RMSE: 2001.02 MW
+    MAPE: 4.64%
+    R2:   0.9035
+
+    rmsprop
+    MAE:  1849.57 MW
+    RMSE: 2480.93 MW
+    MAPE: 6.05%
+    R2:   0.8516
+
+    32
+    MAE:  1448.90 MW
+    RMSE: 2061.29 MW
+    MAPE: 4.63%
+    R2:   0.8976
+
+    16
+    MAE:  1507.54 MW
+    RMSE: 2127.13 MW
+    MAPE: 4.76%
+    R2:   0.8909
+
+    layer
+    MAE:  1646.47 MW
+    RMSE: 2257.01 MW
+    MAPE: 5.12%
+    R2:   0.8772
