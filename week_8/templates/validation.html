@@ -6,11 +6,6 @@
 
 <h2 class="page-title">Forecast Validation</h2>
 
-
-<!-- ========================================== -->
-<!-- Validation Period -->
-<!-- ========================================== -->
-
 <div class="card shadow-sm mt-4">
 
     <div class="card-body">
@@ -75,10 +70,6 @@
 
 {% if mae is not none %}
 
-
-<!-- ========================================== -->
-<!-- Validation Metrics -->
-<!-- ========================================== -->
 
 <div class="row g-4 mt-1">
 
@@ -154,10 +145,6 @@
 </div>
 
 
-<!-- ========================================== -->
-<!-- Actual vs Predicted -->
-<!-- ========================================== -->
-
 <div class="card shadow-sm mt-4">
 
     <div class="card-body">
@@ -227,11 +214,6 @@
 
 </div>
 
-
-<!-- ========================================== -->
-<!-- Forecasting Performance -->
-<!-- ========================================== -->
-
 <div class="card shadow-sm mt-4">
 
     <div class="card-body">
@@ -244,7 +226,7 @@
 
             <img
                         src="{{ url_for('static', filename='images/ac_vs_pr.png') }}"
-                        class="img-fluid validation-chart"
+                        class="img-fluid analytics-small-chart"
                         alt="Actual vs Forecast"
                     >
 

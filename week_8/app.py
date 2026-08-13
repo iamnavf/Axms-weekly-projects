@@ -91,7 +91,12 @@ def forecast():
 @app.route('/analytics')
 def analytics():
    model_comparison = df_performance.to_dict(orient='records')
-   return render_template("analytics.html",model_comparison=model_comparison)
+   best_model ='GRU'
+   best_r2 = 91.16
+   best_mae = 1338.70
+   best_rmse = 1915.71
+   return render_template("analytics.html",model_comparison=model_comparison,best_model=best_model,best_r2=best_r2,
+                          best_mae =best_mae,best_rmse=best_rmse)
 
 @app.route("/validation", methods=["GET", "POST"])
 def validation():
@@ -121,8 +126,6 @@ def validation():
 
     return render_template("validation.html",days=days,actual_values=actual_values,
                            predicted_values=predicted_values,mae=mae,rmse=rmse,mape=mape)
-    
-    
 
 if __name__ == "__main__":
     app.run()

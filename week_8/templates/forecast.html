@@ -65,6 +65,65 @@
 
 {% if forecast_values %}
 
+
+<div class="row g-4 mt-1">
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h6>Forecast Horizon</h6>
+
+                <h3>24 Hours</h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h6>Maximum Forecast</h6>
+
+                <h3>
+                    {{ "%.2f"|format(forecast_values|max) }} MW
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h6>Minimum Forecast</h6>
+
+                <h3>
+                    {{ "%.2f"|format(forecast_values|min) }} MW
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 <div class="card shadow-sm mt-4">
 
     <div class="card-body">
@@ -132,66 +191,6 @@
 
 </div>
 
-
-<!-- Summary -->
-
-<div class="row g-4 mt-1">
-
-    <div class="col-md-4">
-
-        <div class="card shadow-sm">
-
-            <div class="card-body">
-
-                <h6>Forecast Horizon</h6>
-
-                <h3>24 Hours</h3>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="col-md-4">
-
-        <div class="card shadow-sm">
-
-            <div class="card-body">
-
-                <h6>Maximum Forecast</h6>
-
-                <h3>
-                    {{ "%.2f"|format(forecast_values|max) }} MW
-                </h3>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="col-md-4">
-
-        <div class="card shadow-sm">
-
-            <div class="card-body">
-
-                <h6>Minimum Forecast</h6>
-
-                <h3>
-                    {{ "%.2f"|format(forecast_values|min) }} MW
-                </h3>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
 
 {% endif %}
 

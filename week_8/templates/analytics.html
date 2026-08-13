@@ -6,10 +6,46 @@
 
 <h2 class="page-title">Forecast Analytics</h2>
 
+<div class="row g-4">
 
-<!-- ========================================== -->
-<!-- Model Comparison -->
-<!-- ========================================== -->
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>Best Model</h6>
+                <h3>{{ best_model }} MW</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>R2 Score</h6>
+                <h3>{{ best_r2 }} MW</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>MAE</h6>
+                <h3>{{ best_mae }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>RMSE</h6>
+                <h3>{{ best_rmse }}</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 
 <div class="card shadow-sm mt-4">
 
@@ -21,7 +57,7 @@
 
             <table class="table table-bordered table-striped">
 
-                <thead>
+                <thead class="table-dark">
 
                     <tr>
                         <th>Model</th>

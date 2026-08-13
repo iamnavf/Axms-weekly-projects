@@ -1,17 +1,9 @@
-/* =========================================
-   GLOBAL
-========================================= */
-
 body {
     background: #f4f6f8;
     color: #263238;
     font-family: "Segoe UI", Arial, sans-serif;
 }
 
-
-/* =========================================
-   NAVBAR
-========================================= */
 
 .navbar {
     min-height: 64px;
@@ -25,10 +17,6 @@ body {
     font-size: 1.1rem;
 }
 
-
-/* =========================================
-   SIDEBAR
-========================================= */
 
 .sidebar {
     min-height: calc(100vh - 64px);
@@ -55,10 +43,6 @@ body {
 }
 
 
-/* =========================================
-   MAIN CONTENT
-========================================= */
-
 .main-content {
     padding: 30px;
     min-height: calc(100vh - 64px);
@@ -71,10 +55,6 @@ body {
     margin-bottom: 24px;
 }
 
-
-/* =========================================
-   CARDS
-========================================= */
 
 .card {
     background: #ffffff;
@@ -104,14 +84,6 @@ body {
 }
 
 
-/* =========================================
-   SECTION HEADERS
-========================================= */
-
-/*
-   Use this class when you want a colored
-   header similar to the screenshot.
-*/
 
 .section-header {
     background: #00897b;
@@ -122,10 +94,6 @@ body {
     margin: -18px -18px 18px -18px;
 }
 
-
-/* =========================================
-   BUTTONS
-========================================= */
 
 .btn {
     border-radius: 6px;
@@ -144,10 +112,6 @@ body {
 }
 
 
-/* =========================================
-   FORMS
-========================================= */
-
 .form-label {
     color: #455a64;
     font-weight: 500;
@@ -164,10 +128,6 @@ body {
     box-shadow: 0 0 0 0.15rem rgba(0, 137, 123, 0.15);
 }
 
-
-/* =========================================
-   TABLES
-========================================= */
 
 .table {
     margin-bottom: 0;
@@ -197,9 +157,6 @@ body {
 }
 
 
-/* =========================================
-   BADGES
-========================================= */
 
 .badge {
     padding: 6px 10px;
@@ -212,21 +169,21 @@ body {
 }
 
 
-/* =========================================
-   ALERTS
-========================================= */
-
 .alert {
     border-radius: 6px;
     border: none;
 }
 
 
-/* =========================================
-   ANALYTICS CHARTS
-========================================= */
-
 .analytics-small-chart {
+    width: 75%;
+    max-width: 650px;
+    height: 400px;
+    display: block;
+    margin: 0 auto;
+}
+
+.validation-chart {
     width: 75%;
     max-width: 650px;
     height: auto;
@@ -234,18 +191,6 @@ body {
     margin: 0 auto;
 }
 
-.validation-chart {
-    width: 75%;
-    max-width: 900px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-
-/* =========================================
-   CHART CONTAINER
-========================================= */
 
 .chart-container {
     background: #ffffff;
@@ -254,10 +199,6 @@ body {
     padding: 12px;
 }
 
-
-/* =========================================
-   DASHBOARD METRIC CARDS
-========================================= */
 
 .row > .col-md-3 > .card {
     min-height: 120px;
@@ -269,10 +210,6 @@ body {
     transition: 0.2s ease;
 }
 
-
-/* =========================================
-   RESPONSIVE
-========================================= */
 
 @media (max-width: 767px) {
 
