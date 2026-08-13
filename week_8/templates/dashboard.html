@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<h2 class="page-title">Electricity Demand Dashboard</h2>
+
+<div class="row g-4">
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>Latest Demand</h6>
+                <h3>{{ latest_demand }} MW</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>Forecast Demand</h6>
+                <h3>{{ forecast_demand }} MW</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>Best Model</h6>
+                <h3>{{ best_model }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6>R²</h6>
+                <h3>{{ best_r2 }}%</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="card shadow-sm mt-4">
+
+    <div class="card-body">
+
+        <h5>Historical Consumption</h5>
+
+        <img
+            src="{{ url_for('static', filename='images/30_day.png') }}"
+            class="img-fluid analytics-small-chart"
+            alt="Historical consumption"
+        >
+
+    </div>
+
+</div>
+
+
+<div class="row g-4 mt-1">
+
+    <div class="col-md-6">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h5>Forecast Summary</h5>
+
+                <hr>
+
+                <p>
+                    Forecast Horizon:
+                    <strong>{{ forecast_horizon }}</strong>
+                </p>
+
+                <p>
+                    Forecast Demand:
+                    <strong>{{ forecast_demand }} MW</strong>
+                </p>
+
+                <p>
+                    Model:
+                    <strong>{{ best_model }}</strong>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-6">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h5>Model Performance</h5>
+
+                <hr>
+
+                <p>MAE: {{ best_mae }} MW</p>
+                <p>RMSE: {{ best_rmse }} MW</p>
+                <p>MAPE: {{ best_mape }}%</p>
+                <p>R²: {{ best_r2 }}%</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

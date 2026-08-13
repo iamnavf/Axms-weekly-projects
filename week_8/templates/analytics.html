@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block content %}
+
+<h2 class="page-title">Forecast Analytics</h2>
+
+
+<!-- ========================================== -->
+<!-- Model Comparison -->
+<!-- ========================================== -->
+
+<div class="card shadow-sm mt-4">
+
+    <div class="card-body">
+
+        <h5>Model Comparison</h5>
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-striped">
+
+                <thead>
+
+                    <tr>
+                        <th>Model</th>
+                        <th>MAE</th>
+                        <th>MSE</th>
+                        <th>RMSE</th>
+                        <th>MAPE</th>
+                        <th>R²</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for model in model_comparison %}
+
+                    <tr>
+
+                        <td>{{ model.Model }}</td>
+
+                        <td>{{ model.MAE }}</td>
+
+                        <td>{{ model.MSE }}</td>
+
+                        <td>{{ model.RMSE }}</td>
+
+                        <td>{{ model.MAPE }}</td>
+
+                        <td>{{ model.R2 }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================== -->
+<!-- Daily / Weekly / Monthly Trends -->
+<!-- ========================================== -->
+
+<div class="row g-4 mt-1">
+
+
+    <!-- Daily Trend -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5 class="mb-3">
+                    Daily Trend
+                </h5>
+
+                <div class="text-center">
+
+                    <img
+                        src="{{ url_for('static', filename='images/day.png') }}"
+                        class="img-fluid"
+                        alt="Daily Trend"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Weekly Trend -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5 class="mb-3">
+                    Weekly Trend
+                </h5>
+
+                <div class="text-center">
+
+                    <img
+                        src="{{ url_for('static', filename='images/weekly.png') }}"
+                        class="img-fluid"
+                        alt="Weekly Trend"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Monthly Trend -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5 class="mb-3">
+                    Monthly Trend
+                </h5>
+
+                <div class="text-center">
+
+                    <img
+                        src="{{ url_for('static', filename='images/monthly.png') }}"
+                        class="img-fluid"
+                        alt="Monthly Trend"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================== -->
+<!-- Actual vs Forecast / Peak / Error -->
+<!-- ========================================== -->
+
+<div class="row g-4 mt-1">
+
+
+    <!-- Actual vs Forecast -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5 class="mb-3">
+                    Actual vs Forecast
+                </h5>
+
+                <div class="text-center">
+
+                    <img
+                        src="{{ url_for('static', filename='images/ac_vs_pr.png') }}"
+                        class="img-fluid"
+                        alt="Actual vs Forecast"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Peak Demand -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5 class="mb-3">
+                    Peak Demand Analysis
+                </h5>
+
+                <div class="text-center">
+
+                    <img
+                        src="{{ url_for('static', filename='images/demand.png') }}"
+                        class="img-fluid"
+                        alt="Peak Demand Analysis"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Forecast Errors -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <h5 class="mb-3">
+                    Forecast Errors
+                </h5>
+
+                <div class="text-center">
+
+                    <img
+                        src="{{ url_for('static', filename='images/forecast.png') }}"
+                        class="img-fluid"
+                        alt="Forecast Errors"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

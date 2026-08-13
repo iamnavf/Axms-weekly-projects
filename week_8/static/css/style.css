@@ -1,0 +1,296 @@
+/* =========================================
+   GLOBAL
+========================================= */
+
+body {
+    background: #f4f6f8;
+    color: #263238;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+    min-height: 64px;
+    background: #263238 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    min-height: calc(100vh - 64px);
+    padding: 20px 12px;
+    background: #263238 !important;
+}
+
+.sidebar .nav-link {
+    color: #cfd8dc;
+    padding: 11px 15px;
+    margin: 4px 0;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.sidebar .nav-link:hover {
+    background: #37474f;
+    color: #ffffff;
+}
+
+.sidebar .nav-link.active {
+    background: #00897b;
+    color: #ffffff;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.main-content {
+    padding: 30px;
+    min-height: calc(100vh - 64px);
+}
+
+.page-title {
+    color: #263238;
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+
+/* =========================================
+   CARDS
+========================================= */
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e0e4e7;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 18px;
+}
+
+.card h5 {
+    color: #37474f;
+    font-weight: 600;
+}
+
+.card h6 {
+    color: #78909c;
+    font-weight: 500;
+}
+
+.card h3 {
+    color: #263238;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   SECTION HEADERS
+========================================= */
+
+/*
+   Use this class when you want a colored
+   header similar to the screenshot.
+*/
+
+.section-header {
+    background: #00897b;
+    color: #ffffff;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: -18px -18px 18px -18px;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+    padding: 8px 17px;
+}
+
+.btn-primary {
+    background: #00897b;
+    border-color: #00897b;
+}
+
+.btn-primary:hover {
+    background: #00796b;
+    border-color: #00796b;
+}
+
+
+/* =========================================
+   FORMS
+========================================= */
+
+.form-label {
+    color: #455a64;
+    font-weight: 500;
+}
+
+.form-select {
+    border: 1px solid #cfd8dc;
+    border-radius: 6px;
+    min-height: 42px;
+}
+
+.form-select:focus {
+    border-color: #00897b;
+    box-shadow: 0 0 0 0.15rem rgba(0, 137, 123, 0.15);
+}
+
+
+/* =========================================
+   TABLES
+========================================= */
+
+.table {
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.table thead th {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.table-dark {
+    background: #37474f !important;
+    border-color: #37474f !important;
+}
+
+.table-bordered {
+    border-color: #dfe4e7;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: #f8fafb;
+}
+
+.table tbody tr:hover > * {
+    background-color: #e8f5f3;
+}
+
+
+/* =========================================
+   BADGES
+========================================= */
+
+.badge {
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.badge.bg-primary {
+    background-color: #00897b !important;
+}
+
+
+/* =========================================
+   ALERTS
+========================================= */
+
+.alert {
+    border-radius: 6px;
+    border: none;
+}
+
+
+/* =========================================
+   ANALYTICS CHARTS
+========================================= */
+
+.analytics-small-chart {
+    width: 75%;
+    max-width: 650px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.validation-chart {
+    width: 75%;
+    max-width: 900px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   CHART CONTAINER
+========================================= */
+
+.chart-container {
+    background: #ffffff;
+    border: 1px solid #e0e4e7;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+
+/* =========================================
+   DASHBOARD METRIC CARDS
+========================================= */
+
+.row > .col-md-3 > .card {
+    min-height: 120px;
+}
+
+.row > .col-md-3 > .card:hover,
+.row > .col-md-4 > .card:hover {
+    transform: translateY(-2px);
+    transition: 0.2s ease;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 767px) {
+
+    .sidebar {
+        min-height: auto;
+        padding: 12px;
+    }
+
+    .main-content {
+        padding: 20px 14px;
+    }
+
+    .page-title {
+        font-size: 1.4rem;
+    }
+
+    .analytics-small-chart,
+    .validation-chart {
+        width: 100%;
+    }
+}
