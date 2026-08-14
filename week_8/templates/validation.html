@@ -1,242 +1,99 @@
 {% extends "base.html" %}
 
-{% block title %}Validation{% endblock %}
+{% block title %}Validation - PowerGrid AI{% endblock %}
+{% block header_title %}Forecast Validation{% endblock %}
 
 {% block content %}
-
-<h2 class="page-title">Forecast Validation</h2>
-
-<div class="card shadow-sm mt-4">
-
+<div class="card mb-4">
     <div class="card-body">
-
-        <h5 class="mb-3">
-            Select Validation Period
-        </h5>
-
+        <h5 class="card-title mb-3">Validation Configuration</h5>
         <form method="POST">
-
-            <div class="row align-items-end">
-
+            <div class="row g-3 align-items-end">
                 <div class="col-md-4">
-
-                    <label class="form-label">
-                        Validation Period
-                    </label>
-
-                    <select
-                        name="days"
-                        class="form-select"
-                        required
-                    >
-
-                        <option
-                            value="30"
-                            {% if days == 30 %}selected{% endif %}
-                        >
-                            30 Days
-                        </option>
-
-                        <option
-                            value="60"
-                            {% if days == 60 %}selected{% endif %}
-                        >
-                            60 Days
-                        </option>
-
+                    <label class="form-label text-muted small fw-semibold">VALIDATION PERIOD</label>
+                    <select name="days" class="form-select custom-select" required>
+                        <option value="30" {% if days == 30 %}selected{% endif %}>30 Days</option>
+                        <option value="60" {% if days == 60 %}selected{% endif %}>60 Days</option>
                     </select>
-
                 </div>
-
                 <div class="col-md-3">
-
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                    >
+                    <button type="submit" class="btn btn-primary w-100">
                         Evaluate
                     </button>
-
                 </div>
-
             </div>
-
         </form>
-
     </div>
-
 </div>
-
 
 {% if mae is not none %}
-
-
-<div class="row g-4 mt-1">
-
-
-    <!-- MAE -->
-
+<div class="row g-3 mb-4">
     <div class="col-md-4">
-
-        <div class="card shadow-sm h-100">
-
+        <div class="card metric-card">
             <div class="card-body">
-
-                <h6 class="text-muted">
-                    Mean Absolute Error
-                </h6>
-
-                <h3>
-                    {{ "%.2f"|format(mae) }} MW
-                </h3>
-
+                <span class="metric-label">MAE</span>
+                <div class="metric-value">{{ "%.2f"|format(mae) }} <span class="unit">MW</span></div>
             </div>
-
         </div>
-
     </div>
-
-
-    <!-- RMSE -->
-
     <div class="col-md-4">
-
-        <div class="card shadow-sm h-100">
-
+        <div class="card metric-card">
             <div class="card-body">
-
-                <h6 class="text-muted">
-                    Root Mean Squared Error
-                </h6>
-
-                <h3>
-                    {{ "%.2f"|format(rmse) }} MW
-                </h3>
-
+                <span class="metric-label">RMSE</span>
+                <div class="metric-value">{{ "%.2f"|format(rmse) }} <span class="unit">MW</span></div>
             </div>
-
         </div>
-
     </div>
-
-
-    <!-- MAPE -->
-
     <div class="col-md-4">
-
-        <div class="card shadow-sm h-100">
-
+        <div class="card metric-card">
             <div class="card-body">
-
-                <h6 class="text-muted">
-                    Mean Absolute Percentage Error
-                </h6>
-
-                <h3>
-                    {{ "%.2f"|format(mape) }}%
-                </h3>
-
+                <span class="metric-label">MAPE</span>
+                <div class="metric-value">{{ "%.2f"|format(mape) }}<span class="unit">%</span></div>
             </div>
-
         </div>
-
     </div>
-
 </div>
 
-
-<div class="card shadow-sm mt-4">
-
-    <div class="card-body">
-
-        <div class="d-flex justify-content-between align-items-center mb-3">
-
-            <h5 class="mb-0">
-                Actual vs Predicted Demand
-            </h5>
-
-            <span class="badge bg-primary">
-                {{ days }} Days
-            </span>
-
-        </div>
-
+<div class="card mb-4">
+    <div class="card-header border-0 bg-transparent pt-3 d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">Actual vs Predicted Demand Log</h5>
+        <span class="badge bg-soft-primary">{{ days }} Days Evaluated</span>
+    </div>
+    <div class="card-body p-0">
         <div class="table-responsive">
-
-            <table class="table table-bordered table-striped">
-
-                <thead class="table-dark">
-
+            <table class="table align-middle mb-0">
+                <thead>
                     <tr>
                         <th>Hour</th>
                         <th>Actual Demand (MW)</th>
                         <th>Predicted Demand (MW)</th>
-                        <th>Error (MW)</th>
+                        <th>Error Delta (MW)</th>
                     </tr>
-
                 </thead>
-
                 <tbody>
-
                     {% for i in range(actual_values|length) %}
-
                     <tr>
-
-                        <td>
-                            {{ i + 1 }}
+                        <td class="text-mono">Hour {{ i + 1 }}</td>
+                        <td class="text-mono">{{ "%.2f"|format(actual_values[i]) }}</td>
+                        <td class="text-mono">{{ "%.2f"|format(predicted_values[i]) }}</td>
+                        <td class="text-mono {% if (actual_values[i] - predicted_values[i]) < 0 %}text-danger{% else %}text-success{% endif %}">
+                            {{ "%.2f"|format(actual_values[i] - predicted_values[i]) }}
                         </td>
-
-                        <td>
-                            {{ "%.2f"|format(actual_values[i]) }}
-                        </td>
-
-                        <td>
-                            {{ "%.2f"|format(predicted_values[i]) }}
-                        </td>
-
-                        <td>
-                            {{ "%.2f"|format(
-                                actual_values[i] - predicted_values[i]
-                            ) }}
-                        </td>
-
                     </tr>
-
                     {% endfor %}
-
                 </tbody>
-
             </table>
-
         </div>
-
     </div>
-
 </div>
 
-<div class="card shadow-sm mt-4">
-
-    <div class="card-body">
-
-        <h5 class="mb-3">
-            Forecasting Performance
-        </h5>
-
-        <div class="text-center">
-
-            <img
-                        src="{{ url_for('static', filename='images/ac_vs_pr.png') }}"
-                        class="img-fluid analytics-small-chart"
-                        alt="Actual vs Forecast"
-                    >
-
-        </div>
-
+<div class="card mb-4">
+    <div class="card-header border-0 bg-transparent pt-3">
+        <h5 class="card-title mb-0">Performance Evaluation Chart</h5>
     </div>
-
+    <div class="card-body text-center">
+        <img src="{{ url_for('static', filename='images/ac_vs_pr.png') }}" class="img-fluid chart-img" alt="Actual vs Forecast">
+    </div>
 </div>
-
-
 {% endif %}
-
 {% endblock %}

@@ -1,64 +1,52 @@
 {% extends "base.html" %}
 
-{% block title %}Analytics{% endblock %}
+{% block title %}Analytics - PowerGrid AI{% endblock %}
+{% block header_title %}Forecast Analytics{% endblock %}
 
 {% block content %}
-
-<h2 class="page-title">Forecast Analytics</h2>
-
-<div class="row g-4">
-
-    <div class="col-md-3">
-        <div class="card shadow-sm">
+<div class="row g-3 mb-4">
+    <div class="col-xl-3 col-md-6">
+        <div class="card metric-card">
             <div class="card-body">
-                <h6>Best Model</h6>
-                <h3>{{ best_model }} MW</h3>
+                <span class="metric-label">Best Model</span>
+                <div class="metric-value-text">{{ best_model }}</div>
             </div>
         </div>
     </div>
-
-    <div class="col-md-3">
-        <div class="card shadow-sm">
+    <div class="col-xl-3 col-md-6">
+        <div class="card metric-card">
             <div class="card-body">
-                <h6>R2 Score</h6>
-                <h3>{{ best_r2 }} MW</h3>
+                <span class="metric-label">R² Score</span>
+                <div class="metric-value">{{ best_r2 }}</div>
             </div>
         </div>
     </div>
-
-    <div class="col-md-3">
-        <div class="card shadow-sm">
+    <div class="col-xl-3 col-md-6">
+        <div class="card metric-card">
             <div class="card-body">
-                <h6>MAE</h6>
-                <h3>{{ best_mae }}</h3>
+                <span class="metric-label">MAE</span>
+                <div class="metric-value">{{ best_mae }}</div>
             </div>
         </div>
     </div>
-
-    <div class="col-md-3">
-        <div class="card shadow-sm">
+    <div class="col-xl-3 col-md-6">
+        <div class="card metric-card">
             <div class="card-body">
-                <h6>RMSE</h6>
-                <h3>{{ best_rmse }}</h3>
+                <span class="metric-label">RMSE</span>
+                <div class="metric-value">{{ best_rmse }}</div>
             </div>
         </div>
     </div>
-
 </div>
 
-
-<div class="card shadow-sm mt-4">
-
-    <div class="card-body">
-
-        <h5>Model Comparison</h5>
-
+<div class="card mb-4">
+    <div class="card-header border-0 bg-transparent pt-3">
+        <h5 class="card-title mb-0">Model Comparison Matrix</h5>
+    </div>
+    <div class="card-body p-0">
         <div class="table-responsive">
-
-            <table class="table table-bordered table-striped">
-
-                <thead class="table-dark">
-
+            <table class="table align-middle mb-0">
+                <thead>
                     <tr>
                         <th>Model</th>
                         <th>MAE</th>
@@ -67,232 +55,76 @@
                         <th>MAPE</th>
                         <th>R²</th>
                     </tr>
-
                 </thead>
-
                 <tbody>
-
                     {% for model in model_comparison %}
-
                     <tr>
-
-                        <td>{{ model.Model }}</td>
-
-                        <td>{{ model.MAE }}</td>
-
-                        <td>{{ model.MSE }}</td>
-
-                        <td>{{ model.RMSE }}</td>
-
-                        <td>{{ model.MAPE }}</td>
-
-                        <td>{{ model.R2 }}</td>
-
+                        <td class="fw-bold">{{ model.Model }}</td>
+                        <td class="text-mono">{{ model.MAE }}</td>
+                        <td class="text-mono">{{ model.MSE }}</td>
+                        <td class="text-mono">{{ model.RMSE }}</td>
+                        <td class="text-mono">{{ model.MAPE }}</td>
+                        <td class="text-mono">{{ model.R2 }}</td>
                     </tr>
-
                     {% endfor %}
-
                 </tbody>
-
             </table>
-
         </div>
-
     </div>
-
 </div>
 
-
-<!-- ========================================== -->
-<!-- Daily / Weekly / Monthly Trends -->
-<!-- ========================================== -->
-
-<div class="row g-4 mt-1">
-
-
-    <!-- Daily Trend -->
-
-    <div class="col-md-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-body">
-
-                <h5 class="mb-3">
-                    Daily Trend
-                </h5>
-
-                <div class="text-center">
-
-                    <img
-                        src="{{ url_for('static', filename='images/day.png') }}"
-                        class="img-fluid"
-                        alt="Daily Trend"
-                    >
-
-                </div>
-
+<!-- Charts Section -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h6 class="text-start mb-3 text-muted">DAILY TREND</h6>
+                <img src="{{ url_for('static', filename='images/day.png') }}" class="img-fluid chart-img" alt="Daily Trend">
             </div>
-
         </div>
-
     </div>
-
-
-    <!-- Weekly Trend -->
-
-    <div class="col-md-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-body">
-
-                <h5 class="mb-3">
-                    Weekly Trend
-                </h5>
-
-                <div class="text-center">
-
-                    <img
-                        src="{{ url_for('static', filename='images/weekly.png') }}"
-                        class="img-fluid"
-                        alt="Weekly Trend"
-                    >
-
-                </div>
-
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h6 class="text-start mb-3 text-muted">WEEKLY TREND</h6>
+                <img src="{{ url_for('static', filename='images/weekly.png') }}" class="img-fluid chart-img" alt="Weekly Trend">
             </div>
-
         </div>
-
     </div>
-
-
-    <!-- Monthly Trend -->
-
-    <div class="col-md-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-body">
-
-                <h5 class="mb-3">
-                    Monthly Trend
-                </h5>
-
-                <div class="text-center">
-
-                    <img
-                        src="{{ url_for('static', filename='images/monthly.png') }}"
-                        class="img-fluid"
-                        alt="Monthly Trend"
-                    >
-
-                </div>
-
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h6 class="text-start mb-3 text-muted">MONTHLY TREND</h6>
+                <img src="{{ url_for('static', filename='images/monthly.png') }}" class="img-fluid chart-img" alt="Monthly Trend">
             </div>
-
         </div>
-
     </div>
-
 </div>
 
-
-<!-- ========================================== -->
-<!-- Actual vs Forecast / Peak / Error -->
-<!-- ========================================== -->
-
-<div class="row g-4 mt-1">
-
-
-    <!-- Actual vs Forecast -->
-
-    <div class="col-md-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-body">
-
-                <h5 class="mb-3">
-                    Actual vs Forecast
-                </h5>
-
-                <div class="text-center">
-
-                    <img
-                        src="{{ url_for('static', filename='images/ac_vs_pr.png') }}"
-                        class="img-fluid"
-                        alt="Actual vs Forecast"
-                    >
-
-                </div>
-
+<div class="row g-4 mb-4">
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h6 class="text-start mb-3 text-muted">ACTUAL VS FORECAST</h6>
+                <img src="{{ url_for('static', filename='images/ac_vs_pr.png') }}" class="img-fluid chart-img" alt="Actual vs Forecast">
             </div>
-
         </div>
-
     </div>
-
-
-    <!-- Peak Demand -->
-
-    <div class="col-md-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-body">
-
-                <h5 class="mb-3">
-                    Peak Demand Analysis
-                </h5>
-
-                <div class="text-center">
-
-                    <img
-                        src="{{ url_for('static', filename='images/demand.png') }}"
-                        class="img-fluid"
-                        alt="Peak Demand Analysis"
-                    >
-
-                </div>
-
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h6 class="text-start mb-3 text-muted">PEAK DEMAND ANALYSIS</h6>
+                <img src="{{ url_for('static', filename='images/demand.png') }}" class="img-fluid chart-img" alt="Peak Demand Analysis">
             </div>
-
         </div>
-
     </div>
-
-
-    <!-- Forecast Errors -->
-
-    <div class="col-md-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-body">
-
-                <h5 class="mb-3">
-                    Forecast Errors
-                </h5>
-
-                <div class="text-center">
-
-                    <img
-                        src="{{ url_for('static', filename='images/forecast.png') }}"
-                        class="img-fluid"
-                        alt="Forecast Errors"
-                    >
-
-                </div>
-
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h6 class="text-start mb-3 text-muted">FORECAST ERRORS</h6>
+                <img src="{{ url_for('static', filename='images/forecast.png') }}" class="img-fluid chart-img" alt="Forecast Errors">
             </div>
-
         </div>
-
     </div>
-
 </div>
-
-
 {% endblock %}

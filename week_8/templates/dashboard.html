@@ -1,122 +1,118 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Dashboard - PowerGrid AI{% endblock %}
+{% block header_title %}Electricity Demand Dashboard{% endblock %}
 
 {% block content %}
-
-<h2 class="page-title">Electricity Demand Dashboard</h2>
-
-<div class="row g-4">
-
-    <div class="col-md-3">
-        <div class="card shadow-sm">
+<!-- Metric Cards Grid -->
+<div class="row g-3 mb-4">
+    <div class="col-xl-3 col-md-6">
+        <div class="card metric-card">
             <div class="card-body">
-                <h6>Latest Demand</h6>
-                <h3>{{ latest_demand }} MW</h3>
+                <span class="metric-label">Latest Demand</span>
+                <div class="metric-value">{{ latest_demand }} <span class="unit">MW</span></div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card shadow-sm">
+    <div class="col-xl-3 col-md-6">
+        <div class="card metric-card">
             <div class="card-body">
-                <h6>Forecast Demand</h6>
-                <h3>{{ forecast_demand }} MW</h3>
+                <span class="metric-label">Forecast Demand</span>
+                <div class="metric-value">{{ forecast_demand }} <span class="unit">MW</span></div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card shadow-sm">
+    <div class="col-xl-3 col-md-6">
+        <div class="card metric-card">
             <div class="card-body">
-                <h6>Best Model</h6>
-                <h3>{{ best_model }}</h3>
+                <span class="metric-label">Best Model</span>
+                <div class="metric-value-text">{{ best_model }}</div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card shadow-sm">
+    <div class="col-xl-3 col-md-6">
+        <div class="card metric-card">
             <div class="card-body">
-                <h6>R²</h6>
-                <h3>{{ best_r2 }}%</h3>
+                <span class="metric-label">Accuracy Score (R²)</span>
+                <div class="metric-value">{{ best_r2 }}<span class="unit">%</span></div>
             </div>
         </div>
     </div>
-
 </div>
 
-<div class="row g-4 mt-1">
-
-    <div class="col-md-6">
-
-        <div class="card shadow-sm">
-
-            <div class="card-body">
-
-                <h5>Forecast Summary</h5>
-
-                <hr>
-
-                <p>
-                    Forecast Horizon:
-                    <strong>{{ forecast_horizon }}</strong>
-                </p>
-
-                <p>
-                    Forecast Demand:
-                    <strong>{{ forecast_demand }} MW</strong>
-                </p>
-
-                <p>
-                    Model:
-                    <strong>{{ best_model }}</strong>
-                </p>
-
+<!-- Details Cards Section -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header border-0 bg-transparent pt-3">
+                <h5 class="card-title">Forecast Summary</h5>
             </div>
-
+            <div class="card-body">
+                <ul class="list-group list-group-flush border-0">
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom-soft">
+                        <span class="text-secondary">Forecast Horizon</span>
+                        <span class="badge bg-soft-primary">{{ forecast_horizon }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom-soft">
+                        <span class="text-secondary">Forecast Demand</span>
+                        <span class="fw-bold text-mono">{{ forecast_demand }} MW</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
+                        <span class="text-secondary">Active Model</span>
+                        <span class="fw-bold text-mono">{{ best_model }}</span>
+                    </li>
+                </ul>
+            </div>
         </div>
-
     </div>
 
-
-    <div class="col-md-6">
-
-        <div class="card shadow-sm">
-
-            <div class="card-body">
-
-                <h5>Model Performance</h5>
-
-                <hr>
-
-                <p>MAE: {{ best_mae }} MW</p>
-                <p>RMSE: {{ best_rmse }} MW</p>
-                <p>MAPE: {{ best_mape }}%</p>
-                <p>R²: {{ best_r2 }}%</p>
-
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header border-0 bg-transparent pt-3">
+                <h5 class="card-title">Model Performance</h5>
             </div>
-
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="p-3 border-soft rounded">
+                            <span class="d-block text-muted small">MAE</span>
+                            <span class="fw-bold text-mono fs-5">{{ best_mae }} MW</span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 border-soft rounded">
+                            <span class="d-block text-muted small">RMSE</span>
+                            <span class="fw-bold text-mono fs-5">{{ best_rmse }} MW</span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 border-soft rounded">
+                            <span class="d-block text-muted small">MAPE</span>
+                            <span class="fw-bold text-mono fs-5">{{ best_mape }}%</span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 border-soft rounded">
+                            <span class="d-block text-muted small">R²</span>
+                            <span class="fw-bold text-mono fs-5">{{ best_r2 }}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
-
 </div>
 
-<div class="card shadow-sm mt-4">
-
-    <div class="card-body">
-
-        <h5>Historical Consumption</h5>
-
-        <img
-            src="{{ url_for('static', filename='images/30_day.png') }}"
-            class="img-fluid analytics-small-chart"
-            alt="Historical consumption"
-        >
-
+<!-- Chart Container -->
+<div class="card mb-4">
+    <div class="card-header border-0 bg-transparent pt-3">
+        <h5 class="card-title">Historical Consumption</h5>
     </div>
-
+    <div class="card-body text-center">
+        <img src="{{ url_for('static', filename='images/30_day.png') }}" class="img-fluid chart-img" alt="Historical consumption">
+    </div>
 </div>
-
 {% endblock %}
