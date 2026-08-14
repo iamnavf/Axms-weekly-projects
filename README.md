@@ -165,3 +165,37 @@ Web Development
     -Bootstrap
 Report Generation 
     -ReportLab
+
+WEEK 8 This project presents an **Electricity Demand Forecasting System** developed using **Time-Series Forecasting and Deep Learning**. The system predicts electricity demand using historical consumption data and compares Naive, Moving Average, RNN, LSTM, GRU, and Bi-LSTM models.
+
+The application provides demand forecasting, model analytics, validation, and forecasting error analysis through a **Flask web application**.
+
+--Features
+    
+Dashboard
+     Latest demand
+     Model performance
+     Forecast summary
+Forecasting
+     Generate 24-hour demand forecast
+     Display forecast values
+     Display forecast intervals
+Analytics
+    Actual vs Forecast
+    Daily, weekly and monthly trends
+    Peak demand analysis
+    Forecast errors
+    Model comparison
+ Validation
+    30-day and 60-day validation
+    Actual vs Predicted demand
+    MAE, RMSE and MAPE
+
+Tech Stack
+**Programming Language** - Python
+**Deep Learning** - TensorFlow, Keras, RNN, LSTM, GRU, Bi-LSTM
+**Machine Learning** - Scikit-learn
+**Data Processing** - Pandas, NumPy
+**Visualization** - Matplotlib, Seaborn
+**Web Development** - Flask, HTML, CSS, Bootstrap
+
