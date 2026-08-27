@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sentiment Prediction | Sentiment Analysis
+{% endblock %}
+
+{% block content %}
+
+<div class="prediction-header">
+
+    <h1>Sentiment Prediction</h1>
+
+    <p>
+        Enter a movie review and predict whether the sentiment is positive or negative.
+    </p>
+
+</div>
+
+
+<div class="prediction-container">
+
+    <form method="POST" action="{{ url_for('prediction') }}">
+
+        <label for="review">Enter Review</label>
+
+        <textarea
+            id="review"
+            name="review"
+            rows="8"
+            placeholder="Enter or paste a customer review..."
+            required>{{ review }}</textarea>
+
+        <button type="submit">
+            Predict Sentiment
+        </button>
+
+    </form>
+
+
+    {% if sentiment %}
+
+    <div class="prediction-result">
+
+        <h2>Prediction Result</h2>
+
+        <div class="sentiment-result">
+
+            <span>Sentiment</span>
+
+            <strong class="{{ sentiment|lower }}">
+                {{ sentiment }}
+            </strong>
+
+        </div>
+
+
+        <div class="confidence">
+
+            <h3>Confidence</h3>
+
+            <p>{{ "%.2f"|format(confidence) }}%</p>
+
+        </div>
+
+
+        <div class="probability-section">
+
+            <h3>Class Probabilities</h3>
+
+            <div class="probability-item">
+
+                <div class="probability-label">
+                    <span>Positive</span>
+                    <span>{{ "%.2f"|format(probabilities.positive) }}%</span>
+                </div>
+
+                <div class="progress-bar">
+
+                    <div class="probability-value positive-value">
+                        {{ "%.2f"|format(probabilities.positive) }}%
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="probability-item">
+
+                <div class="probability-label">
+                    <span>Negative</span>
+                    <span>{{ "%.2f"|format(probabilities.negative) }}%</span>
+                </div>
+
+                <div class="progress-bar">
+
+                    <div class="probability-value negative-value">
+                        {{ "%.2f"|format(probabilities.negative) }}%
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

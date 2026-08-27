@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Sentiment Analysis{% endblock %}</title>
+
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <a href="{{ url_for('dashboard') }}" class="logo">
+            Sentiment Analysis
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('dashboard') }}">Home</a>
+
+            <a href="{{ url_for('prediction') }}">
+                Sentiment Prediction
+            </a>
+
+            <a href="{{ url_for('comparison') }}">
+                Model Comparison
+            </a>
+
+            <a href="{{ url_for('analytics') }}">
+                Text Analytics
+            </a>
+
+            <a href="{{ url_for('batch_prediction') }}">
+                Batch Prediction
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+</body>
+
+</html>

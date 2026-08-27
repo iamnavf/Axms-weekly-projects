@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+
+{% block title %}
+Model Comparison | Sentiment Analysis
+{% endblock %}
+
+{% block content %}
+
+<div class="comparison-header">
+
+    <h1>Model Comparison</h1>
+
+    <p>
+        Compare the performance of the deep learning sentiment classification models.
+    </p>
+
+</div>
+
+
+<!-- Evaluation Metrics -->
+
+<section class="comparison-section">
+
+    <h2>Optimized Evaluation Metrics</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Model</th>
+                    <th>Accuracy</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F1 Score</th>
+                    <th>AUC-ROC</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for row in performance %}
+
+                <tr>
+
+                    <td>{{ row['MODEL'] }}</td>
+
+                    <td>
+                        {{ "%.2f"|format(row['ACCURACY'] * 100) }}%
+                    </td>
+
+                    <td>
+                        {{ "%.2f"|format(row['PRECISION'] * 100) }}%
+                    </td>
+
+                    <td>
+                        {{ "%.2f"|format(row['RECALL'] * 100) }}%
+                    </td>
+
+                    <td>
+                        {{ "%.2f"|format(row['F1 SCORE'] * 100) }}%
+                    </td>
+
+                    <td>
+                        {{ "%.2f"|format(row['AUC'] * 100) }}%
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!-- Baseline Evaluation Metrics -->
+
+<section class="comparison-section">
+
+    <h2>Baseline Evaluation Metrics</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Model</th>
+                    <th>Accuracy</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F1 Score</th>
+                    <th>AUC-ROC</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for row in baseline_performance %}
+
+                <tr>
+
+                    <td>{{ row['MODEL'] }}</td>
+
+                    <td>
+                        {{ "%.2f"|format(row['ACCURACY'] * 100) }}%
+                    </td>
+
+                    <td>
+                        {{ "%.2f"|format(row['PRECISION'] * 100) }}%
+                    </td>
+
+                    <td>
+                        {{ "%.2f"|format(row['RECALL'] * 100) }}%
+                    </td>
+
+                    <td>
+                        {{ "%.2f"|format(row['F1 SCORE'] * 100) }}%
+                    </td>
+
+                    <td>
+                        {{ "%.2f"|format(row['AUC'] * 100) }}%
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!-- Confusion Matrices -->
+
+<section class="comparison-section">
+
+    <h2>Confusion Matrices</h2>
+
+    <div class="matrix-grid">
+
+
+        <!-- ANN -->
+
+        <div class="matrix-card">
+
+            <h3>ANN</h3>
+
+            <img
+                src="{{ url_for('static', filename='images/ann-cm.png') }}"
+                alt="ANN Confusion Matrix", height="220px",width="350px">
+
+        </div>
+
+
+        <!-- RNN -->
+
+        <div class="matrix-card">
+
+            <h3>RNN</h3>
+
+            <img
+                src="{{ url_for('static', filename='images/rnn-cm.png') }}"
+                alt="RNN Confusion Matrix", height="220px",width="350px">
+
+        </div>
+
+
+        <!-- LSTM -->
+
+        <div class="matrix-card">
+
+            <h3>LSTM</h3>
+
+            <img
+                src="{{ url_for('static', filename='images/lstm-cm.png') }}"
+                alt="LSTM Confusion Matrix", height="220px",width="350px">
+
+        </div>
+
+
+        <!-- GRU -->
+
+        <div class="matrix-card">
+
+            <h3>GRU</h3>
+
+            <img
+                src="{{ url_for('static', filename='images/gru-cm.png') }}"
+                alt="GRU Confusion Matrix", height="220px",width="350px">
+
+        </div>
+
+
+        <!-- Bi-LSTM -->
+
+        <div class="matrix-card">
+
+            <h3>Bi-LSTM</h3>
+
+            <img
+                src="{{ url_for('static', filename='images/bilstm-cm.png') }}"
+                alt="Bi-LSTM Confusion Matrix", height="220px",width="350px">
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- Training History 
+
+<section class="comparison-section">
+
+    <h2>Training History</h2>
+
+    <div class="history-grid">
+
+
+    
+
+        <div class="history-card">
+
+            <h3>ANN</h3>
+
+            <img
+                src="{{ url_for('static', filename='images/ann_training_history.png') }}"
+                alt="ANN Training History">
+
+        </div>
+
+
+
+        <div class="history-card">
+
+            <h3>RNN</h3>
+
+            <img
+                src="{{ url_for('static', filename='images/rnn_training_history.png') }}"
+                alt="RNN Training History">
+
+        </div>
+
+
+        
+
+        <div class="history-card">
+
+            <h3>LSTM</h3>
+
+            <img
+                src="{{ url_for('static', filename='images/lstm_training_history.png') }}"
+                alt="LSTM Training History">
+
+        </div>
+
+
+
+
+        <div class="history-card">
+
+            <h3>GRU</h3>
+
+            <img
+                src="{{ url_for('static', filename='images/gru_training_history.png') }}"
+                alt="GRU Training History">
+
+        </div>
+
+
+
+
+        <div class="history-card">
+
+            <h3>Bi-LSTM</h3>
+
+            <img
+                src="{{ url_for('static', filename='images/bilstm_training_history.png') }}"
+                alt="Bi-LSTM Training History">
+
+        </div>
+
+
+    </div>
+
+</section> -->
+
+{% endblock %}

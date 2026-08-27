@@ -1,0 +1,715 @@
+/* =========================
+   GLOBAL
+   ========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6ff;
+    color: #20223a;
+}
+
+
+/* =========================
+   NAVBAR
+   ========================= */
+
+.navbar {
+    min-height: 70px;
+    background: linear-gradient(135deg, #5b2be0, #7c4dff);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    box-shadow: 0 4px 15px rgba(91, 43, 224, 0.25);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 14px;
+    border-radius: 8px;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+
+/* =========================
+   GENERAL CONTAINER
+   ========================= */
+
+.container {
+    padding: 35px 45px;
+}
+
+
+/* =========================
+   HEADERS
+   ========================= */
+
+.dashboard-header,
+.prediction-header,
+.comparison-header,
+.analytics-header,
+.batch-header {
+    margin-bottom: 35px;
+}
+
+.dashboard-header h1,
+.prediction-header h1,
+.comparison-header h1,
+.analytics-header h1,
+.batch-header h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+    color: #29244f;
+}
+
+.dashboard-header p,
+.prediction-header p,
+.comparison-header p,
+.analytics-header p,
+.batch-header p {
+    color: #6b6d85;
+    font-size: 16px;
+}
+
+
+/* =========================
+   SECTIONS
+   ========================= */
+
+.dashboard-section,
+.comparison-section,
+.analytics-section,
+.batch-section {
+    margin-bottom: 40px;
+}
+
+.dashboard-section h2,
+.comparison-section h2,
+.analytics-section h2,
+.batch-section h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #30285f;
+}
+
+
+/* =========================
+   DASHBOARD OVERVIEW
+   ========================= */
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.overview-card {
+    background: linear-gradient(135deg, #ffffff, #f1edff);
+    padding: 25px;
+    border-radius: 14px;
+    border-left: 5px solid #6c3ce9;
+    box-shadow: 0 5px 20px rgba(82, 58, 150, 0.10);
+}
+
+.overview-card h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #5b2be0;
+}
+
+.overview-card p {
+    color: #555873;
+}
+
+
+/* =========================
+   DATASET STATISTICS
+   ========================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(50, 50, 100, 0.10);
+    border-top: 4px solid #4c8bf5;
+}
+
+.stat-card:nth-child(2) {
+    border-top-color: #8b5cf6;
+}
+
+.stat-card:nth-child(3) {
+    border-top-color: #f59e0b;
+}
+
+.stat-card:nth-child(4) {
+    border-top-color: #10b981;
+}
+
+.stat-card h3 {
+    color: #6b6d85;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.stat-card p {
+    font-size: 30px;
+    font-weight: bold;
+    color: #30285f;
+}
+
+
+/* =========================
+   TABLE
+   ========================= */
+
+.table-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 14px;
+    overflow-x: auto;
+    box-shadow: 0 5px 20px rgba(50, 50, 100, 0.10);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #eeeeF5;
+}
+
+th {
+    background-color: #eee9ff;
+    color: #4d2aa8;
+    font-weight: 600;
+}
+
+td {
+    color: #555873;
+}
+
+tr:hover {
+    background-color: #f8f7ff;
+}
+
+
+/* =========================
+   SENTIMENT PREDICTION
+   ========================= */
+
+.prediction-container {
+    max-width: 900px;
+}
+
+.prediction-container form {
+    background-color: #ffffff;
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(50, 50, 100, 0.10);
+    border-top: 4px solid #6c3ce9;
+}
+
+.prediction-container label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #30285f;
+}
+
+.prediction-container textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e4e1f2;
+    border-radius: 10px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.prediction-container textarea:focus {
+    outline: none;
+    border-color: #6c3ce9;
+}
+
+.prediction-container button {
+    padding: 13px 25px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #5b2be0, #8b5cf6);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.prediction-container button:hover {
+    background-color: #5b2be0;
+}
+
+
+/* Prediction Result */
+
+.prediction-result {
+    margin-top: 25px;
+    background-color: #ffffff;
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(50, 50, 100, 0.10);
+}
+
+.sentiment-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    background-color: #f4f1ff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.sentiment-result strong {
+    font-size: 20px;
+}
+
+.sentiment-result strong.positive {
+    color: #059669;
+}
+
+.sentiment-result strong.negative {
+    color: #dc2626;
+}
+
+
+/* Confidence */
+
+.confidence {
+    margin-bottom: 25px;
+}
+
+.confidence h3 {
+    margin-bottom: 8px;
+    color: #555873;
+}
+
+.confidence p {
+    font-size: 30px;
+    font-weight: bold;
+    color: #6c3ce9;
+}
+
+
+/* =========================
+   PROBABILITY
+   ========================= */
+
+.probability-section h3 {
+    margin-bottom: 20px;
+    color: #30285f;
+}
+
+.probability-item {
+    margin-bottom: 18px;
+}
+
+.probability-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+    font-size: 14px;
+}
+
+.probability-value {
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.positive-value {
+    background-color: #dff7eb;
+    color: #047857;
+}
+
+.negative-value {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+
+/* =========================
+   MODEL COMPARISON
+   ========================= */
+
+.comparison-header {
+    margin-bottom: 30px;
+}
+
+.comparison-header h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+    color: #29244f;
+}
+
+.comparison-header p {
+    color: #6b6d85;
+    font-size: 16px;
+}
+
+.comparison-section {
+    margin-bottom: 40px;
+}
+
+.comparison-section h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #30285f;
+}
+
+
+/* Two Cards Per Row */
+
+.matrix-grid,
+.history-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+
+/* Comparison Cards */
+
+.matrix-card,
+.history-card {
+    background-color: #ffffff;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(50, 50, 100, 0.10);
+    border-top: 4px solid #7c4dff;
+}
+
+.matrix-card h3,
+.history-card h3 {
+    margin-bottom: 12px;
+    color: #4d2aa8;
+    text-align: center;
+}
+
+
+/* Smaller Comparison Images */
+
+.matrix-card img,
+.history-card img {
+    width: 55%;
+    max-width: 350px;
+    height: 220px;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    border-radius: 8px;
+}
+
+
+/* =========================
+   TEXT ANALYTICS
+   ========================= */
+
+.analytics-header {
+    margin-bottom: 30px;
+}
+
+.analytics-header h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+    color: #29244f;
+}
+
+.analytics-header p {
+    color: #6b6d85;
+    font-size: 16px;
+}
+
+
+/* Two Cards Per Row */
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+
+/* Analytics Card */
+
+.analytics-card {
+    background-color: #ffffff;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(50, 50, 100, 0.10);
+    border-top: 4px solid #f59e0b;
+}
+
+.analytics-card h2 {
+    margin-bottom: 12px;
+    font-size: 20px;
+    color: #30285f;
+    text-align: center;
+}
+
+
+/* Smaller Analytics Images */
+
+.analytics-card img {
+    width: 65%;
+    max-width: 400px;
+    height: 240px;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    border-radius: 8px;
+}
+
+
+/* =========================
+   BATCH PREDICTION
+   ========================= */
+
+.batch-header {
+    margin-bottom: 30px;
+}
+
+.batch-header h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+    color: #29244f;
+}
+
+.batch-header p {
+    color: #6b6d85;
+    font-size: 16px;
+}
+
+.batch-section {
+    margin-bottom: 35px;
+}
+
+
+/* Upload */
+
+.upload-form {
+    background-color: #ffffff;
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(50, 50, 100, 0.10);
+    border-top: 4px solid #06b6d4;
+}
+
+.upload-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #30285f;
+}
+
+.upload-form input[type="file"] {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.upload-form button {
+    padding: 13px 25px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #5b2be0, #8b5cf6);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.upload-form button:hover {
+    background-color: #5b2be0;
+}
+
+
+/* Batch Statistics */
+
+.batch-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.batch-stat-card {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(50, 50, 100, 0.10);
+}
+
+.batch-stat-card:nth-child(1) {
+    border-top: 4px solid #6366f1;
+}
+
+.batch-stat-card:nth-child(2) {
+    border-top: 4px solid #10b981;
+}
+
+.batch-stat-card:nth-child(3) {
+    border-top: 4px solid #ef4444;
+}
+
+.batch-stat-card h3 {
+    color: #6b6d85;
+    margin-bottom: 10px;
+}
+
+.batch-stat-card p {
+    font-size: 30px;
+    font-weight: bold;
+    color: #30285f;
+}
+
+
+/* Download */
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.download-button {
+    padding: 11px 20px;
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.download-button:hover {
+    background-color: #059669;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 1000px) {
+
+    .overview-grid,
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nav-links {
+        gap: 4px;
+    }
+
+    .nav-links a {
+        padding: 8px 10px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .navbar {
+        min-height: auto;
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .container {
+        padding: 25px 20px;
+    }
+
+    .overview-grid,
+    .stats-grid,
+    .batch-stats,
+    .matrix-grid,
+    .history-grid,
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .matrix-card img,
+    .history-card img {
+        width: 70%;
+        max-width: 350px;
+        height: 350px;
+    }
+
+    .analytics-card img {
+        width: 75%;
+        max-width: 400px;
+        height: 240px;
+    }
+
+    .img{
+        width: 70%;
+        max-width: 350px;
+        height: 220px;
+    }
+
+    .dashboard-header h1,
+    .prediction-header h1,
+    .comparison-header h1,
+    .analytics-header h1,
+    .batch-header h1 {
+        font-size: 28px;
+    }
+
+    .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}

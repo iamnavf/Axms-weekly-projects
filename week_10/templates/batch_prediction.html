@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block title %}
+Batch Prediction | Sentiment Analysis
+{% endblock %}
+
+{% block content %}
+
+<div class="batch-header">
+
+    <h1>Batch Prediction</h1>
+
+    <p>
+        Upload a CSV file containing reviews to generate sentiment predictions.
+    </p>
+
+</div>
+
+
+<!-- Upload Section -->
+
+<section class="batch-section">
+
+    <h2>Upload Reviews</h2>
+
+    <form
+        method="POST"
+        action="{{ url_for('batch_prediction') }}"
+        enctype="multipart/form-data"
+        class="upload-form">
+
+        <label for="file">
+            Select CSV File
+        </label>
+
+        <input
+            type="file"
+            id="file"
+            name="file"
+            accept=".csv"
+            required>
+
+        <button type="submit">
+            Generate Predictions
+        </button>
+
+    </form>
+
+</section>
+
+
+{% if summary %}
+
+<!-- Prediction Summary -->
+
+<section class="batch-section">
+
+    <h2>Prediction Summary</h2>
+
+    <div class="batch-stats">
+
+        <div class="batch-stat-card">
+
+            <h3>Total Reviews</h3>
+
+            <p>{{ summary.total }}</p>
+
+        </div>
+
+
+        <div class="batch-stat-card">
+
+            <h3>Positive</h3>
+
+            <p>{{ summary.positive }}</p>
+
+        </div>
+
+
+        <div class="batch-stat-card">
+
+            <h3>Negative</h3>
+
+            <p>{{ summary.negative }}</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Prediction Results -->
+
+<section class="batch-section">
+
+    <div class="results-header">
+
+        <h2>Prediction Results</h2>
+
+        <a
+            href="{{ url_for('download_results') }}"
+            class="download-button">
+
+            Download Results
+
+        </a>
+
+    </div>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Review</th>
+                    <th>Sentiment</th>
+                    <th>Positive Probability</th>
+                    <th>Negative Probability</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for row in results %}
+
+                <tr>
+
+                    <td>{{ row["review"] }}</td>
+
+                    <td>{{ row["Sentiment"] }}</td>
+
+                    <td>
+                        {{ "%.2f"|format(row["Positive_Probability"] * 100) }}%
+                    </td>
+
+                    <td>
+                        {{ "%.2f"|format(row["Negative_Probability"] * 100) }}%
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+{% endblock %}

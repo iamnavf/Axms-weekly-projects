@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}
+Text Analytics | Sentiment Analysis
+{% endblock %}
+
+{% block content %}
+
+<div class="analytics-header">
+
+    <h1>Text Analytics</h1>
+
+    <p>
+        Explore the sentiment distribution and characteristics of the movie reviews.
+    </p>
+
+</div>
+
+<div class="matrix-grid">
+
+    <section class="analytics-section">
+
+        <h2>Sentiment Distribution</h2>
+
+        <div class="analytics-card">
+
+            <img
+                src="{{ url_for('static', filename='images/sentiment_distribution.png') }}"
+                alt="Sentiment Distribution">
+
+        </div>
+
+    </section>
+
+
+    <section class="analytics-section">
+
+        <h2>Review Length Analysis</h2>
+
+        <div class="analytics-card">
+
+            <img
+                src="{{ url_for('static', filename='images/review_length_distribution.png') }}"
+                alt="Review Length Analysis">
+
+        </div>
+
+    </section>
+
+
+    <section class="analytics-section">
+
+        <h2>Word Frequency</h2>
+
+        <div class="analytics-card">
+
+            <img
+                src="{{ url_for('static', filename='images/words_distribution.png') }}"
+                alt="Word Frequency">
+
+        </div>
+
+    </section>
+
+
+    <section class="analytics-section">
+
+        <h2>Word Cloud</h2>
+
+        <div class="analytics-card">
+
+            <img
+                src="{{ url_for('static', filename='images/wordcloud.png') }}"
+                alt="Word Cloud">
+
+        </div>
+
+    </section>
+
+</div class="analytics-section">
+
+
+{% endblock %}

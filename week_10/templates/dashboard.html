@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home | Sentiment Analysis
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-header">
+
+    <h1>Sentiment Analysis Dashboard</h1>
+
+    <p>
+        Sentiment Analysis
+    </p>
+
+</div>
+
+
+<!-- Project Overview -->
+
+<section class="dashboard-section">
+
+    <h2>Project Overview</h2>
+
+    <div class="overview-grid">
+
+        <div class="overview-card">
+            <h3>Dataset</h3>
+            <p>IMDb Movie Reviews</p>
+        </div>
+
+        <div class="overview-card">
+            <h3>Task</h3>
+            <p>Sentiment Classification</p>
+        </div>
+
+        <div class="overview-card">
+            <h3>Classes</h3>
+            <p>Positive / Negative</p>
+        </div>
+
+        <div class="overview-card">
+            <h3> Best Models</h3>
+            <p>GRU</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Dataset Statistics -->
+
+<section class="dashboard-section">
+
+    <h2>Dataset Statistics</h2>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h3>Total Reviews</h3>
+            <p>49,582</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Training</h3>
+            <p>34,705</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Validation</h3>
+            <p>7,439</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Testing</h3>
+            <p>7,438</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Model Performance -->
+
+<section class="dashboard-section">
+
+    <h2>Model Performance Summary</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Model</th>
+                    <th>Accuracy</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F1 Score</th>
+                    <th>AUC-ROC</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for row in performance %}
+
+                <tr>
+
+                    <td>{{ row['MODEL'] }}</td>
+                    <td>{{"%.2f"|format(row['ACCURACY'] * 100)}}</td>
+                    <td>{{"%.2f"|format(row['PRECISION'] * 100)}}</td>
+                    <td>{{"%.2f"|format(row['RECALL'] * 100)}}</td>
+                    <td>{{"%.2f"|format(row['F1 SCORE'] * 100)}}</td>
+                    <td>{{"%.2f"|format(row['AUC'] * 100)}}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}
