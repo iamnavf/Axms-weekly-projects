@@ -15,6 +15,7 @@ scikit-learn = "*"
 gensim = "*"
 wordcloud = "*"
 flask = "*"
+keras-tuner = "*"
 
 [dev-packages]
 
