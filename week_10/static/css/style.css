@@ -285,7 +285,9 @@ tr:hover {
 }
 
 
-/* Prediction Result */
+/* =========================
+   PREDICTION RESULT
+   ========================= */
 
 .prediction-result {
     margin-top: 25px;
@@ -318,7 +320,9 @@ tr:hover {
 }
 
 
-/* Confidence */
+/* =========================
+   CONFIDENCE
+   ========================= */
 
 .confidence {
     margin-bottom: 25px;
@@ -404,7 +408,9 @@ tr:hover {
 }
 
 
-/* Two Cards Per Row */
+/* =========================
+   TWO CARDS PER ROW
+   ========================= */
 
 .matrix-grid,
 .history-grid {
@@ -414,7 +420,9 @@ tr:hover {
 }
 
 
-/* Comparison Cards */
+/* =========================
+   COMPARISON CARDS
+   ========================= */
 
 .matrix-card,
 .history-card {
@@ -433,13 +441,15 @@ tr:hover {
 }
 
 
-/* Smaller Comparison Images */
+/* =========================
+   MODEL COMPARISON IMAGES
+   ========================= */
 
 .matrix-card img,
 .history-card img {
-    width: 55%;
-    max-width: 350px;
-    height: 220px;
+    width: 85%;
+    max-width: 600px;
+    height: 300px;
     object-fit: contain;
     display: block;
     margin: auto;
@@ -467,7 +477,9 @@ tr:hover {
 }
 
 
-/* Two Cards Per Row */
+/* =========================
+   TWO CARDS PER ROW
+   ========================= */
 
 .analytics-grid {
     display: grid;
@@ -476,7 +488,9 @@ tr:hover {
 }
 
 
-/* Analytics Card */
+/* =========================
+   ANALYTICS CARD
+   ========================= */
 
 .analytics-card {
     background-color: #ffffff;
@@ -494,12 +508,14 @@ tr:hover {
 }
 
 
-/* Smaller Analytics Images */
+/* =========================
+   ANALYTICS IMAGES
+   ========================= */
 
 .analytics-card img {
-    width: 65%;
-    max-width: 400px;
-    height: 240px;
+    width: 85%;
+    max-width: 600px;
+    height: 300px;
     object-fit: contain;
     display: block;
     margin: auto;
@@ -531,7 +547,9 @@ tr:hover {
 }
 
 
-/* Upload */
+/* =========================
+   UPLOAD
+   ========================= */
 
 .upload-form {
     background-color: #ffffff;
@@ -569,7 +587,9 @@ tr:hover {
 }
 
 
-/* Batch Statistics */
+/* =========================
+   BATCH STATISTICS
+   ========================= */
 
 .batch-stats {
     display: grid;
@@ -609,7 +629,9 @@ tr:hover {
 }
 
 
-/* Download */
+/* =========================
+   DOWNLOAD
+   ========================= */
 
 .results-header {
     display: flex;
@@ -653,6 +675,10 @@ tr:hover {
 }
 
 
+/* =========================
+   MOBILE
+   ========================= */
+
 @media (max-width: 700px) {
 
     .navbar {
@@ -680,24 +706,37 @@ tr:hover {
         grid-template-columns: 1fr;
     }
 
+
+    /* Comparison images on mobile */
+
     .matrix-card img,
     .history-card img {
-        width: 70%;
-        max-width: 350px;
-        height: 350px;
+        width: 90%;
+        max-width: 500px;
+        height: 300px;
     }
+
+
+    /* Analytics images on mobile */
 
     .analytics-card img {
-        width: 75%;
-        max-width: 400px;
-        height: 240px;
+        width: 90%;
+        max-width: 500px;
+        height: 300px;
     }
 
-    .img{
-        width: 70%;
-        max-width: 350px;
-        height: 220px;
+
+    /* General image class */
+
+    .img {
+        width: 80%;
+        max-width: 400px;
+        height: 250px;
+        object-fit: contain;
+        display: block;
+        margin: auto;
     }
+
 
     .dashboard-header h1,
     .prediction-header h1,
