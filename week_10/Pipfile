@@ -13,6 +13,7 @@ openpyxl = "*"
 scikit-learn = "*"
 xgboost = "*"
 tensorflow = "*"
+nltk = "*"
 
 [dev-packages]
 
