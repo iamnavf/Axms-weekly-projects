@@ -12,6 +12,7 @@ ipykernel = "*"
 openpyxl = "*"
 scikit-learn = "*"
 xgboost = "*"
+tensorflow = "*"
 
 [dev-packages]
 
