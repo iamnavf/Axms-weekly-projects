@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "014d47fd35f7f9606952a0d94519f65f47f188aa9e5596759fbbd4109cf5e856"
+            "sha256": "e40e1d4fa407d9b4c7f1faee665046c69f412d48707d496eaa0d5af97886a9e2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -400,6 +400,14 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
             "version": "==0.7.1"
+        },
+        "diskcache": {
+            "hashes": [
+                "sha256:2c3a3fa2743d8535d832ec61c2054a1641f41775aa7c556758a109941e33e4fc",
+                "sha256:5e31b2d5fbad117cc363ebaf6b689474db18a1f6438bc82358b024abd4c2ca19"
+            ],
+            "markers": "python_version >= '3'",
+            "version": "==5.6.3"
         },
         "et-xmlfile": {
             "hashes": [
@@ -941,6 +949,14 @@
                 "sha256:cf4a99b05376513717ab5d82a0db832c56ccea4fd61a69dbb7bccf2dfb207dbe"
             ],
             "version": "==18.1.1"
+        },
+        "llama-cpp-python": {
+            "hashes": [
+                "sha256:1139dbb54509074b70893fab8554e3b079aa9f4d312058ce4018ef0019e3de12"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==0.3.35"
         },
         "markdown-it-py": {
             "hashes": [

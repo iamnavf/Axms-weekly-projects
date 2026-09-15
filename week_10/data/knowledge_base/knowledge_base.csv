@@ -1,0 +1,105 @@
+category,title,text
+Service Policy,Support Channels,"Customers can contact customer support through approved channels such as email, phone, and the online support portal."
+Service Policy,Business Hours,Standard customer support requests are normally handled during business hours.
+Service Policy,Urgent Issues,Urgent service interruptions may receive higher priority when they have a significant impact on the customer.
+Customer Support FAQ,Required Information,"Customers should provide their customer ID, order number, and a clear description of the issue when contacting support."
+Customer Support FAQ,Product Not Working,"If a product is not working, customers should first restart the product and check that required connections are secure."
+Customer Support FAQ,Software Problems,"When reporting a software problem, customers should provide the error message and explain when the problem started."
+Contract Information,Contract Review,Customers should review their applicable contract terms before changing or cancelling a service.
+Contract Information,Month-to-Month Contract,Month-to-month contracts generally provide greater flexibility because the customer has a shorter commitment period.
+Contract Information,Contract Changes,Contract changes must be processed according to approved business procedures and applicable agreement terms.
+Cancellation Policy,Cancellation Request,Customers who want to cancel a service should contact customer support through an approved support channel.
+Cancellation Policy,Account Verification,The customer account should be verified before a cancellation request is processed.
+Cancellation Policy,Cancellation Conditions,Applicable contract terms should be reviewed to determine whether cancellation conditions or charges apply.
+Billing Policy,Billing Questions,"Customers can contact support when they have questions about their invoice, payment, billing amount, or unexpected charge."
+Billing Policy,Billing Dispute,Customers submitting a billing dispute should identify the specific charge they believe is incorrect.
+Billing Policy,Billing Adjustment,"If an incorrect charge is identified, the appropriate billing adjustment should follow applicable approval rules."
+Retention Guidelines,Cancellation Reason,"When a customer considers cancellation, support staff should first understand the customer's reason for considering cancellation."
+Retention Guidelines,Technical Retention,"For technical problems, support staff should attempt appropriate troubleshooting or escalation before discussing cancellation."
+Retention Guidelines,Customer Choice,Customers should receive clear information about available options and should not be pressured into continuing a service.
+Support Procedures,Record Support Requests,All customer support requests should be recorded in the support system so that the issue and its progress can be tracked.
+Support Procedures,Technical Troubleshooting,"For technical issues, support staff should collect relevant details and record troubleshooting steps already completed."
+Support Procedures,Issue Escalation,Issues that cannot be resolved using standard procedures should be escalated to the appropriate support team.
+Business Rules,Account Verification,"Support staff should verify the customer account before processing requests involving billing, contracts, or cancellations."
+Business Rules,Refund Approval,Refunds and billing adjustments should only be provided when the applicable eligibility requirements are satisfied.
+Business Rules,Unauthorized Exceptions,Support staff should not create unauthorized exceptions to approved business rules or service policies.
+Service Policy,Support Request Priority,Support requests should normally be handled in the order they are received unless an issue requires higher priority.
+Service Policy,Customer Information,Customers may be asked to provide relevant account or order information so that support staff can investigate their request.
+Service Policy,Account Verification,Account information should be verified before support staff discuss sensitive billing or account details.
+Service Policy,Technical Support,Customers reporting technical problems may be asked to complete basic troubleshooting steps before escalation.
+Service Policy,Support Case Updates,Customers can request an update about an open support case through an approved support channel.
+Service Policy,Existing Support Case,Customers reporting an existing issue should provide the previous support reference number when available.
+Service Policy,Support Documentation,"Support staff should record the reported problem, troubleshooting actions, customer communications, and final resolution."
+Service Policy,Escalation Process,Issues that cannot be resolved through standard support procedures should be escalated to the appropriate team.
+Service Policy,Clear Communication,Support staff should communicate instructions and service decisions clearly so that customers understand the available options.
+Service Policy,Sensitive Information,Customers should avoid sharing unnecessary sensitive information when submitting a support request.
+Customer Support FAQ,How to Contact Support,"Customers can contact support through approved email, phone, or online support channels."
+Customer Support FAQ,What Information to Provide,"Customers should provide their customer ID, order number, and a clear description of the issue."
+Customer Support FAQ,Product Restart,"If a product is not working, customers should restart the product before trying additional troubleshooting steps."
+Customer Support FAQ,Connection Check,Customers experiencing product problems should check that all required connections are secure.
+Customer Support FAQ,Error Messages,Customers reporting software problems should provide any error message displayed by the product.
+Customer Support FAQ,When the Problem Started,Customers should explain when a technical problem started because this information can help support investigate the issue.
+Customer Support FAQ,Previous Troubleshooting,Customers should tell support staff which troubleshooting steps they have already tried.
+Customer Support FAQ,Existing Support Reference,Customers contacting support about an existing issue should provide the previous support reference number when available.
+Customer Support FAQ,Account Verification,Support staff may need to verify the customer account before discussing account-specific information.
+Customer Support FAQ,Sensitive Information,Customers should avoid including unnecessary sensitive information in support messages.
+Contract Information,Contract Type,Customers should review their current contract type before making decisions about changing or cancelling a service.
+Contract Information,Month-to-Month Contract,Month-to-month contracts generally provide greater flexibility because they involve a shorter commitment period.
+Contract Information,One-Year Contract,One-year contracts provide a longer service commitment and may have conditions that differ from month-to-month agreements.
+Contract Information,Two-Year Contract,Two-year contracts involve a longer service commitment and customers should review the applicable contract conditions.
+Contract Information,Contract Clarification,Customers can contact support if they need clarification about their contract type or service commitment.
+Contract Information,Contract Cancellation,Customers should review their contract terms before requesting cancellation because applicable conditions may affect the request.
+Contract Information,Early Termination,Early termination conditions may depend on the customer's applicable agreement and should be checked before processing termination.
+Contract Information,Contract Changes,Contract changes should be processed according to the applicable agreement and approved business procedures.
+Contract Information,Contract Authorization,"Support staff should not promise contract changes, discounts, or exceptions without the required authorization."
+Contract Information,Account-Specific Contract Details,Support staff should verify the customer account before discussing account-specific contract information.
+Cancellation Policy,Cancellation Request,Customers who want to cancel a service should contact customer support through an approved support channel.
+Cancellation Policy,Verify Account,The customer account should be verified before a cancellation request is processed.
+Cancellation Policy,Review Contract,Support staff should review the customer's applicable contract before processing a cancellation request.
+Cancellation Policy,Cancellation Conditions,Applicable contract terms should be checked to determine whether cancellation conditions or charges apply.
+Cancellation Policy,Explain Charges,Customers should be informed about applicable cancellation charges or remaining commitments before cancellation is completed.
+Cancellation Policy,Cancellation Reason,Support staff should record the customer's reason for cancellation in the support system.
+Cancellation Policy,Cancellation Date,The cancellation date should be recorded accurately in the customer account after the cancellation is processed.
+Cancellation Policy,Withdraw Cancellation,"If a customer changes their mind before cancellation is completed, support should check whether the request can still be withdrawn."
+Cancellation Policy,Troubleshooting Before Cancellation,"When applicable, customers experiencing service problems may be offered appropriate troubleshooting information before cancellation."
+Cancellation Policy,Final Resolution,The final outcome of a cancellation request should be documented in the support system.
+Billing Policy,Invoice Questions,Customers can contact support when they have questions about their monthly invoice or billing amount.
+Billing Policy,Unexpected Charge,Customers who notice an unexpected charge should identify the specific charge when contacting support.
+Billing Policy,Billing Period,Customers submitting a billing dispute should provide the relevant billing period when possible.
+Billing Policy,Review Invoice,Customers should review their invoice before submitting a billing dispute so that the issue can be clearly understood.
+Billing Policy,Billing Dispute Review,Support staff should record a billing dispute and review the available billing information.
+Billing Policy,Incorrect Charge,"If an incorrect charge is identified, the appropriate billing adjustment should follow the applicable approval rules."
+Billing Policy,Refund Eligibility,A disputed charge does not automatically qualify for a refund and must be reviewed according to eligibility requirements.
+Billing Policy,Approved Refund,Approved refunds and billing adjustments should be recorded in the customer's account.
+Billing Policy,Billing Decision,Support staff should communicate billing decisions clearly to customers after reviewing the request.
+Billing Policy,Account Verification,Customer account information should be verified before discussing account-specific billing information.
+Retention Guidelines,Identify At-Risk Customers,"Customers showing signs of dissatisfaction, repeated support issues, or cancellation intent should be considered for retention actions."
+Retention Guidelines,Understand Customer Concerns,Support staff should understand the customer's main concern before recommending a retention action.
+Retention Guidelines,Review Customer History,Customer history and previous support interactions can be reviewed to understand recurring problems.
+Retention Guidelines,Prioritize High-Risk Customers,Customers identified as high churn risk should receive appropriate retention attention.
+Retention Guidelines,Address Service Issues,"When service problems contribute to dissatisfaction, resolving the underlying issue should be prioritized."
+Retention Guidelines,Explain Available Options,Customers should be informed about relevant service or account options that may address their concerns.
+Retention Guidelines,Avoid Unnecessary Offers,Retention offers should be relevant to the customer's situation and should not be provided without understanding the problem.
+Retention Guidelines,Escalate Complex Cases,Complex retention cases should be escalated to the appropriate support or retention team.
+Retention Guidelines,Record Retention Actions,Retention actions and customer responses should be recorded for future reference.
+Retention Guidelines,Respect Cancellation Decisions,"If a customer decides to cancel after available options have been explained, the cancellation process should be handled according to policy."
+Support Procedures,Verify Customer Account,Support staff should verify the customer's account information before handling account-specific requests.
+Support Procedures,Understand the Issue,Support staff should identify the customer's problem and collect the relevant details before troubleshooting.
+Support Procedures,Check Previous Interactions,Previous support interactions can be reviewed to determine whether the customer has experienced the same issue before.
+Support Procedures,Provide Troubleshooting,Support staff should provide appropriate troubleshooting steps based on the customer's reported problem.
+Support Procedures,Confirm Resolution,"After troubleshooting, support staff should confirm whether the customer's issue has been resolved."
+Support Procedures,Escalate Unresolved Issues,Issues that cannot be resolved through standard troubleshooting should be escalated to the appropriate team.
+Support Procedures,Document Support Cases,"Important customer issues, actions taken, and outcomes should be documented in the support record."
+Support Procedures,Handle Billing Issues,Billing-related issues should be reviewed using the customer's account and billing information before providing a resolution.
+Support Procedures,Handle Cancellation Requests,Cancellation requests should be verified and processed according to the applicable cancellation policy.
+Support Procedures,Close Resolved Tickets,A support ticket can be closed after the issue has been resolved and the necessary information has been recorded.
+Business Rules,Account Verification,Account-specific information should only be discussed after the customer's account has been verified.
+Business Rules,Customer Privacy,Customer information should be handled carefully and only used for legitimate support and business purposes.
+Business Rules,Accurate Information,"Support staff should provide customers with accurate information about products, services, billing, and policies."
+Business Rules,Policy Compliance,Customer requests should be handled according to the applicable company policies and business rules.
+Business Rules,Escalation Rule,Requests outside the authority of support staff should be escalated to the appropriate team.
+Business Rules,Document Important Actions,"Important account changes, resolutions, and customer decisions should be documented in the appropriate record."
+Business Rules,Refund Approval,Refunds and billing adjustments should follow the required approval rules before they are processed.
+Business Rules,Cancellation Processing,Cancellation requests should be processed only after the required customer and account information has been verified.
+Business Rules,Consistent Support,Similar customer issues should be handled consistently using the applicable support procedures and policies.
+Business Rules,Record Resolution,Resolved customer issues should have the resolution and relevant actions recorded before the support case is closed.
