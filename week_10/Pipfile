@@ -3,6 +3,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[[source]]
+url = "https://pytorch.org"
+verify_ssl = true
+name = "pytorch"
+
+[[source]]
+url = "https://pytorch.org"
+verify_ssl = true
+name = "pytorch"
+
 [packages]
 numpy = "*"
 pandas = "*"
@@ -16,6 +26,7 @@ tensorflow = "*"
 nltk = "*"
 sentence-transformers = "*"
 faiss-cpu = "*"
+shap = "*"
 
 [dev-packages]
 
