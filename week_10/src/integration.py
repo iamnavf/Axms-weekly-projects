@@ -36,7 +36,6 @@ def get_customer_profile(customer_id):
 def feature_engineering(customer):
 
     customer = customer.copy()
-
     customer['TotalCharges'] = pd.to_numeric(customer['TotalCharges'],errors='coerce').fillna(0)
 
     customer['tenure_group'] = pd.cut(customer['tenure'],bins=[-1, 12, 24, 48, 72],
@@ -81,6 +80,7 @@ def feature_engineering(customer):
 
 #data scaling and encode and top 15 cols
 def preprocess_customer(customer):
+
     customer = customer.drop(['customerID','Churn'], axis=1)
     numeric_cols = customer.select_dtypes(include=np.number).columns.tolist()
     categorical_cols = customer.select_dtypes(exclude=np.number).columns.tolist()
@@ -93,34 +93,30 @@ def preprocess_customer(customer):
 
     return customer_top15
 
-customer = get_customer_profile("9305-CDSKC")
-#totalchanges datatype change
-customer['TotalCharges'] = pd.to_numeric(customer['TotalCharges'],errors='coerce')
-customer['TotalCharges'] = customer['TotalCharges'].fillna(0)
 
-customer = feature_engineering(customer)
-customer_top15 = preprocess_customer(customer)
+#churn prediction
+def churn_predict(customer_top15):
+    churn_probability = model.predict_proba(customer_top15)[0][1]
+    churn_prediction = model.predict(customer_top15)[0]
+    return churn_prediction, churn_probability
 
-churn_probability = model.predict_proba(customer_top15)[0][1]
+#shap  exlainable ai
+def shap_explanation(customer_top15):
+    explainer = shap.TreeExplainer(model)
+    customer_shap = explainer(customer_top15)
+    shap_values_customer = customer_shap.values[0]
+    shap_text = "\n".join(f"{feature}: {'increases' if value > 0 else 'decreases'} churn risk"
+        for feature, value in zip(top_15_feature, shap_values_customer))
+    return shap_text
 
-churn_prediction = model.predict(customer_top15)[0]
-
-explainer = shap.TreeExplainer(model)
-
-customer_shap = explainer(customer_top15)
-
-shap_values_customer = customer_shap.values[0]
-
-
-shap_text = "\n".join(f"{feature}: {'increases' if value > 0 else 'decreases'} churn risk"
-    for feature, value in zip(top_15_feature, shap_values_customer))
-    
+#rag retrival
 def retrieve_knowledge(query, top_k=5):
     query_vector = embedding_model.encode([query]).astype("float32")
     distances, indices = kb_index.search(query_vector,top_k)
     results = kb_chunks_df.iloc[indices[0]]
     return results
 
+#build context
 def build_rag_context(rag_results):
     context = ""
     for _, row in rag_results.iterrows():
@@ -129,14 +125,11 @@ def build_rag_context(rag_results):
             Information: {row['text']} """
     return context
 
-query = "How can I cancel my subscription?"
-rag_results = retrieve_knowledge(query)
-context = build_rag_context(rag_results)
-
+#llm
 def generate_response(customer_id, churn_probability, shap_text,context, question):
-    prompt = prompt = f"""Use ONLY the Model explanation to answer the question.Do not interpret, 
+    prompt = f"""Use ONLY the Model explanation to answer the question.Do not interpret, 
     explain, rename, combine, or infer any feature.Copy feature names exactly as written.
-    Only mention features marked "increases churn risk".Do not use the Support information for this question.
+    Only mention features marked "increases churn risk".
     Do not give advice.
         Customer ID: {customer_id}
         Churn probability: {churn_probability:.2%}
@@ -149,8 +142,49 @@ def generate_response(customer_id, churn_probability, shap_text,context, questio
     outputs = llm.generate(**inputs,max_new_tokens=100)
     return tokenizer.decode(outputs[0],skip_special_tokens=True)
 
-question = "Why am I at such high risk of being cancelled?"
+#customer tool calling
+def customer_profile_tool(customer_id):
+    customer =get_customer_profile(customer_id)
+    return customer.to_dict(orient="records")
 
-response = generate_response("5129-JLPIS",churn_probability,shap_text,context,question)
+#churn tool calling
+def predict_churn(customer_id):
+    customer = get_customer_profile(customer_id)
+    customer = feature_engineering(customer)
+    customer_top15 = preprocess_customer(customer)
+    churn_prediction, churn_probability = churn_predict(customer_top15)
 
-print(response)
+    return {"customer_id": customer_id,"churn_prediction": int(churn_prediction),
+        "churn_probability": float(churn_probability)}
+
+#shap explain toolcalling
+def get_shap_explanation(customer_id):
+    customer = get_customer_profile(customer_id)
+    customer = feature_engineering(customer)
+    customer_top15 = preprocess_customer(customer)
+
+    return shap_explanation(customer_top15)
+
+
+def search_knowledge_base(query):
+    results = retrieve_knowledge(query)
+    return results.to_dict(orient="records")
+
+
+tools = [{"name": "get_customer_profile",
+        "description": "Get the customer profile from the database.",
+        "parameters": {"customer_id": "Customer ID"}},
+        {"name": "predict_churn",
+        "description": "Predict the customer's churn probability using the trained ML model.",
+        "parameters": {"customer_id": "Customer ID"}},
+        {"name": "get_shap_explanation",
+        "description": "Get the SHAP explanation for the customer's churn prediction.",
+        "parameters": {"customer_id": "Customer ID"}},
+        {"name": "search_knowledge_base",
+        "description": "Search the support knowledge base for relevant information.",
+        "parameters": {"query": "User question"}}]
+
+
+
+"""result = search_knowledge_base("How can I cancel my subscription?")
+print(result)"""
