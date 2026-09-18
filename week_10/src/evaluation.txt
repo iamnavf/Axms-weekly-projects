@@ -1,0 +1,11 @@
+#customer lookup
+1. Show the profile of customer 3668-QPYBK.
+2. What is the tenure of customer 3668-QPYBK?
+3. What is the contract type of customer 3668-QPYBK?
+4. What is the monthly charge of customer 3668-QPYBK?
+
+#churn explanation
+5. Is customer 3668-QPYBK predicted to churn?
+6. What is the churn probability of customer 3668-QPYBK?
+7. Why is customer 3668-QPYBK at high risk of churn?
+8. Explain the churn prediction for customer 3668-QPYBK.

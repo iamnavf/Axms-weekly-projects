@@ -27,6 +27,7 @@ nltk = "*"
 sentence-transformers = "*"
 faiss-cpu = "*"
 shap = "*"
+flask = "*"
 
 [dev-packages]
 

@@ -4,6 +4,10 @@ import sqlite3
 import joblib 
 import shap
 
+import time
+import psutil
+import os
+
 import faiss
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer,AutoModelForCausalLM
@@ -90,9 +94,7 @@ def preprocess_customer(customer):
 
     customer_processed = np.hstack([customer_num,customer_cat])
     customer_top15 = customer_processed[:, top_15_indices]
-
     return customer_top15
-
 
 #churn prediction
 def churn_predict(customer_top15):
@@ -105,8 +107,8 @@ def shap_explanation(customer_top15):
     explainer = shap.TreeExplainer(model)
     customer_shap = explainer(customer_top15)
     shap_values_customer = customer_shap.values[0]
-    shap_text = "\n".join(f"{feature}: {'increases' if value > 0 else 'decreases'} churn risk"
-        for feature, value in zip(top_15_feature, shap_values_customer))
+    shap_text = "\n".join(f"{feature}: increases churn risk"
+    for feature, value in zip(top_15_feature, shap_values_customer)if value > 0)
     return shap_text
 
 #rag retrival
@@ -126,20 +128,26 @@ def build_rag_context(rag_results):
     return context
 
 #llm
-def generate_response(customer_id, churn_probability, shap_text,context, question):
-    prompt = f"""Use ONLY the Model explanation to answer the question.Do not interpret, 
-    explain, rename, combine, or infer any feature.Copy feature names exactly as written.
-    Only mention features marked "increases churn risk".
-    Do not give advice.
-        Customer ID: {customer_id}
-        Churn probability: {churn_probability:.2%}
-        Model explanation:{shap_text}
-        Support:{context}
-        Question:{question}
-        Answer:"""
-
+def generate_response(customer_id,question,results):
+    prediction = results.get("churn_prediction", {})
+    shap_result = results.get("shap_explanation", "")
+    knowledge = results.get("knowledge_base", "")
+    factual_answer = f"""Customer ID: {customer_id}
+    Churn probability: {prediction.get("churn_probability", 0):.2%}
+    SHAP explanation:{shap_result}
+    Knowledge base:{knowledge}"""
+    prompt = f"""Answer the user's question using only the verified information below.
+    Question:{question}
+    Verified information:{factual_answer}
+    Rules:
+    - Do not invent information.
+    - Do not explain or interpret feature names.
+    - Do not change feature names.
+    - Do not add reasons that are not present in the verified information.
+    - Give a short factual answer.
+    Answer:"""
     inputs = tokenizer(prompt, return_tensors="pt")
-    outputs = llm.generate(**inputs,max_new_tokens=100)
+    outputs = llm.generate(**inputs,max_new_tokens=150)
     return tokenizer.decode(outputs[0],skip_special_tokens=True)
 
 #customer tool calling
@@ -162,29 +170,44 @@ def get_shap_explanation(customer_id):
     customer = get_customer_profile(customer_id)
     customer = feature_engineering(customer)
     customer_top15 = preprocess_customer(customer)
-
     return shap_explanation(customer_top15)
-
 
 def search_knowledge_base(query):
     results = retrieve_knowledge(query)
     return results.to_dict(orient="records")
 
+def understand_question(question):
+    prompt = f"""You are deciding what information is required to answer a customer question.
+    Available information:
+    customer_profile
+    churn_prediction
+    shap_explanation
+    knowledge_base
+    Rules:
+    - If the question asks about customer details, use customer_profile.
+    - If the question asks about churn or risk, use churn_prediction.
+    - If the question asks why a customer is at risk, use shap_explanation.
+    - Use knowledge_base when business or support information is needed.
+    Question:{question}
+    Return only the required information names, separated by commas."""
+    
+    inputs = tokenizer(prompt, return_tensors="pt")
+    outputs = llm.generate(**inputs, max_new_tokens=50)
+    return tokenizer.decode(outputs[0],skip_special_tokens=True)
 
-tools = [{"name": "get_customer_profile",
-        "description": "Get the customer profile from the database.",
-        "parameters": {"customer_id": "Customer ID"}},
-        {"name": "predict_churn",
-        "description": "Predict the customer's churn probability using the trained ML model.",
-        "parameters": {"customer_id": "Customer ID"}},
-        {"name": "get_shap_explanation",
-        "description": "Get the SHAP explanation for the customer's churn prediction.",
-        "parameters": {"customer_id": "Customer ID"}},
-        {"name": "search_knowledge_base",
-        "description": "Search the support knowledge base for relevant information.",
-        "parameters": {"query": "User question"}}]
+def customer_agent(customer_id, question):
+    required_info = understand_question(question)
+    results = {}
+    if "customer_profile" in required_info:
+        results["customer_profile"] = customer_profile_tool(customer_id)
+    if "churn_prediction" in required_info:
+        results["churn_prediction"] = predict_churn(customer_id)
+    if "shap_explanation" in required_info:
+        results["shap_explanation"] = get_shap_explanation(customer_id)
+    if "knowledge_base" in required_info:
+        results["knowledge_base"] = search_knowledge_base(question)
+    response = generate_response(customer_id,question,results)
+    return response
 
 
-
-"""result = search_knowledge_base("How can I cancel my subscription?")
-print(result)"""
+   
