@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Churn Prediction</h2>
+
+<form method="POST" class="card shadow-sm p-4 mb-4">
+    <div class="mb-3">
+        <label class="form-label">Customer ID</label>
+        <input
+            type="text"
+            name="customer_id"
+            class="form-control"
+            placeholder="Enter Customer ID"
+            required
+        >
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Predict Churn
+    </button>
+</form>
+
+{% if prediction %}
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+
+        <h4>Prediction Result</h4>
+
+        <p>
+            <strong>Customer ID:</strong>
+            {{ prediction.customer_id }}
+        </p>
+
+        <p>
+            <strong>Churn Probability:</strong>
+            {{ "%.2f"|format(prediction.churn_probability * 100) }}%
+        </p>
+
+        <p>
+            <strong>Model Prediction:</strong>
+            {% if prediction.churn_prediction == 1 %}
+                Churn
+            {% else %}
+                No Churn
+            {% endif %}
+        </p>
+
+        <p>
+            <strong>Risk Level:</strong>
+            {% if prediction.churn_probability >= 0.7 %}
+                High
+            {% elif prediction.churn_probability >= 0.4 %}
+                Medium
+            {% else %}
+                Low
+            {% endif %}
+        </p>
+
+    </div>
+</div>
+
+{% endif %}
+
+{% if shap_features %}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <h4>Important Churn Factors</h4>
+
+        <ul class="list-group">
+            {% for feature in shap_features.split('\n') %}
+                {% if feature %}
+                    <li class="list-group-item">
+                        {{ feature }}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}

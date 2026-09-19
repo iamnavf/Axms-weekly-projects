@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}AI Assistant{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">AI Assistant</h2>
+
+<form method="POST" class="card shadow-sm p-4 mb-4">
+
+    <div class="mb-3">
+        <label class="form-label">Customer ID</label>
+        <input
+            type="text"
+            name="customer_id"
+            class="form-control"
+            placeholder="Enter Customer ID"
+            required
+        >
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Question</label>
+        <textarea
+            name="question"
+            class="form-control"
+            rows="4"
+            placeholder="Ask about this customer..."
+            required
+        ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Ask AI Assistant
+    </button>
+
+</form>
+
+{% if ai_response %}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <h4>AI Response</h4>
+
+        <p>{{ ai_response }}</p>
+
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}

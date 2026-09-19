@@ -4,10 +4,6 @@ import sqlite3
 import joblib 
 import shap
 
-import time
-import psutil
-import os
-
 import faiss
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer,AutoModelForCausalLM
@@ -27,7 +23,8 @@ model_name = "Qwen/Qwen2.5-1.5B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 llm = AutoModelForCausalLM.from_pretrained(model_name,torch_dtype="auto")
 
-conn = sqlite3.connect(r"./notebook/customer_intelligence.db")
+conn = sqlite3.connect(r"./notebook/customer_intelligence.db",
+    check_same_thread=False)
 
 #sql user profile 
 
@@ -208,6 +205,3 @@ def customer_agent(customer_id, question):
         results["knowledge_base"] = search_knowledge_base(question)
     response = generate_response(customer_id,question,results)
     return response
-
-
-   
