@@ -11,9 +11,8 @@ from src.integration import (
 app = Flask(__name__)
 
 
-# =========================
-# HOME PAGE
-# =========================
+#HOME PAGE
+
 
 @app.route("/")
 def home():
@@ -52,9 +51,9 @@ def profile():
     )
 
 
-# =========================
-# PREDICTION PAGE
-# =========================
+
+#PREDICTION PAGE
+
 
 @app.route("/prediction", methods=["GET", "POST"])
 def prediction():
@@ -89,9 +88,9 @@ def prediction():
     )
 
 
-# =========================
-# AI ASSISTANT PAGE
-# =========================
+
+#AI ASSISTANT PAGE
+
 
 @app.route("/assistant", methods=["GET", "POST"])
 def assistant():
@@ -126,10 +125,10 @@ def assistant():
     )
 
 
-# =========================
-# RUN APPLICATION
-# =========================
+
+#RUN APPLICATION
+
 
 if __name__ == "__main__":
 
-    app.run(debug=True)
+    app.run()
