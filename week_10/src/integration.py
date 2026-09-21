@@ -204,18 +204,22 @@ def understand_question(question):
     return tokenizer.decode(outputs[0],skip_special_tokens=True)
 
 def customer_agent(customer_id, question):
-    customer = get_customer_profile(customer_id)
-    if customer.empty:
-        return f"Customer ID '{customer_id}' was not found. Please enter a valid Customer ID."
-    required_info = understand_question(question)
-    results = {}
-    if "customer_profile" in required_info:
-        results["customer_profile"] = customer_profile_tool(customer_id)
-    if "churn_prediction" in required_info:
-        results["churn_prediction"] = predict_churn(customer_id)
-    if "shap_explanation" in required_info:
-        results["shap_explanation"] = get_shap_explanation(customer_id)
-    if "knowledge_base" in required_info:
-        results["knowledge_base"] = search_knowledge_base(question)
-    response = generate_response(customer_id,question,results)
-    return response
+    if customer_id:
+        customer = get_customer_profile(customer_id)
+        if customer.empty:
+            return f"Customer ID '{customer_id}' was not found."
+        required_info = understand_question(question)
+        results = {}
+        if "customer_profile" in required_info:
+            results["customer_profile"] = customer_profile_tool(customer_id)
+        if "churn_prediction" in required_info:
+            results["churn_prediction"] = predict_churn(customer_id)
+        if "shap_explanation" in required_info:
+            results["shap_explanation"] = get_shap_explanation(customer_id)
+        if "knowledge_base" in required_info:
+            results["knowledge_base"] = search_knowledge_base(question)
+        return generate_response(customer_id, question, results)
+    else:
+        knowledge = search_knowledge_base(question)
+        results = {"knowledge_base": knowledge}
+        return generate_response("", question, results)

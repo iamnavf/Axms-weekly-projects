@@ -93,37 +93,32 @@ def prediction():
 
 
 @app.route("/assistant", methods=["GET", "POST"])
+
 def assistant():
 
     ai_response = None
+
     error = None
 
     if request.method == "POST":
 
-        customer_id = request.form.get("customer_id")
-        question = request.form.get("question")
+        customer_id = request.form.get("customer_id").strip()
 
-        # Check whether customer exists
-        customer = customer_profile_tool(customer_id)
+        question = request.form.get("question").strip()
 
-        if not customer:
+        if not question:
 
-            error = f"Customer ID '{customer_id}' was not found."
+            error = "Please enter a question."
 
         else:
-
-            ai_response = customer_agent(
-                customer_id,
-                question
-            )
-
+            
+            ai_response = customer_agent(customer_id, question)
 
     return render_template(
         "assistant.html",
         ai_response=ai_response,
         error=error
     )
-
 
 
 #RUN APPLICATION
