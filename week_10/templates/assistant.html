@@ -4,50 +4,129 @@
 
 {% block content %}
 
-<h2 class="mb-4">AI Assistant</h2>
+<div class="container">
 
-<form method="POST" class="card shadow-sm p-4 mb-4">
+    <!-- =========================
+         PAGE HEADER
+    ========================== -->
 
-    <div class="mb-3">
-        <label class="form-label">Customer ID</label>
-        <input
-            type="text"
-            name="customer_id"
-            class="form-control"
-            placeholder="Enter Customer ID"
-            required
-        >
-    </div>
+    <div class="page-header">
 
-    <div class="mb-3">
-        <label class="form-label">Question</label>
-        <textarea
-            name="question"
-            class="form-control"
-            rows="4"
-            placeholder="Ask about this customer..."
-            required
-        ></textarea>
-    </div>
+        <h1 class="page-title">
+            AI Customer Assistant
+        </h1>
 
-    <button type="submit" class="btn btn-primary">
-        Ask AI Assistant
-    </button>
-
-</form>
-
-{% if ai_response %}
-
-<div class="card shadow-sm">
-    <div class="card-body">
-
-        <h4>AI Response</h4>
-
-        <p>{{ ai_response }}</p>
+        <p class="page-subtitle">
+            Ask questions about a customer's churn risk,
+            important factors, and applicable knowledge-base information.
+        </p>
 
     </div>
+
+
+    <div class="assistant-layout">
+
+        <!-- =========================
+             QUESTION FORM
+        ========================== -->
+
+        <div class="assistant-card">
+
+            <form
+                method="POST"
+                action="{{ url_for('assistant') }}"
+            >
+
+                <!-- Customer ID -->
+
+                <div class="mb-4">
+
+                    <label
+                        for="customer_id"
+                        class="form-label fw-semibold"
+                    >
+                        Customer ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customer_id"
+                        name="customer_id"
+                        class="form-control"
+                        placeholder="Enter customer ID, e.g. 3668-QPYBK"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Question -->
+
+                <div class="mb-4">
+
+                    <label
+                        for="question"
+                        class="form-label fw-semibold"
+                    >
+                        Your Question
+                    </label>
+
+                    <textarea
+                        id="question"
+                        name="question"
+                        class="form-control"
+                        rows="5"
+                        placeholder="Ask a question about this customer..."
+                        required
+                    ></textarea>
+
+                </div>
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    class="btn-primary-custom w-100"
+                >
+                    Ask AI Assistant
+                </button>
+
+            </form>
+
+
+            {% if error %}
+
+        <div class="alert alert-danger mt-3" role="alert">
+            <strong>Customer not found.</strong>
+            {{ error }}
+        </div>
+
+        {% endif %}
+        </div>
+
+
+        <!-- =========================
+             AI RESPONSE
+        ========================== -->
+
+        {% if ai_response %}
+
+        <div class="ai-response">
+
+            <div class="ai-response-title">
+                AI Assistant Response
+            </div>
+
+            <div class="ai-response-text">
+                {{ ai_response }}
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
 </div>
-
-{% endif %}
 
 {% endblock %}

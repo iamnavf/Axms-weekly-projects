@@ -145,16 +145,25 @@ def generate_response(customer_id,question,results):
     Answer:"""
     inputs = tokenizer(prompt, return_tensors="pt")
     outputs = llm.generate(**inputs,max_new_tokens=150)
-    return tokenizer.decode(outputs[0],skip_special_tokens=True)
+    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+    if "Answer:" in response:
+        response = response.split("Answer:", 1)[1].strip()
+
+    return response
 
 #customer tool calling
 def customer_profile_tool(customer_id):
     customer =get_customer_profile(customer_id)
+    if customer.empty:
+        return []
     return customer.to_dict(orient="records")
 
 #churn tool calling
 def predict_churn(customer_id):
     customer = get_customer_profile(customer_id)
+    if customer.empty:
+        return None
     customer = feature_engineering(customer)
     customer_top15 = preprocess_customer(customer)
     churn_prediction, churn_probability = churn_predict(customer_top15)
@@ -165,6 +174,8 @@ def predict_churn(customer_id):
 #shap explain toolcalling
 def get_shap_explanation(customer_id):
     customer = get_customer_profile(customer_id)
+    if customer.empty:
+        return None
     customer = feature_engineering(customer)
     customer_top15 = preprocess_customer(customer)
     return shap_explanation(customer_top15)
@@ -193,6 +204,9 @@ def understand_question(question):
     return tokenizer.decode(outputs[0],skip_special_tokens=True)
 
 def customer_agent(customer_id, question):
+    customer = get_customer_profile(customer_id)
+    if customer.empty:
+        return f"Customer ID '{customer_id}' was not found. Please enter a valid Customer ID."
     required_info = understand_question(question)
     results = {}
     if "customer_profile" in required_info:

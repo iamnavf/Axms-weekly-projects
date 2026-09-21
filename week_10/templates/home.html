@@ -1,45 +1,280 @@
 {% extends "base.html" %}
 
-{% block title %}
-Home - Customer Intelligence Platform
-{% endblock %}
+{% block title %}Customer Search{% endblock %}
 
 {% block content %}
 
-<div class="row justify-content-center">
+<div class="container">
 
-```
-<div class="col-lg-8">
+    <!-- PAGE HEADER -->
 
-    <div class="text-center mb-4">
-        <h2>Customer Search</h2>
-        <p class="text-muted">
-            Search for a customer to view their profile and intelligence insights.
+    <div class="page-header">
+
+        <h1 class="page-title">
+            Customer Intelligence
+        </h1>
+
+        <p class="page-subtitle">
+            Search and view detailed customer information.
         </p>
+
     </div>
 
-    <div class="card shadow-sm">
-        <div class="card-body p-4">
 
-            <form method="POST" action="/profile">
-    <input
-        type="text"
-        name="customer_id"
-        class="form-control"
-        placeholder="Enter Customer ID"
-        required
-    >
+    <!-- CUSTOMER SEARCH -->
 
-    <button type="submit" class="btn btn-primary">
-        Search Customer
-    </button>
-</form>
+    <div class="search-card mb-4">
+
+        <form
+            method="POST"
+            action="{{ url_for('profile') }}"
+        >
+
+            <div class="row align-items-end">
+
+                <div class="col-md-9">
+
+                    <label
+                        for="customer_id"
+                        class="form-label"
+                    >
+                        Customer ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customer_id"
+                        name="customer_id"
+                        class="form-control"
+                        placeholder="Enter customer ID, e.g. 3668-QPYBK"
+                        required
+                    >
+
+                </div>
+
+                <div class="col-md-3 mt-3 mt-md-0">
+
+                    <button
+                        type="submit"
+                        class="btn-primary-custom w-100"
+                    >
+                        Search Customer
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+        
+        {% if error %}
+
+        <div class="alert alert-danger mt-3" role="alert">
+            <strong>Customer not found.</strong>
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- CUSTOMER INFORMATION -->
+
+    <div class="dashboard-card mb-4">
+
+        <h5>Customer Information</h5>
+
+        <div class="profile-grid">
+
+            <div class="profile-item">
+                <span class="label">Customer ID</span>
+                <span class="value">
+                    {{ customer.customerID if customer else "" }}
+                </span>
+            </div>
+
+            <div class="profile-item">
+                <span class="label">Gender</span>
+                <span class="value">
+                    {{ customer.gender if customer else "" }}
+                </span>
+            </div>
+
+            <div class="profile-item">
+                <span class="label">Partner</span>
+                <span class="value">
+                    {{ customer.Partner if customer else "" }}
+                </span>
+            </div>
+
+            <div class="profile-item">
+                <span class="label">Dependents</span>
+                <span class="value">
+                    {{ customer.Dependents if customer else "" }}
+                </span>
+            </div>
 
         </div>
+
     </div>
 
-</div>
-```
+
+    <!-- SERVICES 
+
+    <div class="dashboard-card mb-4">
+
+        <h5>Services</h5>
+
+        <div class="service-list">
+
+            <span class="service-badge">
+                Phone: {{ customer.PhoneService if customer else "" }}
+            </span>
+
+            <span class="service-badge">
+                Multiple Lines: {{ customer.MultipleLines if customer else "" }}
+            </span>
+
+            <span class="service-badge">
+                Internet: {{ customer.InternetService if customer else "" }}
+            </span>
+
+            <span class="service-badge">
+                Online Security: {{ customer.OnlineSecurity if customer else "" }}
+            </span>
+
+            <span class="service-badge">
+                Online Backup: {{ customer.OnlineBackup if customer else "" }}
+            </span>
+
+            <span class="service-badge">
+                Device Protection: {{ customer.DeviceProtection if customer else "" }}
+            </span>
+
+            <span class="service-badge">
+                Tech Support: {{ customer.TechSupport if customer else "" }}
+            </span>
+
+            <span class="service-badge">
+                Streaming TV: {{ customer.StreamingTV if customer else "" }}
+            </span>
+
+            <span class="service-badge">
+                Streaming Movies: {{ customer.StreamingMovies if customer else "" }}
+            </span>
+
+        </div>
+
+    </div> -->
+
+
+    <!-- CONTRACT AND TENURE -->
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-6">
+
+            <div class="dashboard-card">
+
+                <h5>Contract</h5>
+
+                <div class="profile-item">
+
+                    <span class="label">
+                        Contract Type
+                    </span>
+
+                    <span class="value">
+                        {{ customer.Contract if customer else "" }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <div class="dashboard-card">
+
+                <h5>Tenure</h5>
+
+                <div class="profile-item">
+
+                    <span class="label">
+                        Customer Tenure
+                    </span>
+
+                    <span class="value">
+                        {% if customer %}
+                            {{ customer.tenure }} months
+                        {% endif %}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CHARGES -->
+
+    <div class="dashboard-card mb-4">
+
+        <h5>Charges</h5>
+
+        <div class="row g-4">
+
+            <div class="col-md-6">
+
+                <div class="profile-item">
+
+                    <span class="label">
+                        Monthly Charges
+                    </span>
+
+                    <span class="value">
+
+                        {% if customer %}
+                            ${{ "%.2f"|format(customer.MonthlyCharges|float) }}
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <div class="profile-item">
+
+                    <span class="label">
+                        Total Charges
+                    </span>
+
+                    <span class="value">
+
+                        {% if customer %}
+                            ${{ "%.2f"|format(customer.TotalCharges|float) }}
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 

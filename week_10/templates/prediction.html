@@ -1,90 +1,267 @@
 {% extends "base.html" %}
 
-{% block title %}Prediction{% endblock %}
+{% block title %}Churn Prediction{% endblock %}
 
 {% block content %}
 
-<h2 class="mb-4">Churn Prediction</h2>
+<div class="container">
 
-<form method="POST" class="card shadow-sm p-4 mb-4">
-    <div class="mb-3">
-        <label class="form-label">Customer ID</label>
-        <input
-            type="text"
-            name="customer_id"
-            class="form-control"
-            placeholder="Enter Customer ID"
-            required
+    <!-- PAGE HEADER -->
+
+    <div class="page-header">
+
+        <h1 class="page-title">
+            Churn Prediction
+        </h1>
+
+        <p class="page-subtitle">
+            Predict customer churn risk and understand the factors
+            contributing to the prediction.
+        </p>
+
+    </div>
+
+
+    <!-- CUSTOMER SEARCH -->
+
+    <div class="search-card mb-4">
+
+        <form
+            method="POST"
+            action="{{ url_for('prediction') }}"
         >
+
+            <div class="row align-items-end">
+
+                <div class="col-md-9">
+
+                    <label
+                        for="customer_id"
+                        class="form-label"
+                    >
+                        Customer ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customer_id"
+                        name="customer_id"
+                        class="form-control"
+                        placeholder="Enter customer ID, e.g. 3668-QPYBK"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="col-md-3 mt-3 mt-md-0">
+
+                    <button
+                        type="submit"
+                        class="btn-primary-custom w-100"
+                    >
+                        Predict Churn
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        {% if error %}
+
+    <div class="alert alert-danger mt-3" role="alert">
+        <strong>Customer not found.</strong>
+        {{ error }}
     </div>
 
-    <button type="submit" class="btn btn-primary">
-        Predict Churn
-    </button>
-</form>
-
-{% if prediction %}
-
-<div class="card shadow-sm mb-4">
-    <div class="card-body">
-
-        <h4>Prediction Result</h4>
-
-        <p>
-            <strong>Customer ID:</strong>
-            {{ prediction.customer_id }}
-        </p>
-
-        <p>
-            <strong>Churn Probability:</strong>
-            {{ "%.2f"|format(prediction.churn_probability * 100) }}%
-        </p>
-
-        <p>
-            <strong>Model Prediction:</strong>
-            {% if prediction.churn_prediction == 1 %}
-                Churn
-            {% else %}
-                No Churn
-            {% endif %}
-        </p>
-
-        <p>
-            <strong>Risk Level:</strong>
-            {% if prediction.churn_probability >= 0.7 %}
-                High
-            {% elif prediction.churn_probability >= 0.4 %}
-                Medium
-            {% else %}
-                Low
-            {% endif %}
-        </p>
+    {% endif %}
 
     </div>
-</div>
 
-{% endif %}
 
-{% if shap_features %}
+    <!-- PREDICTION METRICS -->
 
-<div class="card shadow-sm">
-    <div class="card-body">
+    <div class="prediction-grid">
 
-        <h4>Important Churn Factors</h4>
+        <!-- CHURN PROBABILITY -->
 
-        <ul class="list-group">
-            {% for feature in shap_features.split('\n') %}
-                {% if feature %}
-                    <li class="list-group-item">
-                        {{ feature }}
-                    </li>
+        <div class="metric-card">
+
+            <div class="metric-title">
+                Churn Probability
+            </div>
+
+            <div class="metric-value">
+
+                {% if prediction %}
+                    {{ "%.2f"|format(
+                        prediction.churn_probability * 100
+                    ) }}%
                 {% endif %}
-            {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <!-- MODEL PREDICTION -->
+
+        <div class="metric-card">
+
+            <div class="metric-title">
+                Model Prediction
+            </div>
+
+            <div class="metric-value">
+
+                {% if prediction %}
+
+                    {% if prediction.churn_prediction == 1 %}
+                        Churn
+                    {% else %}
+                        No Churn
+                    {% endif %}
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- RISK LEVEL -->
+
+        <div class="metric-card">
+
+            <div class="metric-title">
+                Risk Level
+            </div>
+
+            <div class="metric-value">
+
+                {% if prediction %}
+
+                    {% if prediction.churn_probability >= 0.7 %}
+
+                        <span class="risk-high">
+                            High Risk
+                        </span>
+
+                    {% elif prediction.churn_probability >= 0.4 %}
+
+                        <span class="risk-medium">
+                            Medium Risk
+                        </span>
+
+                    {% else %}
+
+                        <span class="risk-low">
+                            Low Risk
+                        </span>
+
+                    {% endif %}
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PREDICTION DETAILS -->
+
+    <div class="dashboard-card mb-4">
+
+        <h5>
+            Prediction Details
+        </h5>
+
+        <div class="profile-grid">
+
+            <div class="profile-item">
+
+                <span class="label">
+                    Customer ID
+                </span>
+
+                <span class="value">
+
+                    {% if prediction %}
+                        {{ prediction.customer_id }}
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span class="label">
+                    Prediction
+                </span>
+
+                <span class="value">
+
+                    {% if prediction %}
+
+                        {% if prediction.churn_prediction == 1 %}
+                            Customer predicted to churn
+                        {% else %}
+                            Customer predicted not to churn
+                        {% endif %}
+
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SHAP EXPLANATION -->
+
+    <div class="explanation-card">
+
+        <h4>
+            Churn Risk Explanation
+        </h4>
+
+        <p class="explanation-description">
+            Important features identified by SHAP for this
+            customer's churn prediction.
+        </p>
+
+
+        <ul class="shap-list">
+
+            {% if shap_features %}
+
+                {% for feature in shap_features.split('\n') %}
+
+                    {% if feature.strip() %}
+
+                        <li class="shap-item">
+                            {{ feature }}
+                        </li>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            {% endif %}
+
         </ul>
 
     </div>
-</div>
 
-{% endif %}
+</div>
 
 {% endblock %}
