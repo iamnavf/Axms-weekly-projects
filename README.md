@@ -199,3 +199,40 @@ Tech Stack
 **Visualization** - Matplotlib, Seaborn
 **Web Development** - Flask, HTML, CSS, Bootstrap
 
+Week 10
+AI Customer Intelligence Platform
+This project presents an AI Customer Intelligence Platform developed using Data Analytics, Machine Learning, Explainable AI, NLP, Semantic Search, RAG, and Generative AI. The system analyzes customer information, predicts churn risk, explains predictions, retrieves support knowledge, and generates natural-language responses.
+The trained models and integrated AI workflow are deployed using a Flask web application for customer analysis, churn prediction, and AI-assisted customer interaction.
+
+--Features
+Dashboard
+    Customer retrival
+    Churn prediction
+    AI Assistant
+Explainable AI
+    SHAP-based model explanation
+    Global feature importance
+    Customer-level churn explanation
+    Identification of important churn factors
+RAG
+    Knowledge-base retrieval
+    Context generation
+    Retrieval-Augmented Generation
+    Local knowledge-based responses
+Generative AI Model
+    Qwen/Qwen2.5-1.5B-Instruct
+    
+Tech Stack
+**Programming Language** - Python
+**Data Processing** - Pandas, NumPy
+**Data Analysis** - Pandas, Matplotlib
+**Database** - SQLite
+**Machine Learning** - Scikit-learn, XGBoost
+**Explainable AI** - SHAP
+**NLP** - NLTK, TF-IDF
+**Embeddings** - Sentence Transformers
+**Vector Search** - FAISS
+**Generative AI** - Hugging Face Transformers, Qwen
+**Web Development** - Flask, HTML, CSS, Bootstrap
+   
+
