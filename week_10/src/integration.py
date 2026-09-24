@@ -105,7 +105,7 @@ def shap_explanation(customer_top15):
     customer_shap = explainer(customer_top15)
     shap_values_customer = customer_shap.values[0]
     shap_text = "\n".join(f"{feature}: increases churn risk"
-    for feature, value in zip(top_15_feature, shap_values_customer)if value > 0)
+        for feature, value in zip(top_15_feature, shap_values_customer)if value > 0)
     return shap_text
 
 #rag retrival
@@ -141,6 +141,10 @@ def generate_response(customer_id,question,results):
     - Do not explain or interpret feature names.
     - Do not change feature names.
     - Do not add reasons that are not present in the verified information.
+    - Only use facts, data, and details explicitly stated in the provided Context to answer the question.
+    - Do NOT use any external knowledge, prior training data, or assumptions to answer, even if you know the answer from elsewhere.
+    - If the if question is asked from outside prior trained data, respond exactly with:
+        "I don't have enough information in the provided context to answer this question.
     - Give a short factual answer.
     Answer:"""
     inputs = tokenizer(prompt, return_tensors="pt")
